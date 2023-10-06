@@ -2,38 +2,41 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    siteTitle: "gatsby-starter-shopify",
-    siteTitleDefault: "gatsby-starter-shopify by @GatsbyJS",
-    siteUrl: "https://shopify-demo.gatsbyjs.com",
-    siteDescription:
-      "A Gatsby starter using the latest Shopify plugin showcasing a store with product overview, individual product pages, and a cart.",
-    siteImage: "/default-og-image.jpg",
-    twitter: "@gatsbyjs",
-  },
-  flags: {
-    FAST_DEV: true,
+    title: `Shopify Tutorial`,
+    description: `Create a Gatsby site connected to your Shopify store`,
+    author: `@stephdiep`,
+    siteUrl: `https://designcode.io`,
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     {
-      resolve: "gatsby-source-shopify",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        password: process.env.SHOPIFY_SHOP_PASSWORD,
-        storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
-        shopifyConnections: ["collections"],
+        name: `images`,
+        path: `${__dirname}/src/images`,
       },
     },
-    "gatsby-plugin-image",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sitemap",
-    "gatsby-plugin-gatsby-cloud",
-    // Add your Google Analytics ID to the .env file to enable
-    // Otherwise, this plugin can be removed
-    // process.env.GOOGLE_ANALYTICS_ID && {
-    //   resolve: "gatsby-plugin-google-analytics",
-    //   options: {
-    //     trackingId: process.env.GOOGLE_ANALYTICS_ID,
-    //   },
-    // },
-  ].filter(Boolean),
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `design-code-gatsby-shopify`,
+        short_name: `gatsby-shopify`,
+        start_url: `/`,
+        background_color: `#014C40`,
+        display: `minimal-ui`,
+        icon: `src/images/coffee-cup.svg`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        password: process.env.GATSBY_SHOPIFY_PASSWORD,
+        storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
+      },
+    },
+  ],
 }
