@@ -1,15 +1,17 @@
-import React from 'react'
-import { navigate } from 'gatsby-link'
+import React from "react"
+import { navigate } from "gatsby-link"
 import styled from "styled-components"
-import useStore from '../context/StoreContext'
+import useStore from "../context/StoreContext"
 
 const ProductCard = ({ product }) => {
   const { addVariantToCart } = useStore()
 
   return (
     <Wrapper>
-      <AddButton onClick={() => addVariantToCart(product, 1)}><p>+</p></AddButton>
-      <ContentWrapper onClick={() => navigate(`${product.handle}`)}>
+      <AddButton onClick={() => addVariantToCart(product, 1)}>
+        <p>+</p>
+      </AddButton>
+      <ContentWrapper onClick={() => navigate(`/products/${product.handle}`)}>
         <Image src={product.images[0]?.src} />
         <TextWrapper>
           <Title>{product.title}</Title>
@@ -50,15 +52,15 @@ const TextWrapper = styled.div`
   position: absolute;
   bottom: 0px;
   left: 0px;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 10px 10px;
   background: rgba(255, 255, 255, 0.2);
   width: 200px;
-  padding: 10px 0;
+  height: 50px;
   backdrop-filter: blur(40px);
 `
 
 const Title = styled.p`
-  font-weight: 600;
+  font-weight: 400;
   text-align: center;
   margin: 0;
   color: #014c40;
@@ -72,13 +74,13 @@ const Price = styled.p`
 
 const AddButton = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   background: #014c40;
   padding: 10px;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +97,7 @@ const AddButton = styled.div`
     font-weight: bold;
     line-height: 0;
 
-    @media not all and (min-resolution:.001dpcm) { 
+    @media not all and (min-resolution: 0.001dpcm) {
       @supports (-webkit-appearance: none) {
         margin-bottom: 5px;
       }

@@ -5,6 +5,9 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.12",
     "babel-plugin-styled-components": "^1.13.3",
     "gatsby": "^4.2.0",
     "gatsby-plugin-gatsby-cloud": "^4.2.0",

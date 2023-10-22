@@ -22,10 +22,15 @@ const ProductTemplate = ({ pageContext }) => {
           <Subtitle>{product.priceRangeV2.maxVariantPrice.amount}0$</Subtitle>
           <p>{product.description}</p>
           <InputForm>
-            <Subtitle><label htmlFor="qty">Quantity:</label></Subtitle>
+            <Subtitle>
+              <label htmlFor="qty">Quantity:</label>
+            </Subtitle>
             <Input placeholder="1" id="qty" type="number" {...bind} />
           </InputForm>
-          <PrimaryButton text="Add to cart" onClick={() => addVariantToCart(product, bind.value)} />
+          <PrimaryButton
+            text="Add to cart"
+            onClick={() => addVariantToCart(product, bind.value)}
+          />
         </InfoContainer>
       </Wrapper>
     </Layout>
@@ -87,7 +92,7 @@ const InputForm = styled.form`
 
 const Input = styled.input`
   border-radius: 20px;
-  border: 2px solid rgba(0,0,0,0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   padding: 10px 20px;
   max-width: 80px;
   font-size: 12px;

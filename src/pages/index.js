@@ -1,24 +1,42 @@
 import * as React from "react"
 import { navigate } from "gatsby-link"
 import styled from "styled-components"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import PrimaryButton from "../components/PrimaryButton"
 import Seo from "../components/seo"
+import ProductCard from "../components/ProductCard"
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <ContentWrapper>
-      <BannerImage src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80" />
-      <TextWrapper>
-        <Title>Start your day with a delicious cup of coffee</Title>
-        <Subtitle>Free shipping on your first order!</Subtitle>
-        <PrimaryButton text="Explore all products" onClick={() => navigate('products')} />
-      </TextWrapper>
-    </ContentWrapper>
-  </Layout>
-)
+const IndexPage = ({ data }) => {
+  const { nodes } = data.allShopifyProduct
+
+  return (
+    <Layout>
+      <Seo title="Home" />
+      <ContentWrapper>
+        <BannerImage src="https://cardsbg.s3.eu-north-1.amazonaws.com/art-in-lounge/IMG_4300.jpg" />
+        <TextWrapper>
+          <Title>Start your day with a delicious cup of coffee</Title>
+          <Subtitle>Free shipping on your first order!</Subtitle>
+          <PrimaryButton
+            text="Explore all products"
+            onClick={() => navigate("products")}
+          />
+        </TextWrapper>
+      </ContentWrapper>
+      <ContentWrapper>
+        <ProductTitle>Express yourself</ProductTitle>
+        {/* <BannerImage src="https://cardsbg.s3.eu-north-1.amazonaws.com/art-in-lounge/IMG_4300.jpg" /> */}
+        <ProductWrapper>
+          {nodes?.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
+        </ProductWrapper>
+      </ContentWrapper>
+    </Layout>
+  )
+}
 
 export default IndexPage
 
@@ -27,15 +45,16 @@ const ContentWrapper = styled.div`
 `
 
 const BannerImage = styled.img`
-  height: 500px;
+  height: 800px;
   width: 100%;
   object-fit: cover;
+  object-position: center top;
   margin: 0;
 `
 
 const TextWrapper = styled.div`
   position: absolute;
-  bottom: 40px;
+  top: 40px;
   left: 40px;
   display: grid;
   gap: 10px;
@@ -46,8 +65,50 @@ const Title = styled.h1`
   margin: 0;
 `
 
-const Subtitle = styled.p`
-  color: rgba(255,255,255,0.7);
-  margin: 0;
+const ProductTitle = styled.h1`
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  color: rgba(0, 0, 0, 1);
+`
 
+const Subtitle = styled.p`
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+`
+
+const ProductWrapper = styled.div`
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: left;
+  gap: 40px;
+  max-width: 1234px;
+`
+
+export const query = graphql`
+  {
+    allShopifyProduct {
+      nodes {
+        title
+        handle
+        variants {
+          shopifyId
+        }
+        priceRangeV2 {
+          maxVariantPrice {
+            amount
+          }
+        }
+        description
+        images {
+          src
+        }
+      }
+    }
+  }
 `

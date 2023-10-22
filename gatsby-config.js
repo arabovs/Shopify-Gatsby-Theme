@@ -2,10 +2,9 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `Shopify Tutorial`,
-    description: `Create a Gatsby site connected to your Shopify store`,
-    author: `@stephdiep`,
-    siteUrl: `https://designcode.io`,
+    title: `The Art in Lounge`,
+    description: `Basics, Lounge and Underwear`,
+    author: `@arabovs`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
