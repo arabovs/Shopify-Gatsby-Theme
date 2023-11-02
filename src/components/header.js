@@ -6,9 +6,13 @@ import { Link } from "gatsby"
 
 const Header = ({ siteTitle }) => (
   <HeaderWrapper>
-    <Link to="/" className="site-title">{siteTitle}</Link>
+    <Link to="/" className="site-title">
+      {siteTitle}
+    </Link>
     <LinksWrapper>
-      <Link to="/products">All products</Link>
+      <Link to="/products">New Arrivals</Link>
+      <Link to="/products">Clothing</Link>
+      <Link to="/products">Collections</Link>
       <Link to="/cart">My Cart</Link>
     </LinksWrapper>
   </HeaderWrapper>
@@ -40,8 +44,8 @@ const HeaderWrapper = styled.header`
     font-size: 15px;
     font-weight: normal;
     text-transform: uppercase;
-    font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-    "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
     :hover {
       text-decoration: underline;
@@ -50,6 +54,6 @@ const HeaderWrapper = styled.header`
 `
 const LinksWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(6, auto);
   gap: 40px;
 `

@@ -6,7 +6,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import PrimaryButton from "../components/PrimaryButton"
 import Seo from "../components/seo"
-import ProductCard from "../components/ProductCard"
+import ProductCardBig from "../components/ProductCardBig"
 
 const IndexPage = ({ data }) => {
   const { nodes } = data.allShopifyProduct
@@ -30,7 +30,7 @@ const IndexPage = ({ data }) => {
         {/* <BannerImage src="https://cardsbg.s3.eu-north-1.amazonaws.com/art-in-lounge/IMG_4300.jpg" /> */}
         <ProductWrapper>
           {nodes?.map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCardBig key={index} product={product} />
           ))}
         </ProductWrapper>
       </ContentWrapper>
@@ -84,7 +84,7 @@ const ProductWrapper = styled.div`
   margin-top: 2%;
   margin-bottom: 2%;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(5, auto);
   justify-content: left;
   gap: 40px;
   max-width: 1234px;
@@ -92,7 +92,7 @@ const ProductWrapper = styled.div`
 
 export const query = graphql`
   {
-    allShopifyProduct {
+    allShopifyProduct(limit: 5) {
       nodes {
         title
         handle

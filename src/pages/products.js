@@ -49,7 +49,8 @@ export const query = graphql`
 const Wrapper = styled.div`
   display: grid;
   margin: 40px;
-  grid-template-columns: repeat(3, auto);
+  margin-bottom: 80px;
+  grid-template-columns: repeat(6, auto);
   justify-content: left;
   gap: 40px;
   max-width: 1234px;
