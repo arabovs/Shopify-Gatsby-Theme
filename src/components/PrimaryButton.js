@@ -1,43 +1,43 @@
-import React from 'react'
-import styled from "styled-components"
+import React from "react"
+import Button from "@mui/material/Button"
 
 const PrimaryButton = ({ text, onClick, disabled = false }) => {
+  const buttonStyles = {
+    background: "#014c40",
+    borderRadius: 30,
+    height: 40,
+    width: "fit-content",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0 20px",
+    cursor: "pointer",
+  }
+
+  const hoverStyles = {
+    transform: "scale(1.2)",
+    transition: "0.2s",
+  }
+
+  const disabledStyles = {
+    background: "rgba(1, 76, 64, 0.5)",
+    transform: "none",
+    cursor: "not-allowed",
+  }
+
   return (
-    <ButtonWrapper onClick={onClick} disabled={disabled}>
-      <Title>{text}</Title>
-    </ButtonWrapper>
+    <Button
+      style={buttonStyles}
+      onClick={onClick}
+      disabled={disabled}
+      sx={{
+        "&:hover": hoverStyles,
+        "&:disabled": disabledStyles,
+      }}
+    >
+      {text}
+    </Button>
   )
 }
 
 export default PrimaryButton
-
-const ButtonWrapper = styled.button`
-  background: #014c40;
-  border: none;
-  border-radius: 30px;
-  height: 40px;
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  cursor: pointer;
-
-  :hover {
-    transform: scale(1.2);
-    transition: 0.2s;
-  }
-
-  :disabled {
-    background: rgba(1,76,64,0.5);
-    transform: none;
-    cursor: not-allowed;
-  }
-`
-
-const Title = styled.p`
-  margin: 0;
-  font-weight: 600;
-  font-size: 12px;
-  color: #FFFFFF;
-`

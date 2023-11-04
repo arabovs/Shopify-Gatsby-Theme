@@ -38,5 +38,21 @@ module.exports = {
         storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
       },
     },
+    {
+      resolve: `gatsby-theme-material-ui`,
+      options: {
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `Montserrat`,
+                variants: [`300`, `400`, `500`, `700`],
+                subsets: [`cyrillic`],
+              },
+            ],
+          },
+        },
+      },
+    },
   ],
 }

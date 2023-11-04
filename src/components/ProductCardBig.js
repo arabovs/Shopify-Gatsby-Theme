@@ -1,107 +1,97 @@
 import React from "react"
 import { navigate } from "gatsby-link"
-import styled from "styled-components"
+import Card from "@mui/material/Card"
+import CardActionArea from "@mui/material/CardActionArea"
+import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import Typography from "@mui/material/Typography"
+import IconButton from "@mui/material/IconButton"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import { makeStyles } from "@mui/styles"
 import useStore from "../context/StoreContext"
 
 const ProductCard = ({ product }) => {
   const { addVariantToCart } = useStore()
+  const classes = useStyles()
 
   return (
-    <Wrapper>
-      <AddButton onClick={() => addVariantToCart(product, 1)}>
-        <p>+</p>
-      </AddButton>
-      <ContentWrapper onClick={() => navigate(`/products/${product.handle}`)}>
-        <Image src={product.images[0]?.src} />
-        <TextWrapper>
-          <Title>{product.title}</Title>
-          <Price>{product.priceRangeV2.maxVariantPrice.amount}0$</Price>
-        </TextWrapper>
-      </ContentWrapper>
-    </Wrapper>
+    <Card className={classes.card}>
+      <CardActionArea onClick={() => navigate(`/products/${product.handle}`)}>
+        <div className={classes.mediaContainer}>
+          <CardMedia
+            component="img"
+            alt={product.title}
+            height="300"
+            image={product.images[0]?.src}
+          />
+          <IconButton
+            edge="end"
+            color="primary"
+            className={classes.addButton}
+            onClick={() => addVariantToCart(product, 1)}
+          >
+            <ShoppingCartIcon />
+          </IconButton>
+        </div>
+        <CardContent className={classes.content}>
+          <Typography variant="h6" className={classes.title}>
+            {product.title}
+          </Typography>
+          <Typography variant="h6" className={classes.price}>
+            ${product.priceRangeV2.maxVariantPrice.amount}0
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   )
 }
 
 export default ProductCard
 
-const Wrapper = styled.div`
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 600px;
-  border-radius: 20px;
-
-  gap: 10px;
-  cursor: pointer;
-  position: relative;
-  box-shadow: 0px 20px 40px rgba(52, 53, 99, 0.2),
-    0px 1px 3px rgba(0, 0, 0, 0.05);
-`
-
-const ContentWrapper = styled.div``
-
-const Image = styled.img`
-  width: 300px;
-  height: 600px;
-  object-fit: cover;
-  border-radius: 20px;
-  margin: 0;
-`
-
-const TextWrapper = styled.div`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  border-radius: 0 0 10px 10px;
-  background: rgba(255, 255, 255, 0.2);
-  width: 300px;
-  height: 50px;
-  backdrop-filter: blur(40px);
-`
-
-const Title = styled.p`
-  font-weight: 400;
-  text-align: center;
-  margin: 0;
-  color: #014c40;
-`
-
-const Price = styled.p`
-  font-weight: normal;
-  text-align: center;
-  margin: 0;
-`
-
-const AddButton = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #014c40;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  :hover {
-    transform: scale(1.2);
-    transition: 0.2s;
-  }
-
-  p {
-    margin: 0;
-    color: white;
-    text-align: center;
-    font-weight: bold;
-    line-height: 0;
-
-    @media not all and (min-resolution: 0.001dpcm) {
-      @supports (-webkit-appearance: none) {
-        margin-bottom: 5px;
-      }
-    }
-  }
-`
+const useStyles = makeStyles(theme => ({
+  card: {
+    borderRadius: 4,
+    boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
+  },
+  mediaContainer: {
+    position: "relative",
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: "1.25rem", // You can adjust the font size as needed
+    fontWeight: 700, // Increase the font weight for a bold appearance
+    color: "#333", // Use a darker color for better readability
+    margin: 0, // Remove any default margin
+    textTransform: "capitalize", // Capitalize the text
+  },
+  price: {
+    fontSize: "1.5rem", // You can adjust the font size as needed
+    fontWeight: 700, // Increase the font weight for a bold appearance
+    color: "#ff5722", // Choose a professional color
+    margin: 0, // Remove any default margin
+  },
+  addButton: {
+    position: "absolute",
+    top: 20,
+    right: 20,
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: "50%",
+    cursor: "pointer",
+    transition: "background-color 0.2s, transform 0.2s",
+    userSelect: "none",
+    outline: "none",
+    "& .MuiSvgIcon-root": {
+      width: "24px", // Adjust the size of the shopping cart icon
+      height: "24px", // Adjust the size of the shopping cart icon
+      color: "white", // Set the color of the shopping cart icon
+    },
+    "&:hover": {
+      background: theme.palette.secondary.main,
+      transform: "scale(1.05)",
+    },
+  },
+}))

@@ -23,24 +23,7 @@ const Layout = ({ children }) => {
       <div>
         <main>{children}</main>
         <FooterContainer>
-          <FooterContent>
-            <SignupSection>
-              <SignupTitle>SIGN UP</SignupTitle>
-              <SignupDescription>
-                Sign-up to our Newsletter to receive updates on events,
-                collections, and exclusive promotions
-              </SignupDescription>
-              <SignupForm>
-                <EmailInput type="email" placeholder="Enter your email" />
-                <SubscribeButton>SUBSCRIBE</SubscribeButton>
-              </SignupForm>
-              <TermsAndConditions>
-                By signing up, you agree with our{" "}
-                <a href="#">Terms and Conditions</a>, and{" "}
-                <a href="#">Privacy and Cookie Policy</a>.
-              </TermsAndConditions>
-            </SignupSection>
-          </FooterContent>
+          <FooterContent></FooterContent>
         </FooterContainer>
 
         <ContactInfoContainer>
@@ -76,24 +59,8 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-const Footer = styled.footer`
-  padding: 40px;
-  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-    "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.4);
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 40px;
-  width: fit-content;
-
-  a {
-    color: rgba(0, 0, 0, 0.4);
-  }
-`
-
 const FooterContainer = styled.footer`
-  background-color: #333;
+  background-color: white;
   color: white;
   padding: 20px;
 `
@@ -101,60 +68,6 @@ const FooterContainer = styled.footer`
 const FooterContent = styled.div`
   max-width: 960px;
   margin: 0 auto;
-`
-
-const SignupSection = styled.div`
-  text-align: center;
-`
-
-const SignupTitle = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-`
-
-const SignupDescription = styled.p`
-  font-size: 16px;
-  margin-bottom: 20px;
-`
-
-const SignupForm = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-`
-
-const EmailInput = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: none;
-  margin-bottom: 10px;
-  border: 1px solid #666;
-`
-
-const SubscribeButton = styled.button`
-  background-color: #ff5733;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  &:hover {
-    background-color: #ff4500;
-  }
-`
-
-const TermsAndConditions = styled.p`
-  font-size: 14px;
-  a {
-    color: #ff5733;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 `
 
 const ContactInfoContainer = styled.div`

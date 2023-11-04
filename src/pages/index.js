@@ -1,7 +1,9 @@
 import * as React from "react"
 import { navigate } from "gatsby-link"
-import styled from "styled-components"
-import { graphql } from "gatsby"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
+import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import PrimaryButton from "../components/PrimaryButton"
@@ -14,81 +16,42 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-      <ContentWrapper>
-        <BannerImage src="https://cardsbg.s3.eu-north-1.amazonaws.com/art-in-lounge/IMG_4300.jpg" />
-        <TextWrapper>
-          <Title>Start your day with a delicious cup of coffee</Title>
-          <Subtitle>Free shipping on your first order!</Subtitle>
-          <PrimaryButton
-            text="Explore all products"
-            onClick={() => navigate("products")}
-          />
-        </TextWrapper>
-      </ContentWrapper>
-      <ContentWrapper>
-        <ProductTitle>Express yourself</ProductTitle>
-        {/* <BannerImage src="https://cardsbg.s3.eu-north-1.amazonaws.com/art-in-lounge/IMG_4300.jpg" /> */}
-        <ProductWrapper>
-          {nodes?.map((product, index) => (
-            <ProductCardBig key={index} product={product} />
-          ))}
-        </ProductWrapper>
-      </ContentWrapper>
+      <Box bgcolor="#f5f5f5" py={4} textAlign="center">
+        <Typography variant="h4" color="textPrimary" gutterBottom>
+          Welcome to Our Clothing Store
+        </Typography>
+        <Typography variant="body1" color="textSecondary" paragraph>
+          Discover the latest trends in fashion and express your style with our
+          high-quality clothing.
+        </Typography>
+      </Box>
+
+      <Grid
+        container
+        spacing={10}
+        padding={2}
+        justifyContent="center"
+        alignItems="center"
+      >
+        {nodes?.map((product, index) => (
+          <Grid
+            item
+            key={index}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            style={{ width: "100%" }}
+          >
+            <ProductCardBig product={product} />
+          </Grid>
+        ))}
+      </Grid>
     </Layout>
   )
 }
 
 export default IndexPage
-
-const ContentWrapper = styled.div`
-  position: relative;
-`
-
-const BannerImage = styled.img`
-  height: 800px;
-  width: 100%;
-  object-fit: cover;
-  object-position: center top;
-  margin: 0;
-`
-
-const TextWrapper = styled.div`
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  display: grid;
-  gap: 10px;
-`
-
-const Title = styled.h1`
-  color: white;
-  margin: 0;
-`
-
-const ProductTitle = styled.h1`
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  color: rgba(0, 0, 0, 1);
-`
-
-const Subtitle = styled.p`
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
-`
-
-const ProductWrapper = styled.div`
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  justify-content: left;
-  gap: 40px;
-  max-width: 1234px;
-`
 
 export const query = graphql`
   {
