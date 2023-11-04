@@ -23,6 +23,7 @@ const ProductCard = ({ product }) => {
             alt={product.title}
             height="300"
             image={product.images[0]?.src}
+            className={classes.cardImage}
           />
           <IconButton
             edge="end"
@@ -49,6 +50,10 @@ const ProductCard = ({ product }) => {
 export default ProductCard
 
 const useStyles = makeStyles(theme => ({
+  cardImage: {
+    height: "500px",
+    margin: 0,
+  },
   card: {
     borderRadius: 4,
     boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
@@ -60,19 +65,19 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    padding: 0,
+    maxHeight: "100px", // Adjust the maxWidth to your desired value
   },
   title: {
     fontSize: "1.25rem", // You can adjust the font size as needed
     fontWeight: 700, // Increase the font weight for a bold appearance
     color: "#333", // Use a darker color for better readability
-    margin: 0, // Remove any default margin
     textTransform: "capitalize", // Capitalize the text
   },
   price: {
     fontSize: "1.5rem", // You can adjust the font size as needed
     fontWeight: 700, // Increase the font weight for a bold appearance
     color: "#ff5722", // Choose a professional color
-    margin: 0, // Remove any default margin
   },
   addButton: {
     position: "absolute",

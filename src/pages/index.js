@@ -1,12 +1,9 @@
 import * as React from "react"
-import { navigate } from "gatsby-link"
 import Grid from "@mui/material/Grid"
+import { graphql } from "gatsby"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
-import { useStaticQuery, graphql } from "gatsby"
-
 import Layout from "../components/layout"
-import PrimaryButton from "../components/PrimaryButton"
 import Seo from "../components/seo"
 import ProductCardBig from "../components/ProductCardBig"
 
