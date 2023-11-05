@@ -1,20 +1,24 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
-import Link from "@mui/material/Link"
-import Paper from "@mui/material/Paper"
+import CardActionArea from "@mui/material/CardActionArea"
+import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import React, { useState } from "react"
 import ProductCardBig from "../components/ProductCardBig"
 import Seo from "../components/seo"
 import { StaticImage } from "gatsby-plugin-image"
+import IconButton from "@mui/material/IconButton"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import useStore from "../context/StoreContext"
 
 const IndexPage = ({ data }) => {
   const [showCollection1, setShowCollection1] = useState(true)
   const [showCollection2, setShowCollection2] = useState(true)
   const [showCollection3, setShowCollection3] = useState(true)
+  const { addVariantToCart } = useStore()
 
   const { nodes } = data.allShopifyProduct
   const toggleCollections1 = () => {
@@ -46,71 +50,258 @@ const IndexPage = ({ data }) => {
     })
   }
 
+  const getRandomObjects = arr =>
+    arr.sort(() => 0.5 - Math.random()).slice(0, 2)
+
   const filteredCollection1 = filterObjectsByTag(nodes, "Nightwear")
   const filteredCollection2 = filterObjectsByTag(nodes, "Bundle")
+  const sideItems = getRandomObjects(nodes)
 
   return (
     <Box>
-      {/* <Box sx={{ marginLeft: 4, marginTop: 4, float: "left", width: "20%" }}>
-        asdasd
-      </Box> */}
+      {/* Right Box */}
+      {/* Right Box */}
+
+      <Grid container sx={{ display: "flex", alignItems: "center" }}>
+        <Grid item sx={{ flex: "1" }}>
+          {/* Left Box */}
+          <Box
+            sx={{
+              marginLeft: 5,
+            }}
+          >
+            {" "}
+            <Grid
+              container
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "block",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 0,
+                },
+              }}
+            >
+              {sideItems?.map((product, index) => (
+                <Grid
+                  sx={{ padding: 0 }}
+                  item
+                  key={index}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                >
+                  <CardActionArea
+                    sx={{ padding: 0, marginTop: 5 }}
+                    onClick={() => navigate(`/products/${product.handle}`)}
+                  >
+                    <div
+                      sx={{
+                        position: "relative",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        padding: 0,
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        alt={product.title}
+                        image={product.images[0]?.src}
+                        sx={{
+                          margin: 0,
+                          padding: 0,
+                        }}
+                      />
+                    </div>
+                  </CardActionArea>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: "Playfair Display, serif",
+                        fontSize: "24px",
+                        whiteSpace: "normal",
+                      }}
+                    >
+                      ${product.priceRangeV2.maxVariantPrice.amount}0
+                    </Typography>
+                    <IconButton
+                      edge="end"
+                      onClick={() => addVariantToCart(product, 1)}
+                      sx={{
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        transition: "background-color 0.2s, transform 0.2s",
+                        userSelect: "none",
+                        outline: "none",
+                        padding: 0,
+                      }}
+                    >
+                      <ShoppingCartIcon />
+                    </IconButton>
+                  </Box>
+                </Grid>
+              ))}{" "}
+            </Grid>{" "}
+          </Box>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {/* Middle Boxes (Two boxes in a column) */}
+          <Box sx={{ marginBottom: 4 }}>
+            <Box py={4} padding={4} textAlign="center">
+              <Typography
+                variant="h4"
+                color="textPrimary"
+                gutterBottom
+                style={{ fontFamily: "Playfair Display, serif" }}
+              >
+                Welcome to The Art in Lounge - For the Women of Art
+              </Typography>
+              <Box>
+                <StaticImage
+                  src="../images/banner.jpg"
+                  alt="Banner"
+                  layout="constrained"
+                  sx={{
+                    width: "100%",
+                    "@media (max-width: 500px)": {
+                      width: "100%",
+                      height: "auto",
+                    },
+                  }}
+                />
+                <Typography
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 22,
+                  }}
+                  variant="body1"
+                  paragraph
+                  sx={{ marginTop: 2, padding: 2 }}
+                >
+                  Welcome to our exquisite night lounge clothing company,
+                  nestled in the heart of Bulgaria, where we craft the epitome
+                  of sophistication and luxury. At our establishment, we
+                  specialize in creating bespoke night lounge attire that exudes
+                  unparalleled opulence and exclusivity. Each piece of clothing
+                  is meticulously designed to reflect your unique style and
+                  preferences, ensuring you step into your evenings with an aura
+                  of sophistication. Our dedication to excellence is mirrored in
+                  our choice of the finest fabrics, sourced from across the
+                  globe, and our commitment to impeccable craftsmanship. Explore
+                  our exclusive range of elegantly tailored garments and
+                  experience the epitome of posh, bespoke elegance. Discover the
+                  allure of handcrafted elegance at its finest and elevate your
+                  nights with our extraordinary creations.
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <Box>{/* Content for the second middle box */}</Box>
+        </Grid>
+        <Grid item sx={{ flex: "1" }}>
+          {/* Right Box */}
+          <Box sx={{ marginRight: 4 }}>
+            {" "}
+            <Grid container sx={{ display: { xs: "none", md: "block" } }}>
+              {sideItems?.map((product, index) => (
+                <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                  <CardActionArea
+                    sx={{ padding: 0, marginTop: 5 }}
+                    onClick={() => navigate(`/products/${product.handle}`)}
+                  >
+                    <div
+                      sx={{
+                        position: "relative",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        padding: 0,
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        alt={product.title}
+                        image={product.images[0]?.src}
+                        sx={{
+                          margin: 0,
+                        }}
+                      />
+                    </div>
+                  </CardActionArea>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: "Playfair Display, serif",
+                        fontSize: "24px",
+                        whiteSpace: "normal",
+                      }}
+                    >
+                      ${product.priceRangeV2.maxVariantPrice.amount}0
+                    </Typography>
+                    <IconButton
+                      edge="end"
+                      onClick={() => addVariantToCart(product, 1)}
+                      sx={{
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        transition: "background-color 0.2s, transform 0.2s",
+                        userSelect: "none",
+                        outline: "none",
+                        padding: 0,
+                      }}
+                    >
+                      <ShoppingCartIcon />
+                    </IconButton>
+                  </Box>
+                </Grid>
+              ))}{" "}
+            </Grid>{" "}
+          </Box>
+        </Grid>
+      </Grid>
+      {/* Right Box */}
+      {/* Right Box */}
 
       <Container>
         <Seo title="Home" />
-        <Box py={4} padding={4} textAlign="center">
-          <Typography
-            variant="h4"
-            color="textPrimary"
-            gutterBottom
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            Welcome to The Art in Lounge - For the Women of Art
-          </Typography>
-          <Box>
-            <StaticImage
-              src="../images/banner.jpg"
-              alt="Banner"
-              layout="constrained"
-              sx={{
-                width: "100%",
-                "@media (max-width: 500px)": {
-                  width: "100%",
-                  height: "auto",
-                },
-              }}
-            />
-            <Typography
-              style={{ fontFamily: "Playfair Display, serif", fontSize: 22 }}
-              variant="body1"
-              paragraph
-              sx={{ marginTop: 2, padding: 2 }}
-            >
-              Welcome to our exquisite night lounge clothing company, nestled in
-              the heart of Bulgaria, where we craft the epitome of
-              sophistication and luxury. At our establishment, we specialize in
-              creating bespoke night lounge attire that exudes unparalleled
-              opulence and exclusivity. Each piece of clothing is meticulously
-              designed to reflect your unique style and preferences, ensuring
-              you step into your evenings with an aura of sophistication. Our
-              dedication to excellence is mirrored in our choice of the finest
-              fabrics, sourced from across the globe, and our commitment to
-              impeccable craftsmanship. Explore our exclusive range of elegantly
-              tailored garments and experience the epitome of posh, bespoke
-              elegance. Discover the allure of handcrafted elegance at its
-              finest and elevate your nights with our extraordinary creations.
-            </Typography>
-          </Box>
-        </Box>
-        <Box py={1} textAlign="center">
-          <Typography
-            style={{ fontFamily: "Playfair Display, serif" }}
-            variant="h4"
-            color="textPrimary"
-            gutterBottom
-          >
-            COLLECTIONS
-          </Typography>
-        </Box>
+        <Typography
+          style={{
+            fontFamily: "Playfair Display, serif",
+            textAlign: "center",
+          }}
+          variant="h4"
+          color="textPrimary"
+          gutterBottom
+        >
+          COLLECTIONS
+        </Typography>
+        <Box py={1} textAlign="center"></Box>
         {/* honey'im home */}
         <div>
           {showCollection1 ? (
