@@ -47,34 +47,46 @@ const Products = ({ data }) => {
     setFilteredProducts(filtered)
   }
 
+  const getAllDistinctTags = products => {
+    const distinctTags = []
+
+    products.forEach(product => {
+      if (product.tags && Array.isArray(product.tags)) {
+        product.tags.forEach(tag => {
+          if (!distinctTags.includes(tag)) {
+            distinctTags.push(tag)
+          }
+        })
+      }
+    })
+
+    return distinctTags
+  }
+
+  const filteredTags = getAllDistinctTags(nodes)
+
   return (
-    <Container>
+    <Box sx={{ marginTop: 4 }}>
       <Seo title="Products" />
-      <Box>
-        <Box>
+      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <Box sx={{ maxWidth: "20%", marginLeft: 4 }}>
           <h2>Collections</h2>
           <FormControl component="fieldset">
             <FormGroup>
-              {nodes.map(product =>
-                product?.tags.length > 0 ? (
-                  <FormControlLabel
-                    id={product.handle}
-                    key={product.handle}
-                    control={
-                      <Checkbox
-                        id={product.handle}
-                        checked={selectedTags.some(tag =>
-                          product.tags.includes(tag)
-                        )}
-                        onChange={() => handleTagFilter(product.tags[0])}
-                      />
-                    }
-                    label={product.tags[0]}
-                  />
-                ) : (
-                  <div></div>
-                )
-              )}
+              {filteredTags.map(tag => (
+                <FormControlLabel
+                  id={tag}
+                  key={tag}
+                  control={
+                    <Checkbox
+                      id={tag}
+                      checked={selectedTags.includes(tag)}
+                      onChange={() => handleTagFilter(tag)}
+                    />
+                  }
+                  label={tag}
+                />
+              ))}
             </FormGroup>
           </FormControl>
           <h2>Price Range</h2>
@@ -91,7 +103,8 @@ const Products = ({ data }) => {
             />
           </div>
         </Box>
-        <Grid container spacing={2} sx={{ maxWidth: 1234 }}>
+
+        <Grid container spacing={2}>
           {filteredProducts.map((product, index) => (
             <Grid
               item
@@ -108,7 +121,7 @@ const Products = ({ data }) => {
           ))}
         </Grid>
       </Box>
-    </Container>
+    </Box>
   )
 }
 

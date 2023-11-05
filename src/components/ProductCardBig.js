@@ -1,5 +1,6 @@
 import React from "react"
 import { navigate } from "gatsby-link"
+import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardActionArea from "@mui/material/CardActionArea"
 import CardContent from "@mui/material/CardContent"
@@ -15,11 +16,30 @@ const ProductCardBig = ({ product }) => {
   return (
     <Card
       sx={{
-        borderRadius: 4,
+        borderRadius: 1,
         padding: 0,
         boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
       }}
     >
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: 1,
+          backgroundColor: "#8B7D9B",
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            fontSize: "20px",
+            whiteSpace: "white",
+          }}
+        >
+          {product.title}
+        </Typography>
+      </CardContent>
       <CardActionArea
         sx={{ padding: 0 }}
         onClick={() => navigate(`/products/${product.handle}`)}
@@ -31,83 +51,50 @@ const ProductCardBig = ({ product }) => {
             flexDirection: "column",
             alignItems: "center",
             padding: 0,
-            maxHeight: "100px",
           }}
         >
           <CardMedia
             component="img"
             alt={product.title}
-            height="300"
             image={product.images[0]?.src}
             sx={{
-              height: "500px",
               margin: 0,
             }}
           />
-          <IconButton
-            edge="end"
-            color="primary"
-            onClick={() => addVariantToCart(product, 1)}
-            sx={{
-              position: "absolute",
-              top: 20,
-              right: 20,
-              backgroundColor: "#8B7D9B",
-              borderRadius: "50%",
-              cursor: "pointer",
-              transition: "background-color 0.2s, transform 0.2s",
-              userSelect: "none",
-              outline: "none",
-              padding: 0,
-              "& .MuiSvgIcon-root": {
-                width: "24px",
-                height: "24px",
-                color: "white",
-              },
-              "&:hover": {
-                background: "#8B7D9B",
-                transform: "scale(1.05)",
-              },
-            }}
-          >
-            <ShoppingCartIcon />
-          </IconButton>
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: 0,
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: "Playfair Display, serif",
-                fontSize: "1.25rem",
-                fontWeight: 700,
-                color: "#333",
-                textTransform: "capitalize",
-                padding: 0,
-              }}
-              variant="h6"
-            >
-              {product.title}
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: "Playfair Display, serif",
-                fontSize: "1.5rem",
-                fontWeight: 700,
-                color: "#ff5722",
-                padding: 0,
-              }}
-              variant="h6"
-            >
-              ${product.priceRangeV2.maxVariantPrice.amount}0
-            </Typography>
-          </CardContent>
         </div>
       </CardActionArea>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            fontSize: "24px",
+            whiteSpace: "normal",
+          }}
+        >
+          ${product.priceRangeV2.maxVariantPrice.amount}0
+        </Typography>
+        <IconButton
+          edge="end"
+          onClick={() => addVariantToCart(product, 1)}
+          sx={{
+            borderRadius: "50%",
+            cursor: "pointer",
+            transition: "background-color 0.2s, transform 0.2s",
+            userSelect: "none",
+            outline: "none",
+            padding: 0,
+          }}
+        >
+          <ShoppingCartIcon />
+        </IconButton>
+      </Box>
     </Card>
   )
 }
