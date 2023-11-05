@@ -13,13 +13,13 @@ const client = Client.buildClient(
 const defaultValues = {
   cart: [],
   loading: false,
-  addVariantToCart: () => { },
-  removeLineItem: () => { },
+  addVariantToCart: () => {},
+  removeLineItem: () => {},
   client,
   checkout: {
     id: "",
     lineItems: [],
-    webUrl: ""
+    webUrl: "",
   },
 }
 
@@ -33,7 +33,7 @@ export const StoreProvider = ({ children }) => {
   const [checkout, setCheckout] = useState(defaultValues.checkout)
   const [loading, setLoading] = useState(false)
 
-  const setCheckoutItem = (checkout) => {
+  const setCheckoutItem = checkout => {
     if (isBrowser) {
       localStorage.setItem(localStorageKey, checkout.id)
     }
@@ -88,20 +88,26 @@ export const StoreProvider = ({ children }) => {
     ]
 
     try {
-      const res = await client.checkout.addLineItems(checkoutID, lineItemsToUpdate)
+      const res = await client.checkout.addLineItems(
+        checkoutID,
+        lineItemsToUpdate
+      )
       setCheckout(res)
 
       let updatedCart = []
       if (cart.length > 0) {
-        const itemIsInCart = cart.find((item) => item.product.variants[0]?.shopifyId === variantId)
+        const itemIsInCart = cart.find(
+          item => item.product.variants[0]?.shopifyId === variantId
+        )
 
         if (itemIsInCart) {
           const newProduct = {
             product: { ...itemIsInCart.product },
-            quantity: (itemIsInCart.quantity + parsedQuantity)
-
+            quantity: itemIsInCart.quantity + parsedQuantity,
           }
-          const otherItems = cart.filter((item) => item.product.variants[0]?.shopifyId !== variantId)
+          const otherItems = cart.filter(
+            item => item.product.variants[0]?.shopifyId !== variantId
+          )
           updatedCart = [...otherItems, newProduct]
         } else {
           updatedCart = cart.concat([{ product, quantity: parsedQuantity }])
@@ -119,27 +125,31 @@ export const StoreProvider = ({ children }) => {
     }
   }
 
-  const removeLineItem = async (variantId) => {
+  const removeLineItem = async variantId => {
     setLoading(true)
     try {
       if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
-      
-      let lineItemID = ''
-      checkout.lineItems?.forEach((item) => {
+
+      let lineItemID = ""
+      checkout.lineItems?.forEach(item => {
         if (item.variableValues.lineItems[0]?.variantId === variantId) {
           lineItemID = item.id
         }
       })
 
       if (!lineItemID) {
-        console.log('Product not in cart')
+        console.log("Product not in cart")
         return
       }
 
-      const res = await client.checkout.removeLineItems(checkout.id, [lineItemID])
+      const res = await client.checkout.removeLineItems(checkout.id, [
+        lineItemID,
+      ])
       setCheckout(res)
 
-      const updatedCart = cart.filter((item) => item.product.variants[0]?.shopifyId !== variantId)
+      const updatedCart = cart.filter(
+        item => item.product.variants[0]?.shopifyId !== variantId
+      )
       setCart(updatedCart)
       setLoading(false)
     } catch (error) {

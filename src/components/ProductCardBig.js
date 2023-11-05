@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import { makeStyles } from "@mui/styles"
 import useStore from "../context/StoreContext"
 
-const ProductCard = ({ product }) => {
+const ProductCardBig = ({ product }) => {
   const { addVariantToCart } = useStore()
   const classes = useStyles()
 
@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
   )
 }
 
-export default ProductCard
+export default ProductCardBig
 
 const useStyles = makeStyles(theme => ({
   cardImage: {

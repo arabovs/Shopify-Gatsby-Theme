@@ -1,5 +1,8 @@
 import React from "react"
-import styled from "styled-components"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import IconButton from "@mui/material/IconButton"
+import DeleteIcon from "@mui/icons-material/Delete"
 
 import useStore from "../context/StoreContext"
 
@@ -8,52 +11,37 @@ const ProductRow = ({ item }) => {
   const { quantity, product } = item
 
   return (
-    <Wrapper>
-      <ProductWrapper>
-        <Image src={product.images[0]?.src} alt={product.title} />
-        <Subtitle>{product.title}</Subtitle>
-      </ProductWrapper>
-      <Subtitle>{quantity}</Subtitle>
-      <DeleteButton
-        onClick={() => removeLineItem(product.variants[0]?.shopifyId)}
-      >
-        Remove
-      </DeleteButton>
-    </Wrapper>
+    <Grid container spacing={2} alignItems="center">
+      <Grid item xs={2}>
+        <img
+          src={product.images[0]?.src}
+          alt={product.title}
+          style={{
+            width: "80px",
+            height: "80px",
+            objectFit: "cover",
+            borderRadius: "4px",
+          }}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Typography variant="h6" style={{ fontWeight: 700 }}>
+          {product.title}
+        </Typography>
+      </Grid>
+      <Grid item xs={2}>
+        <Typography variant="subtitle1">{quantity}</Typography>
+      </Grid>
+      <Grid item xs={2}>
+        <IconButton
+          color="secondary"
+          onClick={() => removeLineItem(product.variants[0]?.shopifyId)}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
   )
 }
 
 export default ProductRow
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 330px);
-  gap: 40px;
-  align-items: center;
-`
-
-const ProductWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 80px auto;
-  gap: 20px;
-  align-items: center;
-  width: 330px;
-`
-
-const Image = styled.img`
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 20px;
-`
-
-const Subtitle = styled.p`
-  font-weight: bold;
-  font-size: 14px;
-`
-
-const DeleteButton = styled.p`
-  color: #a61b2b;
-  font-size: 14px;
-  cursor: pointer;
-`

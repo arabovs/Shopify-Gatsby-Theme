@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react"
 import styled from "styled-components"
 
-import useStore from '../context/StoreContext'
+import useStore from "../context/StoreContext"
 
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 import Seo from "../components/seo"
-import ProductRow from '../components/ProductRow'
+import ProductRow from "../components/ProductRow"
 import PrimaryButton from "../components/PrimaryButton"
 
 const Cart = () => {
@@ -20,11 +20,17 @@ const Cart = () => {
           <Text>Quantity</Text>
           <Text>Remove Item</Text>
         </HeaderWrapper>
-        {
-          cart.length > 0 ? cart.map((item, index) => <ProductRow key={index} item={item} />) : <Text>Your cart is empty.</Text>
-        }
+        {cart.length > 0 ? (
+          cart.map((item, index) => <ProductRow key={index} item={item} />)
+        ) : (
+          <Text>Your cart is empty.</Text>
+        )}
         <ButtonWrapper>
-          <PrimaryButton text="Checkout" onClick={() => window.open(checkout.webUrl)} disabled={cart.length === 0} />
+          <PrimaryButton
+            text="Checkout"
+            onClick={() => window.open(checkout.webUrl)}
+            disabled={cart.length === 0}
+          />
         </ButtonWrapper>
       </Wrapper>
     </Layout>

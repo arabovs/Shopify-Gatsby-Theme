@@ -1,72 +1,113 @@
-import * as React from "react"
-import styled from "styled-components"
+import React, { useState } from "react"
+import { Link } from "gatsby"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import Drawer from "@mui/material/Drawer"
+import IconButton from "@mui/material/IconButton"
+import MenuIcon from "@mui/icons-material/Menu"
+import useMediaQuery from "@mui/material/useMediaQuery"
+import { makeStyles } from "@mui/styles"
 
-import PropTypes from "prop-types"
-import { Link, useStaticQuery, graphql } from "gatsby"
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    backgroundColor: "black", // Header background color
+  },
+  siteTitle: {
+    flexGrow: 1,
+    textDecoration: "none",
+    color: "white", // Site title text color
+    fontWeight: "bold",
+    fontSize: "24px", // Site title font size
+  },
+  menuButton: {
+    color: "white", // Menu icon button color
+  },
+  menuLink: {
+    textDecoration: "none",
+    color: "white", // Menu links text color
+    fontSize: "16px", // Menu links font size
+    fontWeight: "normal",
+    margin: "0 15px", // Menu links spacing
+  },
+  drawer: {
+    backgroundColor: "#0f4c01", // Drawer background color
+  },
+  drawerLink: {
+    textDecoration: "none",
+    color: "white", // Drawer links text color
+    fontSize: "16px", // Drawer links font size
+    fontWeight: "normal",
+  },
+}))
 
 const Header = ({ siteTitle }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"))
+  const classes = useStyles()
 
-  console.log(data)
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen)
+  }
+
   return (
-    <HeaderWrapper>
-      <Link to="/" className="site-title">
-        {siteTitle}
-      </Link>
-      <LinksWrapper>
-        <Link to="/products">New Arrivals</Link>
-        <Link to="/products">Clothing</Link>
-        <Link to="/products">Collections</Link>
-        <Link to="/cart">My Cart</Link>
-      </LinksWrapper>
-    </HeaderWrapper>
+    <AppBar position="static" className={classes.appBar}>
+      <Toolbar>
+        <Link to="/" className={classes.siteTitle}>
+          {siteTitle}
+        </Link>
+        {isSmallScreen ? (
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleDrawer}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+        ) : (
+          <Tabs value={false}>
+            <Link to="/products" className={classes.menuLink}>
+              <Tab label="New Arrivals" />
+            </Link>
+            <Link to="/products" className={classes.menuLink}>
+              <Tab label="Clothing" />
+            </Link>
+            <Link to="/products" className={classes.menuLink}>
+              <Tab label="Collections" />
+            </Link>
+            <Link to="/cart" className={classes.menuLink}>
+              <Tab label="My Cart" />
+            </Link>
+          </Tabs>
+        )}
+      </Toolbar>
+      <Drawer anchor="top" open={drawerOpen} onClose={toggleDrawer}>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={false}
+          indicatorColor="primary"
+          className={classes.drawer}
+        >
+          <Link to="/products" className={classes.drawerLink}>
+            <Tab label="New Arrivals" />
+          </Link>
+          <Link to="/products" className={classes.drawerLink}>
+            <Tab label="Clothing" />
+          </Link>
+          <Link to="/products" className={classes.drawerLink}>
+            <Tab label="Collections" />
+          </Link>
+          <Link to="/cart" className={classes.drawerLink}>
+            <Tab label="My Cart" />
+          </Link>
+        </Tabs>
+      </Drawer>
+    </AppBar>
   )
 }
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
 export default Header
-
-const HeaderWrapper = styled.header`
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-
-  .site-title {
-    font-weight: bold;
-    color: #014c40;
-  }
-
-  a {
-    text-decoration: none;
-    color: black;
-    font-size: 15px;
-    font-weight: normal;
-    text-transform: uppercase;
-    font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-      Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-    :hover {
-      text-decoration: underline;
-    }
-  }
-`
-const LinksWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, auto);
-  gap: 40px;
-`
