@@ -11,32 +11,32 @@ import { makeStyles } from "@mui/styles"
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    backgroundColor: "#37382e", // Header background color
+    backgroundColor: "#37382e",
   },
   siteTitle: {
     flexGrow: 1,
     textDecoration: "none",
-    color: "white", // Site title text color
+    color: "white",
     fontWeight: "bold",
-    fontSize: "24px", // Site title font size
+    fontSize: "24px",
   },
   menuButton: {
-    color: "white", // Menu icon button color
+    color: "white",
   },
   menuLink: {
     textDecoration: "none",
-    color: "white", // Menu links text color
-    fontSize: "16px", // Menu links font size
+    color: "white",
+    fontSize: "16px",
     fontWeight: "normal",
-    margin: "0 15px", // Menu links spacing
+    margin: "0 15px",
   },
   drawer: {
-    backgroundColor: "#37382e", // Drawer background color
+    backgroundColor: "#37382e",
   },
   drawerLink: {
     textDecoration: "none",
-    color: "white", // Drawer links text color
-    fontSize: "16px", // Drawer links font size
+    color: "white",
+    fontSize: "16px",
     fontWeight: "normal",
   },
 }))
@@ -44,16 +44,22 @@ const useStyles = makeStyles(theme => ({
 const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [isClient, setIsClient] = useState(false)
-  const [isSmallScreen, setIsSmallScreen] = useState(false) // State for media query
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
   const classes = useStyles()
 
-  // Conditionally import useMediaQuery
   useEffect(() => {
-    import("@mui/material/useMediaQuery").then(({ default: useMediaQuery }) => {
-      setIsSmallScreen(useMediaQuery(theme => theme.breakpoints.down("sm")))
-      setIsClient(true)
-    })
+    setIsClient(true)
   }, [])
+
+  useEffect(() => {
+    if (isClient) {
+      import("@mui/material/useMediaQuery").then(
+        ({ default: useMediaQuery }) => {
+          setIsSmallScreen(useMediaQuery(theme => theme.breakpoints.down("sm")))
+        }
+      )
+    }
+  }, [isClient])
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)

@@ -1,13 +1,11 @@
-import * as React from "react"
+import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import Box from "@mui/material/Box"
+import { graphql } from "gatsby"
+import * as React from "react"
+import ProductCardBig from "../components/ProductCardBig"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import ProductCardBig from "../components/ProductCardBig"
-import { graphql } from "gatsby"
-
-import Footer from "../components/footer"
 
 const IndexPage = ({ data }) => {
   const { nodes } = data.allShopifyProduct
