@@ -18,9 +18,11 @@ const Products = ({ data }) => {
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   React.useEffect(() => {
     filterProducts()
   }, [selectedTags, minPrice, maxPrice])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const handleTagFilter = tag => {
     if (selectedTags.includes(tag)) {

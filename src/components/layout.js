@@ -8,7 +8,6 @@ import Paper from "@mui/material/Paper"
 import { makeStyles } from "@mui/styles"
 
 import Header from "./header"
-import "./layout.css"
 
 const useStyles = makeStyles(theme => ({
   layout: {
