@@ -1,60 +1,70 @@
 import React from "react"
-import styled from "styled-components"
-
+import Container from "@mui/material/Container"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
+import Grid from "@mui/material/Grid"
+import { makeStyles } from "@mui/styles"
 import useStore from "../context/StoreContext"
-
 import Layout from "../components/layout"
-import Seo from "../components/seo"
 import ProductRow from "../components/ProductRow"
 import PrimaryButton from "../components/PrimaryButton"
 
+const useStyles = makeStyles(theme => ({
+  wrapper: {
+    marginTop: theme.spacing(4),
+    padding: theme.spacing(4),
+  },
+  headerWrapper: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: theme.spacing(4),
+  },
+  text: {
+    fontWeight: 600,
+    fontSize: 14,
+  },
+  buttonWrapper: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+}))
+
 const Cart = () => {
   const { cart, checkout } = useStore()
+  const classes = useStyles()
 
   return (
     <Layout>
-      <Seo title="My Cart" />
-      <Wrapper>
-        <HeaderWrapper>
-          <Text>Product</Text>
-          <Text>Quantity</Text>
-          <Text>Remove Item</Text>
-        </HeaderWrapper>
-        {cart.length > 0 ? (
-          cart.map((item, index) => <ProductRow key={index} item={item} />)
-        ) : (
-          <Text>Your cart is empty.</Text>
-        )}
-        <ButtonWrapper>
-          <PrimaryButton
-            text="Checkout"
-            onClick={() => window.open(checkout.webUrl)}
-            disabled={cart.length === 0}
-          />
-        </ButtonWrapper>
-      </Wrapper>
+      <Container>
+        <Paper className={classes.wrapper}>
+          <Grid container spacing={4}>
+            <Grid item xs={12}>
+              <Typography variant="h4" gutterBottom>
+                My Cart
+              </Typography>
+            </Grid>
+            <Grid item xs={12} className={classes.headerWrapper}>
+              <Typography className={classes.text}>Product</Typography>
+              <Typography className={classes.text}>Quantity</Typography>
+              <Typography className={classes.text}>Remove Item</Typography>
+            </Grid>
+            {cart.length > 0 ? (
+              cart.map((item, index) => <ProductRow key={index} item={item} />)
+            ) : (
+              <Typography>Your cart is empty.</Typography>
+            )}
+            <div className={classes.buttonWrapper}>
+              <PrimaryButton
+                text="Checkout"
+                onClick={() => window.open(checkout.webUrl)}
+                disabled={cart.length === 0}
+              />
+            </div>
+          </Grid>
+        </Paper>
+      </Container>
     </Layout>
   )
 }
 
 export default Cart
-
-const Wrapper = styled.div`
-  margin: 40px;
-`
-
-const HeaderWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 330px);
-  gap: 40px;
-`
-
-const Text = styled.p`
-  font-weight: 600;
-  font-size: 14px;
-`
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`

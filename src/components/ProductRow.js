@@ -30,7 +30,7 @@ const ProductRow = ({ item }) => {
         </Typography>
       </Grid>
       <Grid item xs={2}>
-        <Typography variant="subtitle1">{quantity}</Typography>
+        <Typography variant="subtitle1">{product.quantity}</Typography>
       </Grid>
       <Grid item xs={2}>
         <IconButton

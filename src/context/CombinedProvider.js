@@ -1,10 +1,17 @@
 import React from "react"
 
+import Header from "../components/header"
+import Footer from "../components/footer"
+
 import { StoreProvider } from "./StoreContext"
 
 const CombinedProvider = ({ element }) => {
   return (
-    <StoreProvider>{element}</StoreProvider>
+    <div>
+      <Header siteTitle={`The Art in Lounge`} />
+      <StoreProvider>{element}</StoreProvider>
+      <Footer />
+    </div>
   )
 }
 

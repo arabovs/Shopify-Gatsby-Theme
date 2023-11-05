@@ -1,103 +1,121 @@
 import { navigate } from "gatsby-link"
 import React from "react"
-import styled from "styled-components"
-
-import Layout from "../components/layout"
-import PrimaryButton from "../components/PrimaryButton"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
+import TextField from "@mui/material/TextField"
+import { makeStyles } from "@mui/styles"
 import useStore from "../context/StoreContext"
 import useInput from "../utils/useInput"
+import Layout from "../components/layout"
+import PrimaryButton from "../components/PrimaryButton"
+
+const useStyles = makeStyles(theme => ({
+  backButton: {
+    cursor: "pointer",
+    color: theme.palette.primary.main,
+    fontSize: 14,
+    fontWeight: 600,
+    marginLeft: theme.spacing(2),
+  },
+  wrapper: {
+    margin: theme.spacing(4),
+  },
+  image: {
+    width: "100%",
+    height: "auto",
+    borderRadius: theme.spacing(3),
+  },
+  infoContainer: {
+    display: "grid",
+    alignItems: "flex-start",
+    height: "fit-content",
+    gap: theme.spacing(2),
+  },
+  description: {
+    margin: 0,
+  },
+  title: {
+    margin: 0,
+  },
+  subtitle: {
+    fontWeight: "bold",
+    maxWidth: 500,
+  },
+  inputForm: {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, auto)",
+    width: "fit-content",
+    gap: theme.spacing(4),
+    alignItems: "center",
+  },
+  input: {
+    borderRadius: theme.spacing(4),
+    border: "2px solid rgba(0, 0, 0, 0.3)",
+    padding: theme.spacing(2),
+    maxWidth: 80,
+    fontSize: 12,
+    "&:focus": {
+      outline: "none",
+      outlineColor: theme.palette.primary.main,
+    },
+  },
+}))
 
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
   const { addVariantToCart } = useStore()
   const bind = useInput(1)
+  const classes = useStyles()
 
   return (
     <Layout>
-      <BackButton onClick={() => navigate(-1)}>{"< "} Back</BackButton>
-      <Wrapper>
-        <Image src={product.images[0]?.src} />
-        <InfoContainer>
-          <Title>{product.title}</Title>
-          <Subtitle>{product.priceRangeV2.maxVariantPrice.amount}0$</Subtitle>
-          <p>{product.description}</p>
-          <InputForm>
-            <Subtitle>
-              <label htmlFor="qty">Quantity:</label>
-            </Subtitle>
-            <Input placeholder="1" id="qty" type="number" {...bind} />
-          </InputForm>
-          <PrimaryButton
-            text="Add to cart"
-            onClick={() => addVariantToCart(product, bind.value)}
-          />
-        </InfoContainer>
-      </Wrapper>
+      <Container>
+        <Typography className={classes.backButton} onClick={() => navigate(-1)}>
+          {"< "} Back
+        </Typography>
+        <Paper className={classes.wrapper}>
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={6}>
+              <img
+                src={product.images[0]?.src}
+                alt={product.title}
+                className={classes.image}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <div className={classes.infoContainer}>
+                <Typography variant="h4" className={classes.title}>
+                  {product.title}
+                </Typography>
+                <Typography variant="h6" className={classes.subtitle}>
+                  {`${product.priceRangeV2.maxVariantPrice.amount}0$`}
+                </Typography>
+                <p className={classes.description}>{product.description}</p>
+                <form className={classes.inputForm}>
+                  <Typography variant="subtitle1">
+                    <label htmlFor="qty">Quantity:</label>
+                  </Typography>
+                  <TextField
+                    id="qty"
+                    variant="outlined"
+                    type="number"
+                    {...bind}
+                    inputProps={{ className: classes.input }}
+                  />
+                </form>
+                <PrimaryButton
+                  text="Add to cart"
+                  onClick={() => addVariantToCart(product, bind.value)}
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
     </Layout>
   )
 }
 
 export default ProductTemplate
-
-const BackButton = styled.p`
-  cursor: pointer;
-  color: #014c40;
-  margin-left: 40px;
-  font-size: 14px;
-  font-weight: 600;
-`
-
-const Wrapper = styled.div`
-  margin: 40px;
-  display: grid;
-  grid-template-columns: 400px auto;
-  gap: 40px;
-`
-
-const Image = styled.img`
-  width: 400px;
-  height: 500px;
-  border-radius: 30px;
-  object-fit: cover;
-`
-
-const InfoContainer = styled.div`
-  display: grid;
-  align-items: flex-start;
-  height: fit-content;
-  gap: 10px;
-
-  p {
-    margin: 0;
-  }
-`
-
-const Title = styled.h1`
-  margin: 0;
-`
-
-const Subtitle = styled.p`
-  font-weight: bold;
-  max-width: 500px;
-`
-
-const InputForm = styled.form`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  width: fit-content;
-  gap: 20px;
-  align-items: center;
-  gap: 10px;
-`
-
-const Input = styled.input`
-  border-radius: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  padding: 10px 20px;
-  max-width: 80px;
-  font-size: 12px;
-  :focus {
-    outline: none;
-    outline-color: #014c40;
-  }
-`

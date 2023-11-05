@@ -1,15 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
-import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import ProductCardBig from "../components/ProductCardBig"
 import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Slider from "@mui/material/Slider"
-import Button from "@mui/material/Button"
 import FormControl from "@mui/material/FormControl"
 import FormGroup from "@mui/material/FormGroup"
+import Box from "@mui/material/Box"
+import Grid from "@mui/material/Grid"
 
 const Products = ({ data }) => {
   const { nodes } = data.allShopifyProduct
@@ -18,11 +18,9 @@ const Products = ({ data }) => {
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   React.useEffect(() => {
     filterProducts()
   }, [selectedTags, minPrice, maxPrice])
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   const handleTagFilter = tag => {
     if (selectedTags.includes(tag)) {
@@ -30,10 +28,6 @@ const Products = ({ data }) => {
     } else {
       setSelectedTags([...selectedTags, tag])
     }
-  }
-
-  const handlePriceFilter = () => {
-    filterProducts()
   }
 
   const filterProducts = () => {
@@ -56,38 +50,38 @@ const Products = ({ data }) => {
   return (
     <Layout>
       <Seo title="Products" />
-      <Wrapper>
-        <FilterSection>
+      <Box>
+        <Box>
           <h2>Collections</h2>
           <FormControl component="fieldset">
             <FormGroup>
-              <div>
-                {nodes.map(product => (
-                  <div key={product.handle}>
-                    <FormGroup>
-                      {product.tags.map(tag => (
-                        <FormControlLabel
-                          key={tag}
-                          control={
-                            <Checkbox
-                              checked={selectedTags.includes(tag)}
-                              onChange={() => handleTagFilter(tag)}
-                            />
-                          }
-                          label={tag}
-                        />
-                      ))}
-                    </FormGroup>
-                  </div>
-                ))}
-              </div>
+              {nodes.map(product =>
+                product?.tags.length > 0 ? (
+                  <FormControlLabel
+                    id={product.handle}
+                    key={product.handle}
+                    control={
+                      <Checkbox
+                        id={product.handle}
+                        checked={selectedTags.some(tag =>
+                          product.tags.includes(tag)
+                        )}
+                        onChange={() => handleTagFilter(product.tags[0])}
+                      />
+                    }
+                    label={product.tags[0]}
+                  />
+                ) : (
+                  <div></div>
+                )
+              )}
             </FormGroup>
           </FormControl>
           <h2>Price Range</h2>
           <div>
             <Slider
               value={[minPrice, maxPrice]}
-              onChange={(e, newValue) => {
+              onChange={(_, newValue) => {
                 setMinPrice(newValue[0])
                 setMaxPrice(newValue[1])
               }}
@@ -95,17 +89,25 @@ const Products = ({ data }) => {
               min={0}
               max={1000}
             />
-            <Button variant="contained" onClick={handlePriceFilter}>
-              Apply
-            </Button>
           </div>
-        </FilterSection>
-        <ProductList>
+        </Box>
+        <Grid container spacing={2} sx={{ maxWidth: 1234 }}>
           {filteredProducts.map((product, index) => (
-            <ProductCardBig key={index} product={product} />
+            <Grid
+              item
+              id={index}
+              key={index}
+              xs={6}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={2}
+            >
+              <ProductCardBig product={product} />
+            </Grid>
           ))}
-        </ProductList>
-      </Wrapper>
+        </Grid>
+      </Box>
     </Layout>
   )
 }
@@ -133,42 +135,5 @@ export const query = graphql`
         }
       }
     }
-  }
-`
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  margin: 40px;
-  margin-bottom: 80px;
-  gap: 20px;
-  max-width: 1234px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`
-
-const FilterSection = styled.div`
-  display: inline-block;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    order: -1; /* This will move the filters to the top on smaller screens */
-  }
-`
-
-const ProductList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, auto);
-  justify-content: left;
-  gap: 40px;
-  max-width: 1234px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(
-      2,
-      auto
-    ); /* Adjust the number of columns for smaller screens */
   }
 `

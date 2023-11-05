@@ -1,10 +1,10 @@
 import React from "react"
 import Button from "@mui/material/Button"
+import { makeStyles } from "@mui/styles"
 
-// Define a reusable button component with customization options
-const PrimaryButton = ({ text, onClick, disabled = false }) => {
-  // Define button styles
-  const buttonStyles = {
+// Define button styles using makeStyles
+const useStyles = makeStyles(theme => ({
+  buttonStyles: {
     background: "#014c40",
     borderRadius: 30,
     height: 40,
@@ -14,31 +14,26 @@ const PrimaryButton = ({ text, onClick, disabled = false }) => {
     alignItems: "center",
     padding: "0 20px",
     cursor: "pointer",
-  }
+    "&:hover": {
+      transform: "scale(1.2)",
+      transition: "transform 0.2s",
+    },
+    "&:disabled": {
+      background: "rgba(1, 76, 64, 0.5)",
+      transform: "none",
+      cursor: "not-allowed",
+    },
+  },
+}))
 
-  // Define hover styles
-  const hoverStyles = {
-    transform: "scale(1.2)",
-    transition: "transform 0.2s",
-  }
-
-  // Define disabled styles
-  const disabledStyles = {
-    background: "rgba(1, 76, 64, 0.5)",
-    transform: "none",
-    cursor: "not-allowed",
-  }
+const PrimaryButton = ({ text, onClick, disabled = false }) => {
+  const classes = useStyles()
 
   return (
-    // Use the Material-UI Button component with customized styles
     <Button
-      style={buttonStyles}
+      className={classes.buttonStyles}
       onClick={onClick}
       disabled={disabled}
-      sx={{
-        "&:hover": hoverStyles,
-        "&:disabled": disabledStyles,
-      }}
     >
       {text}
     </Button>

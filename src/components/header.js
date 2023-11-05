@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
@@ -7,12 +7,11 @@ import Tab from "@mui/material/Tab"
 import Drawer from "@mui/material/Drawer"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
-import useMediaQuery from "@mui/material/useMediaQuery"
 import { makeStyles } from "@mui/styles"
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    backgroundColor: "black", // Header background color
+    backgroundColor: "#37382e", // Header background color
   },
   siteTitle: {
     flexGrow: 1,
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     margin: "0 15px", // Menu links spacing
   },
   drawer: {
-    backgroundColor: "#0f4c01", // Drawer background color
+    backgroundColor: "#37382e", // Drawer background color
   },
   drawerLink: {
     textDecoration: "none",
@@ -44,8 +43,17 @@ const useStyles = makeStyles(theme => ({
 
 const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"))
+  const [isClient, setIsClient] = useState(false)
+  const [isSmallScreen, setIsSmallScreen] = useState(false) // State for media query
   const classes = useStyles()
+
+  // Conditionally import useMediaQuery
+  useEffect(() => {
+    import("@mui/material/useMediaQuery").then(({ default: useMediaQuery }) => {
+      setIsSmallScreen(useMediaQuery(theme => theme.breakpoints.down("sm")))
+      setIsClient(true)
+    })
+  }, [])
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)
@@ -57,7 +65,7 @@ const Header = ({ siteTitle }) => {
         <Link to="/" className={classes.siteTitle}>
           {siteTitle}
         </Link>
-        {isSmallScreen ? (
+        {isClient && isSmallScreen ? (
           <IconButton
             edge="end"
             color="inherit"
