@@ -27,7 +27,7 @@ const ProductCardBig = ({ product }) => {
           flexDirection: "column",
           alignItems: "center",
           padding: 1,
-          backgroundColor: "#8B7D9B",
+          backgroundColor: "white",
         }}
       >
         <Typography

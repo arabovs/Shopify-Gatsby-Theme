@@ -1,12 +1,15 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
+import Link from "@mui/material/Link"
+import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { graphql } from "gatsby"
 import React, { useState } from "react"
 import ProductCardBig from "../components/ProductCardBig"
 import Seo from "../components/seo"
+import { StaticImage } from "gatsby-plugin-image"
 
 const IndexPage = ({ data }) => {
   const [showCollection1, setShowCollection1] = useState(true)
@@ -51,37 +54,52 @@ const IndexPage = ({ data }) => {
       {/* <Box sx={{ marginLeft: 4, marginTop: 4, float: "left", width: "20%" }}>
         asdasd
       </Box> */}
+
       <Container>
         <Seo title="Home" />
-        <Box py={4} textAlign="center">
+        <Box py={4} padding={4} textAlign="center">
           <Typography
             variant="h4"
             color="textPrimary"
             gutterBottom
             style={{ fontFamily: "Playfair Display, serif" }}
           >
-            Welcome to The Art in Lounge
+            Welcome to The Art in Lounge - For the Women of Art
           </Typography>
-          <Typography
-            style={{ fontFamily: "Playfair Display, serif", fontSize: 18 }}
-            variant="body1"
-            color="textSecondary"
-            paragraph
-          >
-            Welcome to our exquisite night lounge clothing company, nestled in
-            the heart of Bulgaria, where we craft the epitome of sophistication
-            and luxury. At our establishment, we specialize in creating bespoke
-            night lounge attire that exudes unparalleled opulence and
-            exclusivity. Each piece of clothing is meticulously designed to
-            reflect your unique style and preferences, ensuring you step into
-            your evenings with an aura of sophistication. Our dedication to
-            excellence is mirrored in our choice of the finest fabrics, sourced
-            from across the globe, and our commitment to impeccable
-            craftsmanship. Explore our exclusive range of elegantly tailored
-            garments and experience the epitome of posh, bespoke elegance.
-            Discover the allure of handcrafted elegance at its finest and
-            elevate your nights with our extraordinary creations.
-          </Typography>
+          <Box>
+            <StaticImage
+              src="../images/banner.jpg"
+              alt="Banner"
+              layout="constrained"
+              sx={{
+                width: "100%",
+                "@media (max-width: 500px)": {
+                  width: "100%",
+                  height: "auto",
+                },
+              }}
+            />
+            <Typography
+              style={{ fontFamily: "Playfair Display, serif", fontSize: 22 }}
+              variant="body1"
+              paragraph
+              sx={{ marginTop: 2, padding: 2 }}
+            >
+              Welcome to our exquisite night lounge clothing company, nestled in
+              the heart of Bulgaria, where we craft the epitome of
+              sophistication and luxury. At our establishment, we specialize in
+              creating bespoke night lounge attire that exudes unparalleled
+              opulence and exclusivity. Each piece of clothing is meticulously
+              designed to reflect your unique style and preferences, ensuring
+              you step into your evenings with an aura of sophistication. Our
+              dedication to excellence is mirrored in our choice of the finest
+              fabrics, sourced from across the globe, and our commitment to
+              impeccable craftsmanship. Explore our exclusive range of elegantly
+              tailored garments and experience the epitome of posh, bespoke
+              elegance. Discover the allure of handcrafted elegance at its
+              finest and elevate your nights with our extraordinary creations.
+            </Typography>
+          </Box>
         </Box>
         <Box py={1} textAlign="center">
           <Typography

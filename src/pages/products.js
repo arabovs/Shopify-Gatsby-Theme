@@ -10,6 +10,7 @@ import FormControl from "@mui/material/FormControl"
 import FormGroup from "@mui/material/FormGroup"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
+import { Typography } from "@mui/material"
 
 const Products = ({ data }) => {
   const { nodes } = data.allShopifyProduct
@@ -66,62 +67,79 @@ const Products = ({ data }) => {
   const filteredTags = getAllDistinctTags(nodes)
 
   return (
-    <Box sx={{ marginTop: 4 }}>
-      <Seo title="Products" />
-      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
-        <Box sx={{ maxWidth: "20%", marginLeft: 4 }}>
-          <h2>Collections</h2>
-          <FormControl component="fieldset">
-            <FormGroup>
-              {filteredTags.map(tag => (
-                <FormControlLabel
-                  id={tag}
-                  key={tag}
-                  control={
-                    <Checkbox
+    <Container>
+      <Box sx={{ marginTop: 4 }}>
+        <Seo title="Products" />
+        <Box sx={{ display: "grid" }}>
+          <Grid
+            container
+            spacing={4}
+            sx={{
+              marginBottom: 4,
+              display: "flex",
+              flexDirection: "row", // Change direction to left to right
+            }}
+          >
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Typography
+                variant="h4"
+                color="textPrimary"
+                style={{ fontFamily: "Playfair Display, serif" }}
+              >
+                Collections
+              </Typography>
+              <FormControl component="fieldset">
+                <FormGroup>
+                  {filteredTags.map(tag => (
+                    <FormControlLabel
                       id={tag}
-                      checked={selectedTags.includes(tag)}
-                      onChange={() => handleTagFilter(tag)}
+                      key={tag}
+                      control={
+                        <Checkbox
+                          id={tag}
+                          checked={selectedTags.includes(tag)}
+                          onChange={() => handleTagFilter(tag)}
+                        />
+                      }
+                      label={tag}
                     />
-                  }
-                  label={tag}
-                />
-              ))}
-            </FormGroup>
-          </FormControl>
-          <h2>Price Range</h2>
-          <div>
-            <Slider
-              value={[minPrice, maxPrice]}
-              onChange={(_, newValue) => {
-                setMinPrice(newValue[0])
-                setMaxPrice(newValue[1])
-              }}
-              valueLabelDisplay="auto"
-              min={0}
-              max={1000}
-            />
-          </div>
-        </Box>
-
-        <Grid container spacing={2}>
-          {filteredProducts.map((product, index) => (
-            <Grid
-              item
-              id={index}
-              key={index}
-              xs={6}
-              sm={6}
-              md={4}
-              lg={4}
-              xl={2}
-            >
-              <ProductCardBig product={product} />
+                  ))}
+                </FormGroup>
+              </FormControl>
             </Grid>
-          ))}
-        </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Typography
+                variant="h4"
+                color="textPrimary"
+                minWidth="200px"
+                style={{ fontFamily: "Playfair Display, serif" }}
+              >
+                Price Filter
+              </Typography>
+              <div>
+                <Slider
+                  value={[minPrice, maxPrice]}
+                  onChange={(_, newValue) => {
+                    setMinPrice(newValue[0])
+                    setMaxPrice(newValue[1])
+                  }}
+                  valueLabelDisplay="auto"
+                  min={0}
+                  max={1000}
+                />
+              </div>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            {filteredProducts.map((product, index) => (
+              <Grid item id={index} key={index} xs={12} sm={6} md={4} lg={3}>
+                <ProductCardBig product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   )
 }
 

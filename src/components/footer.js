@@ -1,7 +1,7 @@
 import React from "react"
+import Grid from "@mui/material/Grid"
 import Toolbar from "@mui/material/Toolbar"
-import Tabs from "@mui/material/Tabs"
-import Tab from "@mui/material/Tab"
+import Typography from "@mui/material/Typography"
 import { Link } from "gatsby"
 
 const footerLinks = [
@@ -15,44 +15,50 @@ const Footer = () => {
   return (
     <Toolbar
       sx={{
-        display: "flex",
-        justifyContent: "center",
         backgroundColor: "#8B7D9B",
-        flexWrap: "wrap",
       }}
     >
-      <Tabs
-        value={false}
+      <Grid
+        container
         sx={{
-          "& .MuiTabs-flexContainer": {
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          },
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between", // Center with space between
+          alignContent: "center",
         }}
       >
         {footerLinks.map((link, index) => (
-          <Link
-            id={link.to}
-            to={link.to}
-            sx={{
-              color: "white",
-              fontSize: "16px",
-              fontWeight: "normal",
-              textDecoration: "none",
-              flexBasis: "25%",
-              textAlign: "center",
-              padding: "8px",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
+          <Grid
+            item
+            xs={12} // On extra small screens, take up the full width (stacked)
+            lg={3} // On large screens, take up 3/12 of the available width
             key={index}
           >
-            <Tab label={link.label} />
-          </Link>
+            <Link
+              id={link.to}
+              to={link.to}
+              style={{
+                textDecoration: "none",
+                fontFamily: "Playfair Display, serif",
+              }}
+            >
+              <Typography
+                id={link.label}
+                sx={{
+                  fontSize: "22px",
+                  fontFamily: "Playfair Display, serif",
+                  color: "white",
+                  width: "100%",
+
+                  textAlign: "center", // Center the text
+                }}
+              >
+                {link.label}
+              </Typography>
+            </Link>
+          </Grid>
         ))}
-      </Tabs>
+      </Grid>
     </Toolbar>
   )
 }
