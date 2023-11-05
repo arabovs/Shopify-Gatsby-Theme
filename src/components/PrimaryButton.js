@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles"
 // Define button styles using makeStyles
 const useStyles = makeStyles(theme => ({
   buttonStyles: {
-    background: "#014c40",
+    background: "#8B7D9B",
     borderRadius: 30,
     height: 40,
     width: "fit-content",

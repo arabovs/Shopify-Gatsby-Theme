@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 import ProductCardBig from "../components/ProductCardBig"
 import Checkbox from "@mui/material/Checkbox"
+import Container from "@mui/material/Container"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Slider from "@mui/material/Slider"
 import FormControl from "@mui/material/FormControl"
@@ -48,7 +48,7 @@ const Products = ({ data }) => {
   }
 
   return (
-    <Layout>
+    <Container>
       <Seo title="Products" />
       <Box>
         <Box>
@@ -108,7 +108,7 @@ const Products = ({ data }) => {
           ))}
         </Grid>
       </Box>
-    </Layout>
+    </Container>
   )
 }
 

@@ -44,7 +44,7 @@ module.exports = {
           fonts: {
             google: [
               {
-                family: `Montserrat`,
+                family: `Playfair Display`,
                 variants: [`300`, `400`, `500`, `700`],
                 subsets: [`cyrillic`],
               },
