@@ -263,30 +263,32 @@ const IndexPage = ({ data }) => {
                 </Box>
               </Box>
 
-              <Typography
-                style={{
-                  fontFamily: "Playfair Display, serif",
-                  fontSize: 22,
-                }}
-                variant="body1"
-                paragraph
-                sx={{ marginTop: 2, padding: 2 }}
-              >
-                Welcome to our exquisite night lounge clothing company, nestled
-                in the heart of Bulgaria, where we craft the epitome of
-                sophistication and luxury. At our establishment, we specialize
-                in creating bespoke night lounge attire that exudes unparalleled
-                opulence and exclusivity. Each piece of clothing is meticulously
-                designed to reflect your unique style and preferences, ensuring
-                you step into your evenings with an aura of sophistication. Our
-                dedication to excellence is mirrored in our choice of the finest
-                fabrics, sourced from across the globe, and our commitment to
-                impeccable craftsmanship. Explore our exclusive range of
-                elegantly tailored garments and experience the epitome of posh,
-                bespoke elegance. Discover the allure of handcrafted elegance at
-                its finest and elevate your nights with our extraordinary
-                creations.
-              </Typography>
+              {!isSmallScreen && (
+                <Typography
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 22,
+                  }}
+                  variant="body1"
+                  paragraph
+                  sx={{ marginTop: 2, padding: 2 }}
+                >
+                  Welcome to our exquisite night lounge clothing company,
+                  nestled in the heart of Bulgaria, where we craft the epitome
+                  of sophistication and luxury. At our establishment, we
+                  specialize in creating bespoke night lounge attire that exudes
+                  unparalleled opulence and exclusivity. Each piece of clothing
+                  is meticulously designed to reflect your unique style and
+                  preferences, ensuring you step into your evenings with an aura
+                  of sophistication. Our dedication to excellence is mirrored in
+                  our choice of the finest fabrics, sourced from across the
+                  globe, and our commitment to impeccable craftsmanship. Explore
+                  our exclusive range of elegantly tailored garments and
+                  experience the epitome of posh, bespoke elegance. Discover the
+                  allure of handcrafted elegance at its finest and elevate your
+                  nights with our extraordinary creations.
+                </Typography>
+              )}
             </Box>
           </Box>
           <Box>{/* Content for the second middle box */}</Box>
