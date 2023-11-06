@@ -247,7 +247,7 @@ export default Products
 
 export const query = graphql`
   {
-    allShopifyProduct(limit: 5) {
+    allShopifyProduct(limit: 100) {
       nodes {
         title
         handle

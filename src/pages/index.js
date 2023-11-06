@@ -204,7 +204,7 @@ const IndexPage = ({ data }) => {
                 gutterBottom
                 style={{ fontFamily: "Playfair Display, serif" }}
               >
-                Welcome to The Art in Lounge - For the Women of Art
+                Welcome to The Art in Lounge - Showcasing Women in Art
               </Typography>
               <Box>
                 {/* <StaticImage
@@ -641,7 +641,7 @@ export default IndexPage
 
 export const query = graphql`
   {
-    allShopifyProduct(limit: 50) {
+    allShopifyProduct(limit: 100) {
       nodes {
         title
         handle
