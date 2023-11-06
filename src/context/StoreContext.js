@@ -1,6 +1,13 @@
 import React, { createContext, useState, useEffect, useContext } from "react"
 import fetch from "isomorphic-fetch"
 import Client from "shopify-buy"
+import Dialog from "@mui/material/Dialog"
+import DialogTitle from "@mui/material/DialogTitle"
+import DialogContent from "@mui/material/DialogContent"
+import DialogActions from "@mui/material/DialogActions"
+import Button from "@mui/material/Button"
+import Box from "@mui/material/Box"
+import { navigate } from "gatsby"
 
 const client = Client.buildClient(
   {
@@ -28,10 +35,63 @@ const StoreContext = createContext(defaultValues)
 const isBrowser = typeof window !== `undefined`
 const localStorageKey = `shopify_checkout_id`
 
+const SuccessDialog = ({ open, onClose }) => {
+  const handleGoToCart = () => {
+    onClose()
+    navigate("/cart")
+  }
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      maxWidth="xs"
+      sx={{
+        "& .MuiDialogTitle-root": {
+          // Style the title
+          backgroundColor: "blue",
+          color: "white",
+        },
+        "& .MuiDialogContent-root": {
+          // Style the content
+          padding: "16px",
+        },
+        "& .MuiDialogActions-root": {
+          // Style the actions
+          padding: "16px",
+          justifyContent: "space-between",
+        },
+      }}
+    >
+      <DialogTitle>Item Added to Cart</DialogTitle>
+      <DialogContent>
+        <p>Your item has been added to the cart successfully.</p>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} sx={{ marginRight: 1 }}>
+          Continue Shopping
+        </Button>
+        <Button variant="contained" color="primary" onClick={handleGoToCart}>
+          Go to Cart
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
+
 export const StoreProvider = ({ children }) => {
   const [cart, setCart] = useState(defaultValues.cart)
   const [checkout, setCheckout] = useState(defaultValues.checkout)
   const [loading, setLoading] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const handleDialogClose = () => {
+    setIsDialogOpen(false)
+  }
+
+  const handleAddToCart = () => {
+    // Add item to the cart logic here
+    setIsDialogOpen(true)
+  }
 
   const setCheckoutItem = checkout => {
     if (isBrowser) {
@@ -118,7 +178,7 @@ export const StoreProvider = ({ children }) => {
       setCart(updatedCart)
 
       setLoading(false)
-      alert("Item added to cart!")
+      handleAddToCart()
     } catch (error) {
       setLoading(false)
       console.error(`Error in addVariantToCart: ${error}`)
@@ -170,6 +230,7 @@ export const StoreProvider = ({ children }) => {
       }}
     >
       {children}
+      <SuccessDialog open={isDialogOpen} onClose={handleDialogClose} />
     </StoreContext.Provider>
   )
 }
