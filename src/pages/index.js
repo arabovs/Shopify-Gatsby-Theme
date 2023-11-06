@@ -4,9 +4,11 @@ import Button from "@mui/material/Button"
 import CardActionArea from "@mui/material/CardActionArea"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
+import useMediaQuery from "@mui/material/useMediaQuery"
 import Container from "@mui/material/Container"
 import { graphql, navigate } from "gatsby"
-import React, { useState } from "react"
+import { StaticImage } from "gatsby-plugin-image"
+import React, { useState, useEffect } from "react"
 import ProductCardBig from "../components/ProductCardBig"
 import Seo from "../components/seo"
 import IconButton from "@mui/material/IconButton"
@@ -18,6 +20,24 @@ const IndexPage = ({ data }) => {
   const [showCollection2, setShowCollection2] = useState(true)
   const [showCollection3, setShowCollection3] = useState(true)
   const { addVariantToCart } = useStore()
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 768) {
+        setIsSmallScreen(true)
+      } else {
+        setIsSmallScreen(false)
+      }
+    }
+
+    handleResize()
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   const { nodes } = data.allShopifyProduct
   const toggleCollections1 = () => {
@@ -55,6 +75,7 @@ const IndexPage = ({ data }) => {
   const filteredCollection1 = filterObjectsByTag(nodes, "Nightwear")
   const filteredCollection2 = filterObjectsByTag(nodes, "Bundle")
   const sideItems = getRandomObjects(nodes)
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
 
   return (
     <Box>
@@ -69,7 +90,7 @@ const IndexPage = ({ data }) => {
             {" "}
             <Box
               sx={{
-                height: "100vh",
+                height: "200vh",
                 display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
               }}
             >
@@ -196,54 +217,76 @@ const IndexPage = ({ data }) => {
           }}
         >
           {/* Middle Boxes (Two boxes in a column) */}
-          <Box sx={{ marginBottom: 4 }}>
-            <Box py={4} padding={4} textAlign="center">
-              <Typography
-                variant="h2"
-                color="textPrimary"
-                gutterBottom
-                style={{ fontFamily: "Playfair Display, serif" }}
+          <Box sx={{ marginBottom: 10 }}>
+            <Box textAlign="center">
+              <Box
+                py={4}
+                padding={4}
+                textAlign="center"
+                sx={{ position: "relative" }}
               >
-                Welcome to The Art in Lounge - Showcasing Women in Art
-              </Typography>
-              <Box>
-                {/* <StaticImage
-                  src="../images/banner.jpg"
-                  alt="Banner"
-                  layout="constrained"
-                  sx={{
-                    width: "100%",
-                    "@media (max-width: 500px)": {
-                      width: "100%",
-                      height: "auto",
-                    },
-                  }}
-                /> */}
                 <Typography
+                  variant="h2"
+                  color="white"
+                  gutterBottom
                   style={{
                     fontFamily: "Playfair Display, serif",
-                    fontSize: 22,
+                    position: "absolute",
+                    top: "10",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "80%",
+                    zIndex: 1,
+                    color: "#4f4759",
+                    fontSize: isSmallScreen ? "1.5rem" : "3rem", // Adjust the font size for small and large screens
                   }}
-                  variant="body1"
-                  paragraph
-                  sx={{ marginTop: 2, padding: 2 }}
                 >
-                  Welcome to our exquisite night lounge clothing company,
-                  nestled in the heart of Bulgaria, where we craft the epitome
-                  of sophistication and luxury. At our establishment, we
-                  specialize in creating bespoke night lounge attire that exudes
-                  unparalleled opulence and exclusivity. Each piece of clothing
-                  is meticulously designed to reflect your unique style and
-                  preferences, ensuring you step into your evenings with an aura
-                  of sophistication. Our dedication to excellence is mirrored in
-                  our choice of the finest fabrics, sourced from across the
-                  globe, and our commitment to impeccable craftsmanship. Explore
-                  our exclusive range of elegantly tailored garments and
-                  experience the epitome of posh, bespoke elegance. Discover the
-                  allure of handcrafted elegance at its finest and elevate your
-                  nights with our extraordinary creations.
+                  Welcome to The Art in Lounge - Showcasing Women in Art
                 </Typography>
+
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                  }}
+                >
+                  <StaticImage
+                    src="../images/banner1.jpg"
+                    alt="Banner"
+                    layout="constrained"
+                    sx={{
+                      width: "80%",
+                    }}
+                  />
+                </Box>
               </Box>
+
+              <Typography
+                style={{
+                  fontFamily: "Playfair Display, serif",
+                  fontSize: 22,
+                }}
+                variant="body1"
+                paragraph
+                sx={{ marginTop: 2, padding: 2 }}
+              >
+                Welcome to our exquisite night lounge clothing company, nestled
+                in the heart of Bulgaria, where we craft the epitome of
+                sophistication and luxury. At our establishment, we specialize
+                in creating bespoke night lounge attire that exudes unparalleled
+                opulence and exclusivity. Each piece of clothing is meticulously
+                designed to reflect your unique style and preferences, ensuring
+                you step into your evenings with an aura of sophistication. Our
+                dedication to excellence is mirrored in our choice of the finest
+                fabrics, sourced from across the globe, and our commitment to
+                impeccable craftsmanship. Explore our exclusive range of
+                elegantly tailored garments and experience the epitome of posh,
+                bespoke elegance. Discover the allure of handcrafted elegance at
+                its finest and elevate your nights with our extraordinary
+                creations.
+              </Typography>
             </Box>
           </Box>
           <Box>{/* Content for the second middle box */}</Box>
@@ -254,7 +297,7 @@ const IndexPage = ({ data }) => {
             {" "}
             <Box
               sx={{
-                height: "100vh",
+                height: "200vh",
                 display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
               }}
             >
