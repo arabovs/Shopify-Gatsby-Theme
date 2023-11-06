@@ -135,7 +135,7 @@ const IndexPage = ({ data }) => {
                         <Typography
                           sx={{
                             fontFamily: "Playfair Display, serif",
-                            fontSize: "16px",
+                            fontSize: "14px",
                             whiteSpace: "white",
                           }}
                         >
@@ -302,7 +302,7 @@ const IndexPage = ({ data }) => {
                         <Typography
                           sx={{
                             fontFamily: "Playfair Display, serif",
-                            fontSize: "16px",
+                            fontSize: "14px",
                             whiteSpace: "white",
                           }}
                         >
