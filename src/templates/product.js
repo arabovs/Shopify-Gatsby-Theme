@@ -1,6 +1,7 @@
 import { navigate } from "gatsby-link"
 import React, { useState } from "react"
 import Button from "@mui/material/Button"
+import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
@@ -19,13 +20,11 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     marginLeft: theme.spacing(2),
   },
-  wrapper: {
-    margin: theme.spacing(4),
-  },
+
   image: {
     width: "100%",
     height: "auto",
-    borderRadius: theme.spacing(3),
+    borderRadius: "6px",
   },
   infoContainer: {
     display: "grid",
@@ -51,8 +50,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
   },
   input: {
-    borderRadius: theme.spacing(4),
-    border: "2px solid rgba(0, 0, 0, 0.3)",
     padding: theme.spacing(2),
     maxWidth: 80,
     fontSize: 12,
@@ -61,7 +58,6 @@ const useStyles = makeStyles(theme => ({
       outlineColor: theme.palette.primary.main,
     },
   },
-  buttonContainer: {},
 }))
 
 const ProductTemplate = ({ pageContext }) => {
@@ -86,11 +82,17 @@ const ProductTemplate = ({ pageContext }) => {
 
   return (
     <Container>
-      <Typography className={classes.backButton} onClick={() => navigate(-1)}>
-        {"< "} Back
-      </Typography>
-      <Paper className={classes.wrapper}>
-        <Grid container spacing={4}>
+      <Box sx={{}}>
+        <Grid
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "16px",
+          }}
+          container
+          spacing={4}
+        >
           <Grid item xs={12} sm={6}>
             <div className={classes.imageContainer}>
               <img
@@ -98,12 +100,12 @@ const ProductTemplate = ({ pageContext }) => {
                 alt={product.title}
                 className={classes.image}
               />
-              <div className={classes.buttonContainer}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button
                   onClick={prevImage}
                   variant="contained"
                   color="primary"
-                  className={classes.button}
+                  sx={{ backgroundColor: "#8B7D9B" }}
                 >
                   Previous
                 </Button>
@@ -111,14 +113,20 @@ const ProductTemplate = ({ pageContext }) => {
                   onClick={nextImage}
                   variant="contained"
                   color="primary"
-                  className={classes.button}
+                  sx={{ backgroundColor: "#8B7D9B" }}
                 >
                   Next
                 </Button>
-              </div>
+              </Box>
             </div>
           </Grid>
           <Grid item xs={12} sm={6}>
+            <Typography
+              className={classes.backButton}
+              onClick={() => navigate(-1)}
+            >
+              {"< "} Back
+            </Typography>
             <div className={classes.infoContainer}>
               <Typography variant="h4" className={classes.title}>
                 {product.title}
@@ -146,7 +154,7 @@ const ProductTemplate = ({ pageContext }) => {
             </div>
           </Grid>
         </Grid>
-      </Paper>
+      </Box>
     </Container>
   )
 }

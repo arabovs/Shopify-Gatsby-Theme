@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Seo from "../components/seo"
+import Button from "@mui/material/Button"
 import ProductCardBig from "../components/ProductCardBig"
 import Checkbox from "@mui/material/Checkbox"
 import Container from "@mui/material/Container"
@@ -19,6 +20,11 @@ const Products = ({ data }) => {
   const [minPrice, setMinPrice] = React.useState(0)
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
+  const [isFilterVisible, setIsFilterVisible] = useState(true)
+
+  const toggleFilterVisibility = () => {
+    setIsFilterVisible(!isFilterVisible)
+  }
 
   const apparelTags = ["Tops", "Bottoms", "Intimates", "Hosiery"]
   React.useEffect(() => {
@@ -80,122 +86,142 @@ const Products = ({ data }) => {
     <Container>
       <Box sx={{ marginTop: 4, marginBottom: 4 }}>
         <Seo title="Products" />
-        <Box sx={{ display: "grid" }}>
-          <Grid
-            container
-            spacing={4}
-            sx={{
-              marginBottom: 4,
-              display: "flex",
-              flexDirection: "row", // Change direction to left to right
-            }}
-          >
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Typography
-                variant="h4"
-                color="textPrimary"
-                style={{ fontFamily: "Playfair Display, serif" }}
-              >
-                Collections
-              </Typography>
-              <FormControl component="fieldset">
-                <FormGroup>
-                  {filteredTags.map(tag => (
-                    <FormControlLabel
-                      sx={{ marginTop: 1 }}
-                      id={tag}
-                      key={tag}
-                      control={
-                        <Checkbox
-                          id={tag}
-                          checked={selectedTags.includes(tag)}
-                          onChange={() => handleTagFilter(tag)}
-                          sx={{
-                            "& .MuiSvgIcon-root": {
-                              // Style the checkmark icon
-                              width: 20,
-                              height: 20,
-                              color: "#8B7D9B",
-                            },
-                            "&.Mui-checked": {
+        <Button
+          sx={{
+            marginBottom: 4,
+            backgroundColor: "#8B7D9B",
+            color: "white",
+            "&:active": {
+              backgroundColor: "#8B7D9B", // Set the active background color to match the normal state
+              boxShadow: "none", // Remove the box-shadow on active
+            },
+            "&:hover": {
+              backgroundColor: "#7A6B87", // Change the background color on hover
+            },
+          }}
+          onClick={toggleFilterVisibility}
+        >
+          {isFilterVisible ? "Hide Filters" : "Show Filters"}
+        </Button>
+        <Box>
+          {isFilterVisible && (
+            <Grid
+              container
+              spacing={4}
+              sx={{
+                marginBottom: 4,
+                display: "flex",
+                flexDirection: "row", // Change direction to left to right
+              }}
+            >
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                <Typography
+                  variant="h4"
+                  color="textPrimary"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  Collections
+                </Typography>
+                <FormControl component="fieldset">
+                  <FormGroup>
+                    {filteredTags.map(tag => (
+                      <FormControlLabel
+                        sx={{ marginTop: 1 }}
+                        id={tag}
+                        key={tag}
+                        control={
+                          <Checkbox
+                            id={tag}
+                            checked={selectedTags.includes(tag)}
+                            onChange={() => handleTagFilter(tag)}
+                            sx={{
                               "& .MuiSvgIcon-root": {
-                                color: "green",
+                                // Style the checkmark icon
+                                width: 20,
+                                height: 20,
+                                color: "#8B7D9B",
                               },
-                            },
-                          }}
-                        />
-                      }
-                      label={tag}
-                    />
-                  ))}
-                </FormGroup>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Typography
-                variant="h4"
-                color="textPrimary"
-                style={{ fontFamily: "Playfair Display, serif" }}
-              >
-                Apparel
-              </Typography>
-              <FormControl component="fieldset">
-                <FormGroup>
-                  {apparelTags.map(tag => (
-                    <FormControlLabel
-                      sx={{ marginTop: 1 }}
-                      id={tag}
-                      key={tag}
-                      control={
-                        <Checkbox
-                          id={tag}
-                          checked={selectedProductTags.includes(tag)}
-                          onChange={() => handleTagFilter(tag)}
-                          sx={{
-                            "& .MuiSvgIcon-root": {
-                              // Style the checkmark icon
-                              width: 20,
-                              height: 20,
-                              color: "#8B7D9B",
-                            },
-                            "&.Mui-checked": {
+                              "&.Mui-checked": {
+                                "& .MuiSvgIcon-root": {
+                                  color: "green",
+                                },
+                              },
+                            }}
+                          />
+                        }
+                        label={tag}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                <Typography
+                  variant="h4"
+                  color="textPrimary"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  Apparel
+                </Typography>
+                <FormControl component="fieldset">
+                  <FormGroup>
+                    {apparelTags.map(tag => (
+                      <FormControlLabel
+                        sx={{ marginTop: 1 }}
+                        id={tag}
+                        key={tag}
+                        control={
+                          <Checkbox
+                            id={tag}
+                            checked={selectedProductTags.includes(tag)}
+                            onChange={() => handleProductTagFilter(tag)}
+                            sx={{
                               "& .MuiSvgIcon-root": {
-                                color: "green",
+                                // Style the checkmark icon
+                                width: 20,
+                                height: 20,
+                                color: "#8B7D9B",
                               },
-                            },
-                          }}
-                        />
-                      }
-                      label={tag}
-                    />
-                  ))}
-                </FormGroup>
-              </FormControl>
-            </Grid>
+                              "&.Mui-checked": {
+                                "& .MuiSvgIcon-root": {
+                                  color: "green",
+                                },
+                              },
+                            }}
+                          />
+                        }
+                        label={tag}
+                      />
+                    ))}
+                  </FormGroup>
+                </FormControl>
+              </Grid>
 
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Typography
-                variant="h4"
-                color="textPrimary"
-                minWidth="200px"
-                style={{ fontFamily: "Playfair Display, serif" }}
-              >
-                Price Filter
-              </Typography>
-              <div>
-                <Slider
-                  value={[minPrice, maxPrice]}
-                  onChange={(_, newValue) => {
-                    setMinPrice(newValue[0])
-                    setMaxPrice(newValue[1])
-                  }}
-                  valueLabelDisplay="auto"
-                  min={0}
-                  max={1000}
-                />
-              </div>
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                <Typography
+                  variant="h4"
+                  color="textPrimary"
+                  minWidth="200px"
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                >
+                  Price Filter
+                </Typography>
+                <div>
+                  <Slider
+                    value={[minPrice, maxPrice]}
+                    onChange={(_, newValue) => {
+                      setMinPrice(newValue[0])
+                      setMaxPrice(newValue[1])
+                    }}
+                    valueLabelDisplay="auto"
+                    min={0}
+                    max={1000}
+                  />
+                </div>
+              </Grid>
             </Grid>
-          </Grid>
+          )}
+
           <Grid container spacing={2}>
             {filteredProducts.map((product, index) => (
               <Grid item id={index} key={index} xs={12} sm={6} md={4} lg={3}>
