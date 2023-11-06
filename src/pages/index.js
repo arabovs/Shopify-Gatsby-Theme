@@ -68,7 +68,12 @@ const IndexPage = ({ data }) => {
             }}
           >
             {" "}
-            <div style={{ height: "100vh" }}>
+            <Box
+              sx={{
+                height: "100vh",
+                display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
+              }}
+            >
               <Grid
                 container
                 sx={{
@@ -178,7 +183,7 @@ const IndexPage = ({ data }) => {
                   </Grid>
                 ))}{" "}
               </Grid>{" "}
-            </div>
+            </Box>
           </Box>
         </Grid>
         <Grid
@@ -248,7 +253,13 @@ const IndexPage = ({ data }) => {
           {/* Right Box */}
           <Box sx={{ marginRight: 4 }}>
             {" "}
-            <div style={{ height: "100vh" }}>
+            <Box
+              sx={{
+                height: "100vh",
+                display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
+              }}
+            >
+              {" "}
               <Grid
                 container
                 sx={{ display: { xs: "none", md: "block" } }}
@@ -345,7 +356,7 @@ const IndexPage = ({ data }) => {
                   </Grid>
                 ))}{" "}
               </Grid>{" "}
-            </div>
+            </Box>
           </Box>
         </Grid>
       </Grid>
