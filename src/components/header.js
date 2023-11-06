@@ -16,6 +16,7 @@ const Header = ({ siteTitle }) => {
 
   const headerTags = {
     "New Arrivals": "/products",
+    Sales: "/products",
     Clothing: "/products",
     Collections: "/products",
     "My Cart": "/cart",
@@ -66,30 +67,34 @@ const Header = ({ siteTitle }) => {
             value={false}
             sx={{ backgroundColor: "#8B7D9B", marginRight: 10, marginTop: 2 }}
           >
-            {["New Arrivals", "Clothing", "Collections", "My Cart"].map(
-              (label, index) => (
-                <Link
-                  to={headerTags[label]}
-                  key={index}
-                  style={{
-                    textDecoration: "none",
+            {[
+              "New Arrivals",
+              "Sales",
+              "Clothing",
+              "Collections",
+              "My Cart",
+            ].map((label, index) => (
+              <Link
+                to={headerTags[label]}
+                key={index}
+                style={{
+                  textDecoration: "none",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                <Typography
+                  id={index}
+                  sx={{
+                    fontSize: "22px",
                     fontFamily: "Playfair Display, serif",
+                    marginLeft: 4,
+                    color: "white",
                   }}
                 >
-                  <Typography
-                    id={index}
-                    sx={{
-                      fontSize: "22px",
-                      fontFamily: "Playfair Display, serif",
-                      marginLeft: 4,
-                      color: "white",
-                    }}
-                  >
-                    {label}
-                  </Typography>
-                </Link>
-              )
-            )}
+                  {label}
+                </Typography>
+              </Link>
+            ))}
           </Tabs>
         )}
       </Toolbar>
@@ -106,30 +111,34 @@ const Header = ({ siteTitle }) => {
             value={false}
             sx={{ backgroundColor: "#8B7D9B" }}
           >
-            {["New Arrivals", "Clothing", "Collections", "My Cart"].map(
-              (label, index) => (
-                <Link
-                  to="/products"
-                  key={index}
-                  style={{
-                    textDecoration: "none",
+            {[
+              "New Arrivals",
+              "Sales",
+              "Clothing",
+              "Collections",
+              "My Cart",
+            ].map((label, index) => (
+              <Link
+                to={headerTags[label]}
+                key={index}
+                style={{
+                  textDecoration: "none",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                <Typography
+                  id={index}
+                  sx={{
+                    fontSize: "22px",
                     fontFamily: "Playfair Display, serif",
+                    marginLeft: 4,
+                    color: "white",
                   }}
                 >
-                  <Typography
-                    id={index}
-                    sx={{
-                      fontSize: "22px",
-                      fontFamily: "Playfair Display, serif",
-                      marginLeft: 4,
-                      color: "white",
-                    }}
-                  >
-                    {label}
-                  </Typography>
-                </Link>
-              )
-            )}
+                  {label}
+                </Typography>
+              </Link>
+            ))}
           </Tabs>
         </Drawer>
       )}
