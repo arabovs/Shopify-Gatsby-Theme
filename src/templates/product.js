@@ -22,26 +22,11 @@ const useStyles = makeStyles(theme => ({
   },
 
   image: {
-    width: "100%",
+    width: "90%",
     height: "auto",
     borderRadius: "6px",
   },
-  infoContainer: {
-    display: "grid",
-    alignItems: "flex-start",
-    height: "fit-content",
-    gap: theme.spacing(2),
-  },
-  description: {
-    margin: 0,
-  },
-  title: {
-    margin: 0,
-  },
-  subtitle: {
-    fontWeight: "bold",
-    maxWidth: 500,
-  },
+
   inputForm: {
     display: "grid",
     gridTemplateColumns: "repeat(2, auto)",
@@ -82,7 +67,7 @@ const ProductTemplate = ({ pageContext }) => {
 
   return (
     <Container>
-      <Box sx={{}}>
+      <Box>
         <Grid
           sx={{
             display: "flex",
@@ -94,7 +79,7 @@ const ProductTemplate = ({ pageContext }) => {
           spacing={4}
         >
           <Grid item xs={12} sm={6}>
-            <div className={classes.imageContainer}>
+            <Box>
               <img
                 src={product.images[currentImageIndex]?.src}
                 alt={product.title}
@@ -113,31 +98,58 @@ const ProductTemplate = ({ pageContext }) => {
                   onClick={nextImage}
                   variant="contained"
                   color="primary"
-                  sx={{ backgroundColor: "#8B7D9B" }}
+                  sx={{ backgroundColor: "#8B7D9B", marginRight: 7 }}
                 >
                   Next
                 </Button>
               </Box>
-            </div>
+            </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography
-              className={classes.backButton}
-              onClick={() => navigate(-1)}
+            <Box
+              sx={{
+                display: "grid",
+                alignItems: "flex-start",
+                height: "fit-content",
+                gap: 2,
+              }}
             >
-              {"< "} Back
-            </Typography>
-            <div className={classes.infoContainer}>
-              <Typography variant="h4" className={classes.title}>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
                 {product.title}
               </Typography>
-              <Typography variant="h6" className={classes.subtitle}>
-                {`${product.priceRangeV2.maxVariantPrice.amount}0$`}
+              <Typography
+                sx={{
+                  fontSize: "24px",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>Price:</span>{" "}
+                {`${product.priceRangeV2.maxVariantPrice.amount}0$`}{" "}
               </Typography>
-              <p className={classes.description}>{product.description}</p>
+              <Typography
+                sx={{
+                  fontSize: "18px",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                <span style={{ fontWeight: "bold" }}>Product Description:</span>{" "}
+                {product.description}
+              </Typography>
               <form className={classes.inputForm}>
-                <Typography variant="subtitle1">
-                  <label htmlFor="qty">Quantity:</label>
+                <Typography
+                  sx={{
+                    fontSize: "18px",
+                    fontFamily: "Playfair Display, serif",
+                    fontWeight: "bold",
+                  }}
+                  variant="subtitle1"
+                >
+                  Quantity:
                 </Typography>
                 <TextField
                   id="qty"
@@ -147,11 +159,15 @@ const ProductTemplate = ({ pageContext }) => {
                   inputProps={{ className: classes.input }}
                 />
               </form>
-              <PrimaryButton
-                text="Add to cart"
+              <Button
+                variant="contained"
+                className={classes.addToCartButton}
                 onClick={() => addVariantToCart(product, bind.value)}
-              />
-            </div>
+                sx={{ backgroundColor: "#8B7D9B" }}
+              >
+                Add to Cart
+              </Button>
+            </Box>
           </Grid>
         </Grid>
       </Box>

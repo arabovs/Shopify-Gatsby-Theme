@@ -25,6 +25,7 @@ const Footer = () => {
           display: "flex",
           justifyContent: "space-between", // Center with space between
           alignContent: "center",
+          backgroundColor: "#8B7D9B",
         }}
       >
         {footerLinks.map((link, index) => (
@@ -49,7 +50,6 @@ const Footer = () => {
                   fontFamily: "Playfair Display, serif",
                   color: "white",
                   width: "100%",
-
                   textAlign: "center", // Center the text
                 }}
               >

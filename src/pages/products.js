@@ -92,11 +92,11 @@ const Products = ({ data }) => {
             backgroundColor: "#8B7D9B",
             color: "white",
             "&:active": {
-              backgroundColor: "#8B7D9B", // Set the active background color to match the normal state
-              boxShadow: "none", // Remove the box-shadow on active
+              backgroundColor: "#8B7D9B",
+              boxShadow: "none",
             },
             "&:hover": {
-              backgroundColor: "#7A6B87", // Change the background color on hover
+              backgroundColor: "#7A6B87",
             },
           }}
           onClick={toggleFilterVisibility}
@@ -111,7 +111,7 @@ const Products = ({ data }) => {
               sx={{
                 marginBottom: 4,
                 display: "flex",
-                flexDirection: "row", // Change direction to left to right
+                flexDirection: "row",
               }}
             >
               <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>

@@ -14,6 +14,13 @@ const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"))
 
+  const headerTags = {
+    "New Arrivals": "/products",
+    Clothing: "/products",
+    Collections: "/products",
+    "My Cart": "/cart",
+  }
+
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen)
   }
@@ -28,13 +35,21 @@ const Header = ({ siteTitle }) => {
           padding: "0 16px",
         }}
       >
-        <Typography
-          sx={{ fontFamily: "Playfair Display, serif" }}
-          variant="h5"
-          textAlign="center"
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            fontFamily: "Playfair Display, serif",
+          }}
         >
-          {siteTitle}
-        </Typography>
+          <Typography
+            sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+            variant="h5"
+            textAlign="center"
+          >
+            {siteTitle}
+          </Typography>
+        </Link>
         {isSmallScreen ? (
           <IconButton
             edge="end"
@@ -54,7 +69,7 @@ const Header = ({ siteTitle }) => {
             {["New Arrivals", "Clothing", "Collections", "My Cart"].map(
               (label, index) => (
                 <Link
-                  to="/products"
+                  to={headerTags[label]}
                   key={index}
                   style={{
                     textDecoration: "none",
