@@ -48,6 +48,11 @@ module.exports = {
                 variants: [`300`, `400`, `500`, `700`],
                 subsets: [`cyrillic`],
               },
+              {
+                family: `Great Vibes`,
+                variants: [`300`, `400`, `500`, `700`],
+                subsets: [`cyrillic`],
+              },
             ],
           },
         },

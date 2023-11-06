@@ -90,7 +90,7 @@ const IndexPage = ({ data }) => {
             {" "}
             <Box
               sx={{
-                height: "200vh",
+                height: "155vh",
                 display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
               }}
             >
@@ -217,7 +217,7 @@ const IndexPage = ({ data }) => {
           }}
         >
           {/* Middle Boxes (Two boxes in a column) */}
-          <Box sx={{ marginBottom: 10 }}>
+          <Box>
             <Box textAlign="center">
               <Box
                 py={4}
@@ -230,7 +230,7 @@ const IndexPage = ({ data }) => {
                   gutterBottom
                   style={{
                     marginTop: 4,
-                    fontFamily: "Playfair Display, serif",
+                    fontFamily: "Great Vibes",
                     position: "absolute",
                     top: "20",
                     left: "50%",
@@ -239,7 +239,7 @@ const IndexPage = ({ data }) => {
                     zIndex: 1,
                     color: "#4f4759",
                     fontStyle: "bold",
-                    fontSize: isSmallScreen ? "1.2rem" : "2.6rem",
+                    fontSize: isSmallScreen ? "1.2rem" : "4rem",
                   }}
                 >
                   Welcome to The Art in Lounge
@@ -256,11 +256,11 @@ const IndexPage = ({ data }) => {
                   }}
                 >
                   <StaticImage
-                    src="../images/banner1.jpg"
+                    src="../images/banner2.jpg"
                     alt="Banner"
                     layout="constrained"
                     sx={{
-                      width: "80%",
+                      width: "100%",
                     }}
                   />
                 </Box>
@@ -276,20 +276,17 @@ const IndexPage = ({ data }) => {
                   paragraph
                   sx={{ marginTop: 2, padding: 2 }}
                 >
-                  Welcome to our exquisite night lounge clothing company,
-                  nestled in the heart of Bulgaria, where we craft the epitome
-                  of sophistication and luxury. At our establishment, we
-                  specialize in creating bespoke night lounge attire that exudes
-                  unparalleled opulence and exclusivity. Each piece of clothing
-                  is meticulously designed to reflect your unique style and
-                  preferences, ensuring you step into your evenings with an aura
-                  of sophistication. Our dedication to excellence is mirrored in
-                  our choice of the finest fabrics, sourced from across the
-                  globe, and our commitment to impeccable craftsmanship. Explore
-                  our exclusive range of elegantly tailored garments and
-                  experience the epitome of posh, bespoke elegance. Discover the
-                  allure of handcrafted elegance at its finest and elevate your
-                  nights with our extraordinary creations.
+                  Dear you, Welcome to Art in Lounge! Your fashion soulmate, and
+                  place of artistry and freedom. At our establishment we will
+                  greet you with classical elegance to bold colours. Each piece
+                  of clothing is meticulously designed to reflect your unique
+                  style and preferences, escaping from the fast fashion trends,
+                  and ensuring you step into your evenings with an aura of
+                  sensuality. Expression of character through clothing is a
+                  powerful tool. And we will help you use it! Welcome to your
+                  exquisite night lounge clothing partner, nestled in the heart
+                  of Bulgaria, where we craft the epitome of artistry and
+                  comfort.
                 </Typography>
               )}
             </Box>
@@ -302,7 +299,7 @@ const IndexPage = ({ data }) => {
             {" "}
             <Box
               sx={{
-                height: "200vh",
+                height: "155vh",
                 display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
               }}
             >
