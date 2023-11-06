@@ -226,22 +226,25 @@ const IndexPage = ({ data }) => {
                 sx={{ position: "relative" }}
               >
                 <Typography
-                  variant="h2"
                   color="white"
                   gutterBottom
                   style={{
+                    marginTop: 4,
                     fontFamily: "Playfair Display, serif",
                     position: "absolute",
-                    top: "10",
+                    top: "20",
                     left: "50%",
                     transform: "translateX(-50%)",
                     width: "80%",
                     zIndex: 1,
                     color: "#4f4759",
-                    fontSize: isSmallScreen ? "1.5rem" : "3rem", // Adjust the font size for small and large screens
+                    fontStyle: "bold",
+                    fontSize: isSmallScreen ? "1.2rem" : "2.6rem",
                   }}
                 >
-                  Welcome to The Art in Lounge - Showcasing Women in Art
+                  Welcome to The Art in Lounge
+                  <br />
+                  Showcasing Women in Art
                 </Typography>
 
                 <Box
