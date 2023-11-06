@@ -8,11 +8,23 @@ import Drawer from "@mui/material/Drawer"
 import { Typography } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
+import InstagramIcon from "@mui/icons-material/Instagram"
+import Facebook from "@mui/icons-material/Facebook"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"))
+  const instagramUrl = "https://www.instagram.com/the.art.in.lounge/"
+  const facebookUrl = "https://www.facebook.com/profile.php?id=100094356706321"
+
+  const handleInstagramClick = () => {
+    window.open(instagramUrl, "_blank")
+  }
+
+  const handleFacebookClick = () => {
+    window.open(facebookUrl, "_blank")
+  }
 
   const headerTags = {
     "New Arrivals": "/products",
@@ -95,6 +107,20 @@ const Header = ({ siteTitle }) => {
                 </Typography>
               </Link>
             ))}
+            <IconButton
+              aria-label="Instagram"
+              onClick={handleFacebookClick}
+              sx={{ marginBottom: 2, marginLeft: 4, color: "purple" }}
+            >
+              <Facebook sx={{ fontSize: 24 }} />
+            </IconButton>
+            <IconButton
+              aria-label="Instagram"
+              onClick={handleInstagramClick}
+              sx={{ marginBottom: 2, color: "orange" }}
+            >
+              <InstagramIcon sx={{ fontSize: 24 }} />
+            </IconButton>
           </Tabs>
         )}
       </Toolbar>
@@ -139,6 +165,13 @@ const Header = ({ siteTitle }) => {
                 </Typography>
               </Link>
             ))}
+            <IconButton
+              color="primary" // Choose the appropriate color
+              aria-label="Instagram"
+              onClick={handleInstagramClick}
+            >
+              <InstagramIcon />
+            </IconButton>
           </Tabs>
         </Drawer>
       )}
