@@ -107,14 +107,22 @@ const Products = ({ data }) => {
           {isFilterVisible && (
             <Grid
               container
-              spacing={4}
+              spacing={8}
               sx={{
                 marginBottom: 4,
                 display: "flex",
                 flexDirection: "row",
               }}
             >
-              <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Grid
+                sx={{ marginRight: 8 }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={2}
+              >
                 <Typography
                   variant="h4"
                   color="textPrimary"
