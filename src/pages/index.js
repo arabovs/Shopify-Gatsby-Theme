@@ -102,7 +102,12 @@ const IndexPage = ({ data }) => {
             <Box
               sx={{
                 height: "170vh",
-                display: { xs: "none", sm: "none", md: "none", lg: "block" },
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "block",
+                  lg: "block",
+                },
               }}
             >
               <Typography
@@ -362,7 +367,13 @@ const IndexPage = ({ data }) => {
             <Box
               sx={{
                 height: "170vh",
-                display: { xs: "none", sm: "none", md: "none", lg: "block" },
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "none",
+                  myBreakpoint: "block",
+                  lg: "block",
+                },
               }}
             >
               <Typography
@@ -581,7 +592,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
+                  <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
@@ -668,7 +679,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection2?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
+                  <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
@@ -753,7 +764,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
+                  <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
