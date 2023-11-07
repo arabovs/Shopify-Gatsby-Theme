@@ -136,7 +136,7 @@ const IndexPage = ({ data }) => {
                     md={4}
                     lg={3}
                   >
-                    {/* <Typography
+                    <Typography
                       sx={{
                         fontFamily: "Playfair Display, serif",
                         fontSize: "16px",
@@ -146,7 +146,7 @@ const IndexPage = ({ data }) => {
                       }}
                     >
                       {product.title}
-                    </Typography> */}
+                    </Typography>
                     <CardActionArea
                       sx={{ padding: 0 }}
                       onClick={() => navigate(`/products/${product.handle}`)}
@@ -386,7 +386,7 @@ const IndexPage = ({ data }) => {
                     md={4}
                     lg={3}
                   >
-                    {/* <Typography
+                    <Typography
                       sx={{
                         fontFamily: "Playfair Display, serif",
                         fontSize: "16px",
@@ -396,7 +396,7 @@ const IndexPage = ({ data }) => {
                       }}
                     >
                       {product.title}
-                    </Typography> */}
+                    </Typography>
                     <CardActionArea
                       sx={{ padding: 0 }}
                       onClick={() => navigate(`/products/${product.handle}`)}
@@ -439,6 +439,15 @@ const IndexPage = ({ data }) => {
                             justifyContent: "space-between",
                           }}
                         >
+                          {/* <Typography
+                            sx={{
+                              fontFamily: "Playfair Display, serif",
+                              fontSize: "24px",
+                              whiteSpace: "normal",
+                            }}
+                          >
+                            ${product.priceRangeV2.maxVariantPrice.amount}0
+                          </Typography> */}
                           <Box
                             sx={{
                               display: "flex",

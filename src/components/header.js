@@ -36,7 +36,6 @@ const Header = ({ siteTitle }) => {
   const headerTags = {
     "New Arrivals": "/products",
     Sales: "/products",
-    Clothing: "/products",
     Collections: "/products",
     "My Cart": "/cart",
   }
@@ -86,34 +85,30 @@ const Header = ({ siteTitle }) => {
             value={false}
             sx={{ backgroundColor: "#8B7D9B", marginRight: 10, marginTop: 2 }}
           >
-            {[
-              "New Arrivals",
-              "Sales",
-              "Clothing",
-              "Collections",
-              "My Cart",
-            ].map((label, index) => (
-              <Link
-                to={headerTags[label]}
-                key={index}
-                style={{
-                  textDecoration: "none",
-                  fontFamily: "Playfair Display, serif",
-                }}
-              >
-                <Typography
-                  id={index}
-                  sx={{
-                    fontSize: "22px",
+            {["New Arrivals", "Sales", "Collections", "My Cart"].map(
+              (label, index) => (
+                <Link
+                  to={headerTags[label]}
+                  key={index}
+                  style={{
+                    textDecoration: "none",
                     fontFamily: "Playfair Display, serif",
-                    marginLeft: 4,
-                    color: "white",
                   }}
                 >
-                  {label}
-                </Typography>
-              </Link>
-            ))}
+                  <Typography
+                    id={index}
+                    sx={{
+                      fontSize: "22px",
+                      fontFamily: "Playfair Display, serif",
+                      marginLeft: 4,
+                      color: "white",
+                    }}
+                  >
+                    {label}
+                  </Typography>
+                </Link>
+              )
+            )}
             <IconButton
               aria-label="Facebook"
               onClick={handleFacebookClick}
@@ -152,34 +147,30 @@ const Header = ({ siteTitle }) => {
             value={false}
             sx={{ backgroundColor: "#8B7D9B" }}
           >
-            {[
-              "New Arrivals",
-              "Sales",
-              "Clothing",
-              "Collections",
-              "My Cart",
-            ].map((label, index) => (
-              <Link
-                to={headerTags[label]}
-                key={index}
-                style={{
-                  textDecoration: "none",
-                  fontFamily: "Playfair Display, serif",
-                }}
-              >
-                <Typography
-                  id={index}
-                  sx={{
-                    fontSize: "22px",
+            {["New Arrivals", "Sales", "Collections", "My Cart"].map(
+              (label, index) => (
+                <Link
+                  to={headerTags[label]}
+                  key={index}
+                  style={{
+                    textDecoration: "none",
                     fontFamily: "Playfair Display, serif",
-                    marginLeft: 4,
-                    color: "white",
                   }}
                 >
-                  {label}
-                </Typography>
-              </Link>
-            ))}
+                  <Typography
+                    id={index}
+                    sx={{
+                      fontSize: "22px",
+                      fontFamily: "Playfair Display, serif",
+                      marginLeft: 4,
+                      color: "white",
+                    }}
+                  >
+                    {label}
+                  </Typography>
+                </Link>
+              )
+            )}
             <IconButton
               color="primary" // Choose the appropriate color
               aria-label="Instagram"
