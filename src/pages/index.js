@@ -20,14 +20,20 @@ const IndexPage = ({ data }) => {
   const [showCollection1, setShowCollection1] = useState(true)
   const [showCollection2, setShowCollection2] = useState(true)
   const [showCollection3, setShowCollection3] = useState(true)
+  const [fontSize, setFontSize] = useState("1.2rem")
+
   const { addVariantToCart } = useStore()
 
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth <= 768) {
-        setIsSmallScreen(true)
+      if (window.innerWidth <= 600) {
+        setFontSize("1.8rem")
+      } else if (window.innerWidth <= 800) {
+        setFontSize("2.2rem")
+      } else if (window.innerWidth <= 1200) {
+        setFontSize("2.2rem")
       } else {
-        setIsSmallScreen(false)
+        setFontSize("2.6rem")
       }
     }
 
@@ -96,7 +102,7 @@ const IndexPage = ({ data }) => {
             <Box
               sx={{
                 height: "170vh",
-                display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
+                display: { xs: "none", sm: "none", md: "none", lg: "block" },
               }}
             >
               <Typography
@@ -132,9 +138,9 @@ const IndexPage = ({ data }) => {
                     sx={{ marginLeft: 10, marginBottom: 4, width: "100%" }}
                     key={index}
                     xs={12}
-                    sm={6}
+                    sm={4}
                     md={4}
-                    lg={3}
+                    lg={4}
                   >
                     <Typography
                       sx={{
@@ -269,7 +275,7 @@ const IndexPage = ({ data }) => {
                     zIndex: 1,
                     color: "#4f4759",
                     fontStyle: "bold",
-                    fontSize: isSmallScreen ? "1.2rem" : "4rem",
+                    fontSize: fontSize,
                   }}
                 >
                   Welcome to The Art in Lounge
@@ -356,7 +362,7 @@ const IndexPage = ({ data }) => {
             <Box
               sx={{
                 height: "170vh",
-                display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
+                display: { xs: "none", sm: "none", md: "none", lg: "block" },
               }}
             >
               <Typography
@@ -385,9 +391,9 @@ const IndexPage = ({ data }) => {
                     }}
                     key={index}
                     xs={12}
-                    sm={6}
+                    sm={4}
                     md={4}
-                    lg={3}
+                    lg={4}
                   >
                     <Typography
                       sx={{
@@ -575,7 +581,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                  <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
@@ -662,7 +668,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection2?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                  <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
@@ -747,7 +753,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                  <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
