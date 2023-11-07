@@ -129,7 +129,7 @@ const IndexPage = ({ data }) => {
                 {sideItems?.map((product, index) => (
                   <Grid
                     item
-                    sx={{ marginLeft: 10, marginBottom: 4 }}
+                    sx={{ marginLeft: 10, marginBottom: 4, width: "100%" }}
                     key={index}
                     xs={12}
                     sm={6}
@@ -139,16 +139,19 @@ const IndexPage = ({ data }) => {
                     <Typography
                       sx={{
                         fontFamily: "Playfair Display, serif",
-                        fontSize: "16px",
+                        fontSize: "20px",
                         whiteSpace: "white",
                         flex: 1,
-                        width: "100%",
+                        width: "200%",
+                        position: "relative",
+                        marginLeft: "-10px", // Adjust this value to match the parent's margin
+                        marginBottom: "-4px", // Adjust this value to match the parent's margin
                       }}
                     >
                       {product.title}
                     </Typography>
                     <CardActionArea
-                      sx={{ padding: 0 }}
+                      sx={{ padding: 0, marginTop: 1 }}
                       onClick={() => navigate(`/products/${product.handle}`)}
                     >
                       <div
@@ -389,16 +392,19 @@ const IndexPage = ({ data }) => {
                     <Typography
                       sx={{
                         fontFamily: "Playfair Display, serif",
-                        fontSize: "16px",
+                        fontSize: "20px",
                         whiteSpace: "white",
                         flex: 1,
-                        width: "100%",
+                        width: "200%",
+                        position: "relative",
+                        marginLeft: "-10px", // Adjust this value to match the parent's margin
+                        marginBottom: "-4px", // Adjust this value to match the parent's margin
                       }}
                     >
                       {product.title}
                     </Typography>
                     <CardActionArea
-                      sx={{ padding: 0 }}
+                      sx={{ padding: 0, marginTop: 1 }}
                       onClick={() => navigate(`/products/${product.handle}`)}
                     >
                       <div

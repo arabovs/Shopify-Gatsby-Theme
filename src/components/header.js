@@ -109,7 +109,7 @@ const Header = ({ siteTitle }) => {
                 </Link>
               )
             )}
-            <IconButton
+            {/* <IconButton
               aria-label="Facebook"
               onClick={handleFacebookClick}
               sx={{ marginBottom: 2, marginLeft: 4, color: "purple" }}
@@ -122,7 +122,7 @@ const Header = ({ siteTitle }) => {
               sx={{ marginBottom: 2, color: "orange" }}
             >
               <InstagramIcon sx={{ fontSize: 24 }} />
-            </IconButton>
+            </IconButton> */}
             {/* <IconButton
               color="primary" // Choose the appropriate color
               aria-label="Instagram"
@@ -171,7 +171,7 @@ const Header = ({ siteTitle }) => {
                 </Link>
               )
             )}
-            <IconButton
+            {/* <IconButton
               color="primary" // Choose the appropriate color
               aria-label="Instagram"
               onClick={handleInstagramClick}
@@ -184,7 +184,7 @@ const Header = ({ siteTitle }) => {
               onClick={handleFacebookClick}
             >
               <Facebook />
-            </IconButton>
+            </IconButton> */}
             {/* <IconButton
               color="primary" // Choose the appropriate color
               aria-label="Instagram"
