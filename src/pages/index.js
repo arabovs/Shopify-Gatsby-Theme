@@ -140,7 +140,7 @@ const IndexPage = ({ data }) => {
                     xs={12}
                     sm={4}
                     md={4}
-                    lg={4}
+                    lg={3}
                   >
                     <Typography
                       sx={{
@@ -393,7 +393,7 @@ const IndexPage = ({ data }) => {
                     xs={12}
                     sm={4}
                     md={4}
-                    lg={4}
+                    lg={3}
                   >
                     <Typography
                       sx={{
@@ -581,7 +581,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
+                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
@@ -668,7 +668,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection2?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
+                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
@@ -753,7 +753,7 @@ const IndexPage = ({ data }) => {
               </Typography>
               <Grid container spacing={3}>
                 {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
+                  <Grid item key={index} xs={12} sm={4} md={4} lg={3}>
                     <ProductCardBig product={product} />
                   </Grid>
                 ))}
