@@ -1,12 +1,13 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
+import Paper from "@mui/material/Paper"
 import CardActionArea from "@mui/material/CardActionArea"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import Container from "@mui/material/Container"
-import { graphql, navigate } from "gatsby"
+import { graphql, navigate, Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import React, { useState, useEffect } from "react"
 import ProductCardBig from "../components/ProductCardBig"
@@ -79,21 +80,37 @@ const IndexPage = ({ data }) => {
 
   return (
     <Box>
-      <Grid container sx={{ display: "flex", alignItems: "center" }}>
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          justifyItems: "center",
+        }}
+      >
         <Grid item sx={{ flex: "1" }}>
           {/* Left Box */}
-          <Box
-            sx={{
-              marginLeft: 5,
-            }}
-          >
+          <Box>
             {" "}
             <Box
               sx={{
-                height: "155vh",
+                height: "170vh",
                 display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
               }}
             >
+              <Typography
+                sx={{
+                  fontFamily: "Great Vibes",
+                  fontSize: "40px",
+                  whiteSpace: "black",
+                  width: "100%",
+                  marginLeft: 10,
+                  marginBottom: 4,
+                }}
+              >
+                Tailor's Pick:
+              </Typography>{" "}
               <Grid
                 container
                 sx={{
@@ -111,19 +128,27 @@ const IndexPage = ({ data }) => {
               >
                 {sideItems?.map((product, index) => (
                   <Grid
-                    sx={{
-                      padding: 0,
-                      marginLeft: 10,
-                    }}
                     item
+                    sx={{ marginLeft: 10, marginBottom: 4 }}
                     key={index}
                     xs={12}
                     sm={6}
                     md={4}
                     lg={3}
                   >
+                    {/* <Typography
+                      sx={{
+                        fontFamily: "Playfair Display, serif",
+                        fontSize: "16px",
+                        whiteSpace: "white",
+                        flex: 1,
+                        width: "100%",
+                      }}
+                    >
+                      {product.title}
+                    </Typography> */}
                     <CardActionArea
-                      sx={{ padding: 0, marginTop: 5 }}
+                      sx={{ padding: 0 }}
                       onClick={() => navigate(`/products/${product.handle}`)}
                     >
                       <div
@@ -157,15 +182,6 @@ const IndexPage = ({ data }) => {
                       }}
                     >
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <Typography
-                          sx={{
-                            fontFamily: "Playfair Display, serif",
-                            fontSize: "14px",
-                            whiteSpace: "white",
-                          }}
-                        >
-                          {product.title}
-                        </Typography>
                         <Box
                           sx={{
                             display: "flex",
@@ -173,20 +189,12 @@ const IndexPage = ({ data }) => {
                             justifyContent: "space-between",
                           }}
                         >
-                          <Typography
-                            sx={{
-                              fontFamily: "Playfair Display, serif",
-                              fontSize: "24px",
-                              whiteSpace: "normal",
-                            }}
-                          >
-                            ${product.priceRangeV2.maxVariantPrice.amount}0
-                          </Typography>
                           <IconButton
                             edge="end"
                             onClick={() => addVariantToCart(product, 1)}
                             sx={{
                               borderRadius: "50%",
+                              marginLeft: 4,
                               cursor: "pointer",
                               transition:
                                 "background-color 0.2s, transform 0.2s",
@@ -195,7 +203,26 @@ const IndexPage = ({ data }) => {
                               padding: 0,
                             }}
                           >
-                            <ShoppingCartIcon />
+                            <Typography
+                              sx={{
+                                fontFamily: "Playfair Display, serif",
+                                fontSize: "24px",
+                                whiteSpace: "normal",
+                              }}
+                            >
+                              Buy
+                            </Typography>{" "}
+                            <Typography
+                              sx={{
+                                fontFamily: "Playfair Display, serif",
+                                fontSize: "24px",
+                                whiteSpace: "normal",
+                                marginLeft: 1,
+                              }}
+                            >
+                              ${product.priceRangeV2.maxVariantPrice.amount}0
+                            </Typography>{" "}
+                            <ShoppingCartIcon sx={{ marginLeft: 2 }} />
                           </IconButton>
                         </Box>
                       </Box>
@@ -264,6 +291,32 @@ const IndexPage = ({ data }) => {
                     }}
                   />
                 </Box>
+                <Paper
+                  elevation={4}
+                  sx={{
+                    marginTop: 4,
+                  }}
+                >
+                  <Link
+                    to="/products"
+                    style={{
+                      textDecoration: "none",
+                      fontFamily: "Great Vibes",
+                    }}
+                    sx={{}}
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: "Great Vibes",
+                        color: "black",
+                      }}
+                      variant="h3"
+                      textAlign="center"
+                    >
+                      Shop Now
+                    </Typography>
+                  </Link>
+                </Paper>
               </Box>
 
               {!isSmallScreen && (
@@ -293,17 +346,28 @@ const IndexPage = ({ data }) => {
           </Box>
           <Box>{/* Content for the second middle box */}</Box>
         </Grid>
-        <Grid item sx={{ flex: "1", height: "100%" }}>
+        <Grid item sx={{ flex: "1", height: "100%", width: "100%" }}>
           {/* Right Box */}
-          <Box sx={{ marginRight: 4 }}>
+          <Box>
             {" "}
             <Box
               sx={{
-                height: "155vh",
+                height: "170vh",
                 display: { xs: "none", sm: "block" }, // Hide on extra-small (xs) screens, but show on small (sm) screens and above
               }}
             >
-              {" "}
+              <Typography
+                sx={{
+                  fontFamily: "Great Vibes",
+                  fontSize: "40px",
+                  whiteSpace: "black",
+                  width: "100%",
+                  marginLeft: 10,
+                  marginBottom: 4,
+                }}
+              >
+                Exclusive Offers:
+              </Typography>{" "}
               <Grid
                 container
                 sx={{ display: { xs: "none", md: "block" } }}
@@ -312,15 +376,29 @@ const IndexPage = ({ data }) => {
                 {sideItems?.map((product, index) => (
                   <Grid
                     item
-                    sx={{ marginLeft: 10 }}
+                    sx={{
+                      marginLeft: 10,
+                      marginBottom: 4,
+                    }}
                     key={index}
                     xs={12}
                     sm={6}
                     md={4}
                     lg={3}
                   >
+                    {/* <Typography
+                      sx={{
+                        fontFamily: "Playfair Display, serif",
+                        fontSize: "16px",
+                        whiteSpace: "white",
+                        flex: 1,
+                        width: "100%",
+                      }}
+                    >
+                      {product.title}
+                    </Typography> */}
                     <CardActionArea
-                      sx={{ padding: 0, marginTop: 5 }}
+                      sx={{ padding: 0 }}
                       onClick={() => navigate(`/products/${product.handle}`)}
                     >
                       <div
@@ -354,15 +432,6 @@ const IndexPage = ({ data }) => {
                       }}
                     >
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <Typography
-                          sx={{
-                            fontFamily: "Playfair Display, serif",
-                            fontSize: "14px",
-                            whiteSpace: "white",
-                          }}
-                        >
-                          {product.title}
-                        </Typography>
                         <Box
                           sx={{
                             display: "flex",
@@ -370,30 +439,49 @@ const IndexPage = ({ data }) => {
                             justifyContent: "space-between",
                           }}
                         >
-                          <Typography
+                          <Box
                             sx={{
-                              fontFamily: "Playfair Display, serif",
-                              fontSize: "24px",
-                              whiteSpace: "normal",
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
                             }}
                           >
-                            ${product.priceRangeV2.maxVariantPrice.amount}0
-                          </Typography>
-                          <IconButton
-                            edge="end"
-                            onClick={() => addVariantToCart(product, 1)}
-                            sx={{
-                              borderRadius: "50%",
-                              cursor: "pointer",
-                              transition:
-                                "background-color 0.2s, transform 0.2s",
-                              userSelect: "none",
-                              outline: "none",
-                              padding: 0,
-                            }}
-                          >
-                            <ShoppingCartIcon />
-                          </IconButton>
+                            <IconButton
+                              edge="end"
+                              onClick={() => addVariantToCart(product, 1)}
+                              sx={{
+                                borderRadius: "50%",
+                                marginLeft: 4,
+                                cursor: "pointer",
+                                transition:
+                                  "background-color 0.2s, transform 0.2s",
+                                userSelect: "none",
+                                outline: "none",
+                                padding: 0,
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  fontFamily: "Playfair Display, serif",
+                                  fontSize: "24px",
+                                  whiteSpace: "normal",
+                                }}
+                              >
+                                Buy
+                              </Typography>{" "}
+                              <Typography
+                                sx={{
+                                  fontFamily: "Playfair Display, serif",
+                                  fontSize: "24px",
+                                  whiteSpace: "normal",
+                                  marginLeft: 1,
+                                }}
+                              >
+                                ${product.priceRangeV2.maxVariantPrice.amount}0
+                              </Typography>{" "}
+                              <ShoppingCartIcon sx={{ marginLeft: 2 }} />
+                            </IconButton>
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
