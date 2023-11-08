@@ -1,16 +1,13 @@
-import { navigate } from "gatsby-link"
 import React, { useState } from "react"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import { makeStyles } from "@mui/styles"
 import useStore from "../context/StoreContext"
 import useInput from "../utils/useInput"
-import PrimaryButton from "../components/PrimaryButton"
 
 const useStyles = makeStyles(theme => ({
   backButton: {
@@ -47,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const { addVariantToCart } = useStore()

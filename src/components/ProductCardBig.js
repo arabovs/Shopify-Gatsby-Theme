@@ -35,6 +35,7 @@ const ProductCardBig = ({ product }) => {
             fontFamily: "Playfair Display, serif",
             fontSize: "20px",
             whiteSpace: "white",
+            minHeight: "2.8em", // Minimum height for two lines
           }}
         >
           {product.title}
