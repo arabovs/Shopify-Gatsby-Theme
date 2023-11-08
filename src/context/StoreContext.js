@@ -9,6 +9,9 @@ import Button from "@mui/material/Button"
 import { navigate } from "gatsby"
 import Cookies from "js-cookie"
 
+const expirationTime = new Date()
+expirationTime.setMinutes(expirationTime.getMinutes() + 30)
+
 const client = Client.buildClient(
   {
     domain: process.env.GATSBY_SHOPIFY_STORE_URL,
@@ -131,7 +134,7 @@ export const StoreProvider = ({ children }) => {
     }
 
     setCheckout(checkout)
-    Cookies.set("checkout", JSON.stringify(checkout))
+    Cookies.set("checkout", JSON.stringify(checkout), expirationTime)
   }
 
   useEffect(() => {
@@ -186,7 +189,7 @@ export const StoreProvider = ({ children }) => {
         lineItemsToUpdate
       )
       setCheckout(res)
-      Cookies.set("checkout", JSON.stringify(res))
+      Cookies.set("checkout", JSON.stringify(res), expirationTime)
 
       let updatedCart = []
       if (cart.length > 0) {
@@ -210,7 +213,7 @@ export const StoreProvider = ({ children }) => {
         updatedCart = [{ product, quantity: parsedQuantity }]
       }
       setCart(updatedCart)
-      Cookies.set("cart", JSON.stringify(updatedCart))
+      Cookies.set("cart", JSON.stringify(updatedCart), expirationTime)
 
       setLoading(false)
       handleAddToCart()
@@ -241,13 +244,13 @@ export const StoreProvider = ({ children }) => {
         lineItemID,
       ])
       setCheckout(res)
-      Cookies.set("checkout", JSON.stringify(res))
+      Cookies.set("checkout", JSON.stringify(res), expirationTime)
 
       const updatedCart = cart.filter(
         item => item.product.variants[0]?.shopifyId !== variantId
       )
       setCart(updatedCart)
-      Cookies.set("cart", JSON.stringify(updatedCart))
+      Cookies.set("cart", JSON.stringify(updatedCart), expirationTime)
 
       setLoading(false)
     } catch (error) {

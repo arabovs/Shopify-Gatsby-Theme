@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox"
 import Container from "@mui/material/Container"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Slider from "@mui/material/Slider"
+import { useMediaQuery } from "@mui/material"
 import FormControl from "@mui/material/FormControl"
 import FormGroup from "@mui/material/FormGroup"
 import Box from "@mui/material/Box"
@@ -21,6 +22,8 @@ const Products = ({ data }) => {
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
   const [isFilterVisible, setIsFilterVisible] = useState(true)
+
+  const isSmallScreen = useMediaQuery("(max-width:600px)") // Adjust the breakpoint as needed
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -95,7 +98,30 @@ const Products = ({ data }) => {
   const filteredTags = getAllDistinctTags(nodes)
 
   return (
-    <Box padding={4}>
+    <Box padding={3}>
+      {!isSmallScreen && (
+        <Box paddingLeft={8} paddingRight={8}>
+          <Typography
+            sx={{
+              fontSize: "22px",
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            The Art in Lounge is not just a lounge wear company; it's a
+            commitment to a lifestyle of comfort and elegance. At the heart of
+            our brand lies a dedication to using only the finest fabrics,
+            ensuring that every piece you choose is a symphony of softness and
+            style. We understand that comfort is personal, and that's why we
+            tailor each product to your specific needs. Whether it's a cozy
+            evening at home or a leisurely weekend, our garments are designed to
+            fit you like a second skin, providing the perfect balance of
+            relaxation and sophistication. The Art in Lounge is where
+            exceptional materials meet personalized tailoring, because we
+            believe that every moment of relaxation should be an exquisite
+            experience.
+          </Typography>
+        </Box>
+      )}
       <Grid container spacing={2}>
         {/* Filter Box */}
         <Grid
@@ -106,7 +132,7 @@ const Products = ({ data }) => {
           <Box
             sx={{
               marginTop: 4,
-              marginBottom: 4,
+              marginBottom: 2,
               display: "flex",
               flexDirection: "column",
             }}
@@ -187,6 +213,24 @@ const Products = ({ data }) => {
           </Box>
         </Grid>
       </Grid>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 1,
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "22px",
+            fontFamily: "Playfair Display, serif",
+            marginTop: 1,
+            textAlign: "center",
+          }}
+        >
+          ® Copyrights of The Art in Lounge - 2023 ®
+        </Typography>
+      </Container>
     </Box>
   )
 }

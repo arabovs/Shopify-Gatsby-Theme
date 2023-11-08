@@ -1,12 +1,11 @@
 import React from "react"
 import Container from "@mui/material/Container"
-import Paper from "@mui/material/Paper"
+import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
 import ProductRow from "../components/ProductRow"
 import useStore from "../context/StoreContext"
-import Divider from "@mui/material/Divider"
 
 const Cart = () => {
   const { cart, checkout } = useStore()
@@ -17,8 +16,8 @@ const Cart = () => {
       sx={{
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
-        marginBottom: 2,
         marginTop: 2,
+        backgroundColor: "#8B7D9B",
       }}
     >
       <Grid
@@ -104,10 +103,10 @@ const Cart = () => {
 
   return (
     <Container maxWidth="xl" spacing={1} padding={1}>
-      <Paper
+      <Box
         sx={{
-          margin: "20px",
-          padding: "20px",
+          margin: 1,
+          padding: 0,
         }}
       >
         <Grid container>
@@ -130,18 +129,83 @@ const Cart = () => {
                 justifyContent: "flex-end",
                 mt: 4,
               }}
-            >
-              <Button
-                onClick={handleCheckout}
-                disabled={cart.length === 0}
-                sx={{ backgroundColor: "#8B7D9B", color: "white" }}
-              >
-                Checkout
-              </Button>
-            </div>
+            ></div>
           </Grid>
         </Grid>
-      </Paper>
+        <Container>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: 2,
+              marginBottom: 2,
+            }}
+          >
+            <Button
+              onClick={handleCheckout}
+              disabled={cart.length === 0}
+              sx={{
+                backgroundColor: "darkgrey",
+                color: "white",
+                fontSize: "22px",
+              }}
+            >
+              Clear Basket
+            </Button>
+            <Button
+              onClick={handleCheckout}
+              disabled={cart.length === 0}
+              sx={{
+                backgroundColor: "#8B7D9B",
+                color: "white",
+                fontSize: "22px",
+              }}
+            >
+              Buy Now
+            </Button>
+          </Box>
+          {/* <Box
+            sx={{ backgroundColor: "#8B7D9B", padding: 1, marginTop: 1 }}
+          ></Box> */}
+          <Typography
+            sx={{
+              fontSize: "22px",
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            At The Art in Lounge, we take great pride in ensuring that your
+            orders are not just stylish, but also meticulously packaged and
+            promptly sent to your doorstep. Our dedicated team of artisans pays
+            close attention to detail, carefully wrapping each item with the
+            utmost care to preserve its beauty. We understand the anticipation
+            of receiving your fashion treasures, and we strive to dispatch your
+            order swiftly, so you can enjoy your new pieces in no time. Your
+            satisfaction is our priority, and we guarantee a seamless shopping
+            experience from checkout to delivery.
+          </Typography>
+          {/* <Box sx={{ backgroundColor: "#8B7D9B", padding: 1 }}></Box> */}
+          <Container
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontFamily: "Playfair Display, serif",
+                marginTop: 1,
+                textAlign: "center",
+              }}
+            >
+              ® Copyrights of The Art in Lounge - 2023 ®
+            </Typography>
+          </Container>
+        </Container>
+        {/* <Box
+          sx={{ backgroundColor: "#8B7D9B", padding: 1, marginTop: 1 }}
+        ></Box> */}
+      </Box>
     </Container>
   )
 }
