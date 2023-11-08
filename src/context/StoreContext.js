@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent"
 import DialogActions from "@mui/material/DialogActions"
 import Button from "@mui/material/Button"
 import { navigate } from "gatsby"
+import Cookies from "js-cookie"
 
 const client = Client.buildClient(
   {
@@ -16,8 +17,24 @@ const client = Client.buildClient(
   fetch
 )
 
+const cartCookie = Cookies.get("cart")
+
+let cart = []
+try {
+  if (cartCookie) {
+    const parsedCart = JSON.parse(cartCookie)
+    if (Array.isArray(parsedCart)) {
+      cart = parsedCart
+    } else {
+      console.log("Not a valid array:", parsedCart)
+    }
+  }
+} catch (error) {
+  console.error("Error parsing JSON:", error)
+}
+
 const defaultValues = {
-  cart: [],
+  cart: cart || [],
   loading: false,
   addVariantToCart: () => {},
   removeLineItem: () => {},
@@ -175,6 +192,7 @@ export const StoreProvider = ({ children }) => {
         updatedCart = [{ product, quantity: parsedQuantity }]
       }
       setCart(updatedCart)
+      Cookies.set("cart", JSON.stringify(updatedCart))
 
       setLoading(false)
       handleAddToCart()
@@ -210,6 +228,7 @@ export const StoreProvider = ({ children }) => {
         item => item.product.variants[0]?.shopifyId !== variantId
       )
       setCart(updatedCart)
+      Cookies.set("cart", JSON.stringify(updatedCart))
       setLoading(false)
     } catch (error) {
       setLoading(false)
