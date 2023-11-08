@@ -21,11 +21,18 @@ const Products = ({ data }) => {
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
   const [showCollectionFilter, setShowCollectionFilter] = useState(true)
+  const [showApparelFilter, setShowApparelFilter] = useState(true)
 
   const collectionsTags = ["Nightwear", "Outwear", "Set"]
+
   const toggleCollectionFilter = () => {
     setShowCollectionFilter(!showCollectionFilter)
   }
+
+  const toggleApparelFilter = () => {
+    setShowApparelFilter(!showApparelFilter)
+  }
+
   const isSmallScreen = useMediaQuery("(max-width:900px)") // Adjust the breakpoint as needed
 
   useEffect(() => {
@@ -42,10 +49,21 @@ const Products = ({ data }) => {
       if (filterParam === "Set") {
         setSelectedTags(["Set"])
       }
+      if (filterParam === "New") {
+        setSelectedTags(["New"])
+      }
+      if (filterParam === "Sale") {
+        setSelectedTags(["Sale"])
+      }
+      if (filterParam === "Limited") {
+        setSelectedTags(["Limited"])
+      }
+      if (filterParam === "Collections") {
+        setSelectedTags(["Outwear", "Nightwear", "Set"])
+      }
     }
   }, [])
 
-  // const apparelTags = ["Tops", "Bottoms", "Intimates", "Hosiery"]
   React.useEffect(() => {
     filterProducts()
   }, [selectedTags, minPrice, maxPrice])
@@ -92,6 +110,7 @@ const Products = ({ data }) => {
   }
 
   const filteredTags = getAllDistinctTags(nodes)
+  const apparelTags = ["Dresses", "Sale", "New", "Limited"]
 
   return (
     <Box padding={3}>
@@ -194,6 +213,67 @@ const Products = ({ data }) => {
               {/* Filter content goes here */}
               {showCollectionFilter &&
                 filteredTags.map((tag, index) => (
+                  <FormGroup key={tag}>
+                    <FormControlLabel
+                      id={tag}
+                      control={
+                        <Checkbox
+                          id={tag}
+                          checked={selectedTags.includes(tag)}
+                          onChange={() => handleTagFilter(tag)}
+                          sx={{
+                            fontFamily: "Playfair Display, serif",
+                            "& .MuiSvgIcon-root": {
+                              width: 20,
+                              height: 20,
+                              color: "#8B7D9B",
+                            },
+                            "&.Mui-checked": {
+                              "& .MuiSvgIcon-root": {
+                                color: "green",
+                              },
+                            },
+                          }}
+                        />
+                      }
+                      label={tag}
+                    />
+                  </FormGroup>
+                ))}
+
+              {/* hahaha */}
+              <Box sx={{ display: "flex" }}>
+                <IconButton
+                  sx={{
+                    color: "black",
+                    width: "100%",
+                    fontSize: "16px",
+                    width: "auto",
+                  }}
+                  aria-label="Facebook"
+                  onClick={toggleApparelFilter}
+                >
+                  {showApparelFilter ? (
+                    <ArrowDropDownIcon sx={{ marginLeft: 1, color: "black" }} />
+                  ) : (
+                    <ArrowRightIcon sx={{ margiLeft: 1, color: "black" }} />
+                  )}
+                </IconButton>
+                <Typography
+                  variant="h4"
+                  color="textPrimary"
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    marginBottom: 6,
+                    marginTop: 10,
+                  }}
+                >
+                  Apparel
+                </Typography>
+              </Box>
+              {/* Filter content goes here */}
+              {showApparelFilter &&
+                apparelTags.map((tag, index) => (
                   <FormGroup key={tag}>
                     <FormControlLabel
                       id={tag}

@@ -148,6 +148,7 @@ const Cart = () => {
                 backgroundColor: "darkgrey",
                 color: "white",
                 fontSize: "22px",
+                fontFamily: "Playfair Display, serif",
               }}
             >
               Clear Basket
@@ -159,6 +160,7 @@ const Cart = () => {
                 backgroundColor: "#8B7D9B",
                 color: "white",
                 fontSize: "22px",
+                fontFamily: "Playfair Display, serif",
               }}
             >
               Buy Now

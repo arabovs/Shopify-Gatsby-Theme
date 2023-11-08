@@ -169,7 +169,7 @@ const IndexPage = ({ data }) => {
                             height: "200%",
                             margin: 0,
                             padding: 0,
-                            borderRadius: "12px",
+                            borderRadius: "4px",
                           }}
                         />
                       </div>
@@ -428,7 +428,7 @@ const IndexPage = ({ data }) => {
                             height: "200%",
                             margin: 0,
                             padding: 0,
-                            borderRadius: "12px",
+                            borderRadius: "4px",
                           }}
                         />
                       </div>

@@ -26,12 +26,16 @@ const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("md"))
 
+  const handleLinkClick = url => {
+    window.location.href = url // This will force a full page reload
+  }
+
   const headerTags = {
-    "New Arrivals": "/products?filter=newarrivals",
-    Sales: "/products?filter=sales",
-    Collections: "/products?filter=collections",
+    "New Arrivals": "/products?filter=New",
+    Sales: "/products?filter=Sale",
+    Collections: "/products?filter=Collections",
     "My Cart": "/cart",
-    Exclusive: "/products?filter=exclusive",
+    Exclusive: "/products?filter=Limited",
   }
 
   const toggleDrawer = () => {
@@ -110,6 +114,7 @@ const Header = ({ siteTitle }) => {
                   textDecoration: "none",
                   fontFamily: "Playfair Display, serif",
                 }}
+                onClick={() => handleLinkClick(headerTags[label])}
               >
                 <Typography
                   id={index}
