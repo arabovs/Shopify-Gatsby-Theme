@@ -99,11 +99,27 @@ const Products = ({ data }) => {
 
   return (
     <Box padding={3}>
+      <Typography
+        color="white"
+        gutterBottom
+        style={{
+          textAlign: "center",
+          marginTop: 4,
+          fontFamily: "Great Vibes",
+          color: "#4f4759",
+          fontStyle: "bold",
+          fontSize: 40,
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        Welcome to The Art in Lounge - Showcasing Women in Art
+      </Typography>
       {!isSmallScreen && (
-        <Box paddingLeft={8} paddingRight={8}>
+        <Box paddingLeft={12} paddingRight={12} sx={{ marginBottom: 2 }}>
           <Typography
             sx={{
-              fontSize: "22px",
+              fontSize: "20px",
               fontFamily: "Playfair Display, serif",
             }}
           >
@@ -156,13 +172,24 @@ const Products = ({ data }) => {
               {isFilterVisible ? "Hide Filters" : "Show Filters"}
             </Button> */}
             {/* {isFilterVisible && ( */}
-            <FormControl component="fieldset">
+            <FormControl sx={{ marginLeft: 2 }} component="fieldset">
+              <Typography
+                variant="h3"
+                color="textPrimary"
+                style={{
+                  fontFamily: "Playfair Display, serif",
+                  marginBottom: 10,
+                }}
+              >
+                Filters
+              </Typography>
               <Typography
                 variant="h4"
                 color="textPrimary"
                 style={{
                   fontFamily: "Playfair Display, serif",
                   marginBottom: 6,
+                  marginTop: 10,
                 }}
               >
                 Collections
@@ -178,6 +205,7 @@ const Products = ({ data }) => {
                         checked={selectedTags.includes(tag)}
                         onChange={() => handleTagFilter(tag)}
                         sx={{
+                          fontFamily: "Playfair Display, serif",
                           "& .MuiSvgIcon-root": {
                             width: 20,
                             height: 20,

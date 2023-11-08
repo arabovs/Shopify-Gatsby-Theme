@@ -297,7 +297,7 @@ const IndexPage = ({ data }) => {
                   }}
                 >
                   <StaticImage
-                    src="../images/banner2.jpg"
+                    src="../images/banner.jpg"
                     alt="Banner"
                     layout="constrained"
                     sx={{

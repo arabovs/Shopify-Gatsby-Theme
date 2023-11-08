@@ -7,8 +7,11 @@ import Drawer from "@mui/material/Drawer"
 import { Typography } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
+import Box from "@mui/material/Box"
+import Icon from "@mui/material/Icon"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import Facebook from "@mui/icons-material/Facebook"
+import { StaticImage } from "gatsby-plugin-image"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 const TikTokIcon = ({ color = "#000000" }) => {
@@ -54,21 +57,38 @@ const Header = ({ siteTitle }) => {
           padding: "0 16px",
         }}
       >
-        <Link
-          to="/"
-          style={{
-            textDecoration: "none",
-            fontFamily: "Playfair Display, serif",
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
           }}
         >
-          <Typography
-            sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
-            variant="h5"
-            textAlign="center"
+          <Box sx={{ width: "100px" }}>
+            <StaticImage
+              src="../images/logo.png"
+              alt="The Art in Lounge"
+              loading="lazy"
+              style={{ backgroundColor: "#ccc" }}
+            ></StaticImage>
+          </Box>
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              fontFamily: "Playfair Display, serif",
+            }}
           >
-            {siteTitle}
-          </Typography>
-        </Link>
+            <Typography
+              sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+              variant="h5"
+              textAlign="center"
+            >
+              {siteTitle}
+            </Typography>
+          </Link>
+        </Box>
         {isSmallScreen ? (
           <IconButton
             edge="end"
