@@ -551,7 +551,7 @@ const IndexPage = ({ data }) => {
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                See Collection
+                Shop Now
               </Button>
             </Box>
 
@@ -597,8 +597,9 @@ const IndexPage = ({ data }) => {
                 color="textPrimary"
                 gutterBottom
               >
-                This feeling when: “Honey, I’m Home” (Night & Lounge wear)
+                “Honey, I’m Home” (Night & Lounge wear){" "}
               </Typography>
+
               <Button
                 component={Link}
                 to="/products?filter=Nightwear"
@@ -606,7 +607,7 @@ const IndexPage = ({ data }) => {
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                See Collection
+                Shop Now
               </Button>
             </Box>
 
@@ -662,7 +663,7 @@ const IndexPage = ({ data }) => {
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                See Collection
+                Shop now
               </Button>
             </Box>
 
