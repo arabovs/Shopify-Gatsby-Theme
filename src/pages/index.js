@@ -17,9 +17,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import useStore from "../context/StoreContext"
 
 const IndexPage = ({ data }) => {
-  const [showCollection1, setShowCollection1] = useState(true)
-  const [showCollection2, setShowCollection2] = useState(true)
-  const [showCollection3, setShowCollection3] = useState(true)
   const [fontSize, setFontSize] = useState("1.2rem")
 
   const { addVariantToCart } = useStore()
@@ -47,17 +44,6 @@ const IndexPage = ({ data }) => {
   }, [])
 
   const { nodes } = data.allShopifyProduct
-  const toggleCollections1 = () => {
-    setShowCollection1(!showCollection1)
-  }
-
-  const toggleCollections2 = () => {
-    setShowCollection2(!showCollection2)
-  }
-
-  const toggleCollections3 = () => {
-    setShowCollection3(!showCollection3)
-  }
 
   const filterObjectsByTag = (products, tag) => {
     let count = 0
@@ -80,9 +66,16 @@ const IndexPage = ({ data }) => {
     arr.sort(() => 0.5 - Math.random()).slice(0, 2)
 
   const filteredCollection1 = filterObjectsByTag(nodes, "Nightwear")
-  const filteredCollection2 = filterObjectsByTag(nodes, "Bundle")
+  const filteredCollection2 = filterObjectsByTag(nodes, "Set")
+  const filteredCollection3 = filterObjectsByTag(nodes, "Outwear")
   const sideItems = getRandomObjects(nodes)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+  const collectionsMap = {
+    Outwear: "The Artisan",
+    Nightwear: "Honey, I'm Home",
+    Set: "Sets & Bundles",
+  }
 
   return (
     <Box>
@@ -540,65 +533,9 @@ const IndexPage = ({ data }) => {
         >
           COLLECTIONS
         </Typography>
-        <Box py={1} textAlign="center"></Box>
-        {/* honey'im home */}
+
         <div>
-          {showCollection1 ? (
-            <Box py={4} textAlign="center">
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                  variant="h4"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  Honey, I'm home! (Night & Lounge wear)
-                </Typography>
-                <Button
-                  onClick={toggleCollections1}
-                  variant="contained"
-                  color="primary"
-                  style={{ backgroundColor: "#8B7D9B" }}
-                >
-                  Hide Collection
-                </Button>
-              </Box>
-
-              {/* Add a button to toggle the component visibility */}
-
-              <Typography
-                style={{ fontFamily: "Playfair Display, serif" }}
-                variant="body1"
-                color="textSecondary"
-                paragraph
-              >
-                Introducing our "Honey, I'm Home!" night and lounge wear
-                collection, designed to welcome you with open arms after a long
-                day. This collection embodies the essence of comfort, elegance,
-                and relaxation. Whether you're seeking to unwind in style or
-                indulge in a cozy night at home, our carefully curated pieces
-                will make you feel like you've arrived in your personal haven.
-                From sumptuously soft loungewear sets to silky nightgowns, each
-                garment in this collection is an invitation to embrace
-                tranquility and savor the sweet moments of being home. Explore
-                "Honey, I'm Home!" and elevate your evenings with a touch of
-                luxury.
-              </Typography>
-              <Grid container spacing={3}>
-                {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
-                    <ProductCardBig product={product} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-          ) : (
+          <Box py={4} textAlign="center">
             <Box
               sx={{
                 display: "flex",
@@ -612,80 +549,102 @@ const IndexPage = ({ data }) => {
                 color="textPrimary"
                 gutterBottom
               >
-                Honey, I'm home! (Night & Lounge wear)
+                The Artisan
               </Typography>
               <Button
-                onClick={toggleCollections1}
+                // onClick={toggleCollections3}
                 variant="contained"
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                Show Collection
+                Hide Collection
               </Button>
             </Box>
-          )}
+
+            {/* Add a button to toggle the component visibility */}
+
+            <Typography
+              style={{ fontFamily: "Playfair Display, serif" }}
+              variant="body1"
+              color="textSecondary"
+              paragraph
+            >
+              This extraordinary collection is a fusion of fashion and artistic
+              expression, where each garment tells a unique story. From vibrant,
+              eye-catching bold red to avant-garde designs and eternal classics.
+              Whether you're strolling through the city or attending a social
+              event, our pieces are your canvas, allowing you to paint your own
+              narrative with style and panache. Discover a world of sartorial
+              creativity and become a living work of art with us: " The Artisan"
+              collection.
+            </Typography>
+            <Grid container spacing={3}>
+              {filteredCollection3?.map((product, index) => (
+                <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
+                  <ProductCardBig product={product} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
         </div>
 
-        {/* Bundles & Sets */}
-
         <div>
-          {showCollection2 ? (
-            <Box py={4} textAlign="center">
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                  variant="h4"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  Bundles & Sets
-                </Typography>
-                <Button
-                  onClick={toggleCollections2}
-                  variant="contained"
-                  color="primary"
-                  style={{ backgroundColor: "#8B7D9B" }}
-                >
-                  Hide Collection
-                </Button>
-              </Box>
-
-              {/* Add a button to toggle the component visibility */}
-
+          <Box py={4} tefilteredCollection1xtAlign="center">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <Typography
                 style={{ fontFamily: "Playfair Display, serif" }}
-                variant="body1"
-                color="textSecondary"
-                paragraph
+                variant="h4"
+                color="textPrimary"
+                gutterBottom
               >
-                Indulge in the epitome of convenience and luxury with our unique
-                bundle and sets, where top, bottom, and sleeves seamlessly unite
-                to create a single, harmonious ensemble. These meticulously
-                curated bundles redefine the essence of bespoke fashion, as each
-                set is designed with your unique preferences in mind, ensuring a
-                perfect synergy of style and comfort. Whether you desire an
-                elegant suit, a cozy loungewear set, or a contemporary fusion of
-                both, our bundles cater to your individual tastes. Experience
-                the effortless luxury of complete outfits that reflect your
-                personality and provide unparalleled ease in dressing. Elevate
-                your wardrobe with our top-to-bottom bespoke bundles and set a
-                new standard for personalized fashion.
+                This feeling when: “Honey, I’m Home” (Night & Lounge wear)
               </Typography>
-              <Grid container spacing={3}>
-                {filteredCollection2?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
-                    <ProductCardBig product={product} />
-                  </Grid>
-                ))}
-              </Grid>
+              <Button
+                // onClick={toggleCollections1}
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: "#8B7D9B" }}
+              >
+                Hide Collection
+              </Button>
             </Box>
-          ) : (
+
+            {/* Add a button to toggle the component visibility */}
+
+            <Typography
+              style={{ fontFamily: "Playfair Display, serif" }}
+              variant="body1"
+              color="textSecondary"
+              paragraph
+            >
+              Night and lounge wear collection, designed to welcome you with
+              open arms after a long day, and make you feel like you've arrived
+              in your personal haven. This collection embodies the essence of
+              comfort, elegance, and relaxation. Whether you're seeking to
+              unwind in style or indulge in a cozy night at home. From
+              sumptuously soft loungewear sets to silky nightgowns, each garment
+              in this collection is an invitation to embrace tranquillity and
+              savour the sweet moments of being home. Explore "Honey, I'm Home!"
+              and elevate your evenings with a touch of the luxury of Art.
+            </Typography>
+            <Grid container spacing={3}>
+              {filteredCollection1?.map((product, index) => (
+                <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
+                  <ProductCardBig product={product} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </div>
+
+        <div>
+          <Box py={4} textAlign="center">
             <Box
               sx={{
                 display: "flex",
@@ -702,100 +661,38 @@ const IndexPage = ({ data }) => {
                 Bundles & Sets
               </Typography>
               <Button
-                onClick={toggleCollections2}
+                // onClick={toggleCollections2}
                 variant="contained"
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                Show Collection
+                Hide Collection
               </Button>
             </Box>
-          )}
-        </div>
 
-        {/** out and about */}
-        <div>
-          {showCollection3 ? (
-            <Box py={4} textAlign="center">
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                  variant="h4"
-                  color="textPrimary"
-                  gutterBottom
-                >
-                  Walk and About
-                </Typography>
-                <Button
-                  onClick={toggleCollections3}
-                  variant="contained"
-                  color="primary"
-                  style={{ backgroundColor: "#8B7D9B" }}
-                >
-                  Hide Collection
-                </Button>
-              </Box>
+            {/* Add a button to toggle the component visibility */}
 
-              {/* Add a button to toggle the component visibility */}
-
-              <Typography
-                style={{ fontFamily: "Playfair Display, serif" }}
-                variant="body1"
-                color="textSecondary"
-                paragraph
-              >
-                Step out into the world as a masterpiece with our "Walking Art –
-                Out and about" collection. This extraordinary collection is a
-                fusion of fashion and artistic expression, where each garment
-                tells a unique story. From vibrant, eye-catching prints to
-                avant-garde designs, this collection is tailored for those who
-                view every street as their personal runway. Whether you're
-                strolling through the city or attending a social event, our
-                pieces are your canvas, allowing you to paint your own narrative
-                with style and panache. Discover a world of sartorial creativity
-                and become a living work of art with our "Walking Art – Out and
-                about" collection.
-              </Typography>
-              <Grid container spacing={3}>
-                {filteredCollection1?.map((product, index) => (
-                  <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
-                    <ProductCardBig product={product} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
+            <Typography
+              style={{ fontFamily: "Playfair Display, serif" }}
+              variant="body1"
+              color="textSecondary"
+              paragraph
             >
-              <Typography
-                style={{ fontFamily: "Playfair Display, serif" }}
-                variant="h4"
-                color="textPrimary"
-                gutterBottom
-              >
-                Walk and About
-              </Typography>
-              <Button
-                onClick={toggleCollections3}
-                variant="contained"
-                color="primary"
-                style={{ backgroundColor: "#8B7D9B" }}
-              >
-                Show Collection
-              </Button>
-            </Box>
-          )}
+              No more “I have nothing to wear it with”! Experience the
+              effortless pair with our unique bundle and sets, where top,
+              bottom, and sleeves seamlessly unite to create a single,
+              harmonious ensemble. Whether you desire an elegant suit, a cozy
+              loungewear set, or a contemporary fusion of both, our bundles
+              cater to your individual tastes
+            </Typography>
+            <Grid container spacing={3}>
+              {filteredCollection2?.map((product, index) => (
+                <Grid item key={index} xs={12} sm={3} md={3} lg={3}>
+                  <ProductCardBig product={product} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
         </div>
       </Container>
     </Box>

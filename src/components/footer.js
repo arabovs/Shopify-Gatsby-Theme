@@ -83,7 +83,20 @@ const Footer = () => {
             artinlounge@yahoo.com
           </Typography>
         </Grid>
-
+        <Grid item xs={12} lg={3} key="contacts" sx={{ marginTop: 1 }}>
+          <Typography
+            sx={{
+              fontSize: "22px",
+              fontFamily: "Playfair Display, serif",
+              marginTop: 4,
+              marginBottom: 3,
+              textAlign: "center",
+              color: "white",
+            }}
+          >
+            ® Copyrights of The Art in Lounge - 2023 ®
+          </Typography>
+        </Grid>
         <Grid
           item
           xs={12} // On extra small screens, take up the full width (stacked)

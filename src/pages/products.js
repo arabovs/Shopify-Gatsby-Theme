@@ -30,7 +30,7 @@ const Products = ({ data }) => {
   const toggleCollectionFilter = () => {
     setShowCollectionFilter(!showCollectionFilter)
   }
-  const isSmallScreen = useMediaQuery("(max-width:600px)") // Adjust the breakpoint as needed
+  const isSmallScreen = useMediaQuery("(max-width:900px)") // Adjust the breakpoint as needed
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -250,24 +250,6 @@ const Products = ({ data }) => {
           </Box>
         </Grid>
       </Grid>
-      <Container
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: 1,
-        }}
-      >
-        <Typography
-          sx={{
-            fontSize: "22px",
-            fontFamily: "Playfair Display, serif",
-            marginTop: 1,
-            textAlign: "center",
-          }}
-        >
-          ® Copyrights of The Art in Lounge - 2023 ®
-        </Typography>
-      </Container>
     </Box>
   )
 }

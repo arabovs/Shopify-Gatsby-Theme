@@ -184,23 +184,6 @@ const Cart = () => {
             experience from checkout to delivery.
           </Typography>
           {/* <Box sx={{ backgroundColor: "#8B7D9B", padding: 1 }}></Box> */}
-          <Container
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: "22px",
-                fontFamily: "Playfair Display, serif",
-                marginTop: 1,
-                textAlign: "center",
-              }}
-            >
-              ® Copyrights of The Art in Lounge - 2023 ®
-            </Typography>
-          </Container>
         </Container>
         {/* <Box
           sx={{ backgroundColor: "#8B7D9B", padding: 1, marginTop: 1 }}
