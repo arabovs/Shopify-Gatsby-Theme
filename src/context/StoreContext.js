@@ -18,6 +18,7 @@ const client = Client.buildClient(
 )
 
 const cartCookie = Cookies.get("cart")
+const checkoutCookie = Cookies.get("checkout")
 
 let cart = []
 try {
@@ -33,17 +34,32 @@ try {
   console.error("Error parsing JSON:", error)
 }
 
+let checkout = {
+  id: "",
+  lineItems: [],
+  webUrl: "",
+}
+
+try {
+  if (checkoutCookie) {
+    const parsedCheckout = JSON.parse(checkoutCookie)
+    if (Array.isArray(parsedCheckout)) {
+      checkout = parsedCheckout
+    } else {
+      console.log("Not a valid array:", parsedCheckout)
+    }
+  }
+} catch (error) {
+  console.error("Error parsing JSON:", error)
+}
+
 const defaultValues = {
   cart: cart || [],
   loading: false,
   addVariantToCart: () => {},
   removeLineItem: () => {},
   client,
-  checkout: {
-    id: "",
-    lineItems: [],
-    webUrl: "",
-  },
+  checkout,
 }
 
 const StoreContext = createContext(defaultValues)
@@ -115,6 +131,7 @@ export const StoreProvider = ({ children }) => {
     }
 
     setCheckout(checkout)
+    Cookies.set("checkout", JSON.stringify(checkout))
   }
 
   useEffect(() => {
@@ -169,6 +186,7 @@ export const StoreProvider = ({ children }) => {
         lineItemsToUpdate
       )
       setCheckout(res)
+      Cookies.set("checkout", JSON.stringify(res))
 
       let updatedCart = []
       if (cart.length > 0) {
@@ -223,12 +241,14 @@ export const StoreProvider = ({ children }) => {
         lineItemID,
       ])
       setCheckout(res)
+      Cookies.set("checkout", JSON.stringify(res))
 
       const updatedCart = cart.filter(
         item => item.product.variants[0]?.shopifyId !== variantId
       )
       setCart(updatedCart)
       Cookies.set("cart", JSON.stringify(updatedCart))
+
       setLoading(false)
     } catch (error) {
       setLoading(false)
