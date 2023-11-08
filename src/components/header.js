@@ -28,19 +28,12 @@ const Header = ({ siteTitle }) => {
   const instagramUrl = "https://www.instagram.com/the.art.in.lounge/"
   const facebookUrl = "https://www.facebook.com/profile.php?id=100094356706321"
 
-  const handleInstagramClick = () => {
-    window.open(instagramUrl, "_blank")
-  }
-
-  const handleFacebookClick = () => {
-    window.open(facebookUrl, "_blank")
-  }
-
   const headerTags = {
-    "New Arrivals": "/products",
-    Sales: "/products",
-    Collections: "/products",
+    "New Arrivals": "/products?filter=newarrivals",
+    Sales: "/products?filter=sales",
+    Collections: "/products?filter=collections",
     "My Cart": "/cart",
+    Exclusive: "/products?filter=exclusive",
   }
 
   const toggleDrawer = () => {
@@ -105,52 +98,34 @@ const Header = ({ siteTitle }) => {
             value={false}
             sx={{ backgroundColor: "#8B7D9B", marginRight: 10, marginTop: 2 }}
           >
-            {["New Arrivals", "Sales", "Collections", "My Cart"].map(
-              (label, index) => (
-                <Link
-                  to={headerTags[label]}
-                  key={index}
-                  style={{
-                    textDecoration: "none",
+            {[
+              "Exclusive",
+              "New Arrivals",
+              "Sales",
+              "Collections",
+              "My Cart",
+            ].map((label, index) => (
+              <Link
+                to={headerTags[label]}
+                key={index}
+                style={{
+                  textDecoration: "none",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                <Typography
+                  id={index}
+                  sx={{
+                    fontSize: "22px",
                     fontFamily: "Playfair Display, serif",
+                    marginLeft: 4,
+                    color: "white",
                   }}
                 >
-                  <Typography
-                    id={index}
-                    sx={{
-                      fontSize: "22px",
-                      fontFamily: "Playfair Display, serif",
-                      marginLeft: 4,
-                      color: "white",
-                    }}
-                  >
-                    {label}
-                  </Typography>
-                </Link>
-              )
-            )}
-            {/* <IconButton
-              aria-label="Facebook"
-              onClick={handleFacebookClick}
-              sx={{ marginBottom: 2, marginLeft: 4, color: "purple" }}
-            >
-              <Facebook sx={{ fontSize: 24 }} />
-            </IconButton>
-            <IconButton
-              aria-label="Instagram"
-              onClick={handleInstagramClick}
-              sx={{ marginBottom: 2, color: "orange" }}
-            >
-              <InstagramIcon sx={{ fontSize: 24 }} />
-            </IconButton> */}
-            {/* <IconButton
-              color="primary" // Choose the appropriate color
-              aria-label="Instagram"
-              onClick={handleInstagramClick}
-              sx={{ marginBottom: 2, color: "orange" }}
-            >
-              <TikTokIcon />
-            </IconButton> */}
+                  {label}
+                </Typography>
+              </Link>
+            ))}
           </Tabs>
         )}
       </Toolbar>
@@ -167,52 +142,37 @@ const Header = ({ siteTitle }) => {
             value={false}
             sx={{ backgroundColor: "#8B7D9B" }}
           >
-            {["New Arrivals", "Sales", "Collections", "My Cart"].map(
-              (label, index) => (
-                <Link
-                  to={headerTags[label]}
-                  key={index}
-                  style={{
-                    textDecoration: "none",
+            {[
+              "Exclusive",
+              "New Arrivals",
+              "Sales",
+              "Collections",
+              "My Cart",
+            ].map((label, index) => (
+              <Link
+                to={headerTags[label]}
+                key={index}
+                style={{
+                  textDecoration: "none",
+                  fontFamily: "Playfair Display, serif",
+                }}
+                onClick={() => {
+                  setDrawerOpen(false)
+                }}
+              >
+                <Typography
+                  id={index}
+                  sx={{
+                    fontSize: "22px",
                     fontFamily: "Playfair Display, serif",
+                    marginLeft: 4,
+                    color: "white",
                   }}
                 >
-                  <Typography
-                    id={index}
-                    sx={{
-                      fontSize: "22px",
-                      fontFamily: "Playfair Display, serif",
-                      marginLeft: 4,
-                      color: "white",
-                    }}
-                  >
-                    {label}
-                  </Typography>
-                </Link>
-              )
-            )}
-            {/* <IconButton
-              color="primary" // Choose the appropriate color
-              aria-label="Instagram"
-              onClick={handleInstagramClick}
-            >
-              <InstagramIcon />
-            </IconButton>
-            <IconButton
-              color="primary" // Choose the appropriate color
-              aria-label="Instagram"
-              onClick={handleFacebookClick}
-            >
-              <Facebook />
-            </IconButton> */}
-            {/* <IconButton
-              color="primary" // Choose the appropriate color
-              aria-label="Instagram"
-              onClick={handleInstagramClick}
-              sx={{ marginBottom: 2, color: "orange" }}
-            >
-              <TikTokIcon color="red" />
-            </IconButton> */}
+                  {label}
+                </Typography>
+              </Link>
+            ))}
           </Tabs>
         </Drawer>
       )}

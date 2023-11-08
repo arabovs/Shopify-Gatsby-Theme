@@ -41,7 +41,7 @@ const Products = ({ data }) => {
     setIsFilterVisible(!isFilterVisible)
   }
 
-  const apparelTags = ["Tops", "Bottoms", "Intimates", "Hosiery"]
+  // const apparelTags = ["Tops", "Bottoms", "Intimates", "Hosiery"]
   React.useEffect(() => {
     filterProducts()
   }, [selectedTags, minPrice, maxPrice])
@@ -85,7 +85,7 @@ const Products = ({ data }) => {
     products.forEach(product => {
       if (product.tags && Array.isArray(product.tags)) {
         product.tags.forEach(tag => {
-          if (!distinctTags.includes(tag) && !apparelTags.includes(tag)) {
+          if (!distinctTags.includes(tag)) {
             distinctTags.push(tag)
           }
         })
@@ -154,25 +154,8 @@ const Products = ({ data }) => {
             }}
           >
             <Seo title="Products" />
-            {/* <Button
-              sx={{
-                marginBottom: 4,
-                backgroundColor: "#8B7D9B",
-                color: "white",
-                "&:active": {
-                  backgroundColor: "#8B7D9B",
-                  boxShadow: "none",
-                },
-                "&:hover": {
-                  backgroundColor: "#7A6B87",
-                },
-              }}
-              onClick={() => setIsFilterVisible(!isFilterVisible)}
-            >
-              {isFilterVisible ? "Hide Filters" : "Show Filters"}
-            </Button> */}
-            {/* {isFilterVisible && ( */}
-            <FormControl sx={{ marginLeft: 2 }} component="fieldset">
+
+            <FormControl sx={{ marginLeft: 6 }} component="fieldset">
               <Typography
                 variant="h3"
                 color="textPrimary"
