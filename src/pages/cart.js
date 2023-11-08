@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
 import ProductRow from "../components/ProductRow"
 import useStore from "../context/StoreContext"
+import Divider from "@mui/material/Divider"
 
 const Cart = () => {
   const { cart, checkout } = useStore()
@@ -16,29 +17,65 @@ const Cart = () => {
       sx={{
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
-
-        marginBottom: 1,
+        marginBottom: 2,
         marginTop: 2,
       }}
     >
-      <Grid item xs={4}>
-        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
-          Product
-        </Typography>
+      <Grid
+        item
+        xs={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{ fontFamily: "Playfair Display, serif" }}
+        ></Typography>
       </Grid>
-      <Grid item xs={4}>
+      <Grid
+        item
+        xs={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
           Name
         </Typography>
       </Grid>
-      <Grid item xs={4}>
+      <Grid
+        item
+        xs={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
           Quantity
         </Typography>
       </Grid>
-      <Grid item xs={4}>
+      <Grid
+        item
+        xs={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
-          Remove Item
+          Remove
         </Typography>
       </Grid>
     </Grid>
@@ -66,7 +103,7 @@ const Cart = () => {
   }
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" spacing={1} padding={1}>
       <Paper
         sx={{
           margin: "20px",
@@ -97,7 +134,7 @@ const Cart = () => {
               <Button
                 onClick={handleCheckout}
                 disabled={cart.length === 0}
-                sx={{ backgroundColor: "#8B7D9B" }}
+                sx={{ backgroundColor: "#8B7D9B", color: "white" }}
               >
                 Checkout
               </Button>
