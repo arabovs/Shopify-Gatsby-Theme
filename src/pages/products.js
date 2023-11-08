@@ -12,7 +12,10 @@ import FormControl from "@mui/material/FormControl"
 import FormGroup from "@mui/material/FormGroup"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
+import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Typography } from "@mui/material"
+import IconButton from "@mui/material/IconButton"
 
 const Products = ({ data }) => {
   const { nodes } = data.allShopifyProduct
@@ -22,7 +25,11 @@ const Products = ({ data }) => {
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
   const [isFilterVisible, setIsFilterVisible] = useState(true)
+  const [showCollectionFilter, setShowCollectionFilter] = useState(true)
 
+  const toggleCollectionFilter = () => {
+    setShowCollectionFilter(!showCollectionFilter)
+  }
   const isSmallScreen = useMediaQuery("(max-width:600px)") // Adjust the breakpoint as needed
 
   useEffect(() => {
@@ -166,46 +173,65 @@ const Products = ({ data }) => {
               >
                 Filters
               </Typography>
-              <Typography
-                variant="h4"
-                color="textPrimary"
-                style={{
-                  fontFamily: "Playfair Display, serif",
-                  marginBottom: 6,
-                  marginTop: 10,
-                }}
-              >
-                Collections
-              </Typography>
+              <Box sx={{ display: "flex" }}>
+                <IconButton
+                  sx={{
+                    color: "black",
+                    width: "100%",
+                    fontSize: "16px",
+                    width: "auto",
+                  }}
+                  aria-label="Facebook"
+                  onClick={toggleCollectionFilter}
+                >
+                  {showCollectionFilter ? (
+                    <ArrowDropDownIcon sx={{ marginLeft: 1, color: "black" }} />
+                  ) : (
+                    <ArrowRightIcon sx={{ margiLeft: 1, color: "black" }} />
+                  )}
+                </IconButton>
+                <Typography
+                  variant="h4"
+                  color="textPrimary"
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    marginBottom: 6,
+                    marginTop: 10,
+                  }}
+                >
+                  Collections
+                </Typography>
+              </Box>
               {/* Filter content goes here */}
-              {filteredTags.map((tag, index) => (
-                <FormGroup key={tag}>
-                  <FormControlLabel
-                    id={tag}
-                    control={
-                      <Checkbox
-                        id={tag}
-                        checked={selectedTags.includes(tag)}
-                        onChange={() => handleTagFilter(tag)}
-                        sx={{
-                          fontFamily: "Playfair Display, serif",
-                          "& .MuiSvgIcon-root": {
-                            width: 20,
-                            height: 20,
-                            color: "#8B7D9B",
-                          },
-                          "&.Mui-checked": {
+              {showCollectionFilter &&
+                filteredTags.map((tag, index) => (
+                  <FormGroup key={tag}>
+                    <FormControlLabel
+                      id={tag}
+                      control={
+                        <Checkbox
+                          id={tag}
+                          checked={selectedTags.includes(tag)}
+                          onChange={() => handleTagFilter(tag)}
+                          sx={{
+                            fontFamily: "Playfair Display, serif",
                             "& .MuiSvgIcon-root": {
-                              color: "green",
+                              width: 20,
+                              height: 20,
+                              color: "#8B7D9B",
                             },
-                          },
-                        }}
-                      />
-                    }
-                    label={tag}
-                  />
-                </FormGroup>
-              ))}
+                            "&.Mui-checked": {
+                              "& .MuiSvgIcon-root": {
+                                color: "green",
+                              },
+                            },
+                          }}
+                        />
+                      }
+                      label={tag}
+                    />
+                  </FormGroup>
+                ))}
             </FormControl>
             {/* )} */}
           </Box>

@@ -25,8 +25,6 @@ const TikTokIcon = ({ color = "#000000" }) => {
 const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("md"))
-  const instagramUrl = "https://www.instagram.com/the.art.in.lounge/"
-  const facebookUrl = "https://www.facebook.com/profile.php?id=100094356706321"
 
   const headerTags = {
     "New Arrivals": "/products?filter=newarrivals",
