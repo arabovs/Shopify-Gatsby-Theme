@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { graphql } from "gatsby"
 import Seo from "../components/seo"
-import Button from "@mui/material/Button"
 import ProductCardBig from "../components/ProductCardBig"
 import Checkbox from "@mui/material/Checkbox"
-import Container from "@mui/material/Container"
 import FormControlLabel from "@mui/material/FormControlLabel"
-import Slider from "@mui/material/Slider"
 import { useMediaQuery } from "@mui/material"
 import FormControl from "@mui/material/FormControl"
 import FormGroup from "@mui/material/FormGroup"
@@ -20,13 +17,12 @@ import IconButton from "@mui/material/IconButton"
 const Products = ({ data }) => {
   const { nodes } = data.allShopifyProduct
   const [selectedTags, setSelectedTags] = React.useState([])
-  const [selectedProductTags, setSelectedProductTags] = React.useState([])
   const [minPrice, setMinPrice] = React.useState(0)
   const [maxPrice, setMaxPrice] = React.useState(1000)
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
-  const [isFilterVisible, setIsFilterVisible] = useState(true)
   const [showCollectionFilter, setShowCollectionFilter] = useState(true)
 
+  const collectionsTags = ["Nightwear", "Outwear", "Set"]
   const toggleCollectionFilter = () => {
     setShowCollectionFilter(!showCollectionFilter)
   }
@@ -37,16 +33,17 @@ const Products = ({ data }) => {
       const queryParams = new URLSearchParams(window.location.search)
       const filterParam = queryParams.get("filter")
 
-      if (filterParam === "collection") {
-        // Replace 'collectionTag' with the actual collection tag you want to select
+      if (filterParam === "Outwear") {
+        setSelectedTags(["Outwear"])
+      }
+      if (filterParam === "Nightwear") {
         setSelectedTags(["Nightwear"])
+      }
+      if (filterParam === "Set") {
+        setSelectedTags(["Set"])
       }
     }
   }, [])
-
-  const toggleFilterVisibility = () => {
-    setIsFilterVisible(!isFilterVisible)
-  }
 
   // const apparelTags = ["Tops", "Bottoms", "Intimates", "Hosiery"]
   React.useEffect(() => {
@@ -58,14 +55,6 @@ const Products = ({ data }) => {
       setSelectedTags(selectedTags.filter(t => t !== tag))
     } else {
       setSelectedTags([...selectedTags, tag])
-    }
-  }
-
-  const handleProductTagFilter = tag => {
-    if (selectedProductTags.includes(tag)) {
-      setSelectedProductTags(selectedProductTags.filter(t => t !== tag))
-    } else {
-      setSelectedProductTags([...selectedProductTags, tag])
     }
   }
 
@@ -92,7 +81,7 @@ const Products = ({ data }) => {
     products.forEach(product => {
       if (product.tags && Array.isArray(product.tags)) {
         product.tags.forEach(tag => {
-          if (!distinctTags.includes(tag)) {
+          if (!distinctTags.includes(tag) && collectionsTags.includes(tag)) {
             distinctTags.push(tag)
           }
         })

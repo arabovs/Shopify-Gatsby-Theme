@@ -3,18 +3,9 @@ import Grid from "@mui/material/Grid"
 import Toolbar from "@mui/material/Toolbar"
 import Box from "@mui/material/Menu"
 import Typography from "@mui/material/Typography"
-import Icon from "@mui/material/Icon"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import Facebook from "@mui/icons-material/Facebook"
 import IconButton from "@mui/material/IconButton"
-import { Link } from "gatsby"
-
-const footerLinks = [
-  { label: "Contact Us", to: "/contact" },
-  { label: "About Us", to: "/about" },
-  { label: "Legal", to: "/legal" },
-  { label: "Deliveries and Returns", to: "/deliveries-returns" },
-]
 
 const Footer = () => {
   const instagramUrl = "https://www.instagram.com/the.art.in.lounge/"

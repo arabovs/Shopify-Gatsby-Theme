@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper"
 import CardActionArea from "@mui/material/CardActionArea"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
-import useMediaQuery from "@mui/material/useMediaQuery"
 import Container from "@mui/material/Container"
 import { graphql, navigate, Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
@@ -70,12 +69,6 @@ const IndexPage = ({ data }) => {
   const filteredCollection3 = filterObjectsByTag(nodes, "Outwear")
   const sideItems = getRandomObjects(nodes)
   const [isSmallScreen, setIsSmallScreen] = useState(false)
-
-  const collectionsMap = {
-    Outwear: "The Artisan",
-    Nightwear: "Honey, I'm Home",
-    Set: "Sets & Bundles",
-  }
 
   return (
     <Box>
@@ -552,12 +545,13 @@ const IndexPage = ({ data }) => {
                 The Artisan
               </Typography>
               <Button
-                // onClick={toggleCollections3}
+                component={Link}
+                to="/products?filter=Outwear"
                 variant="contained"
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                Hide Collection
+                See Collection
               </Button>
             </Box>
 
@@ -606,12 +600,13 @@ const IndexPage = ({ data }) => {
                 This feeling when: “Honey, I’m Home” (Night & Lounge wear)
               </Typography>
               <Button
-                // onClick={toggleCollections1}
+                component={Link}
+                to="/products?filter=Nightwear"
                 variant="contained"
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                Hide Collection
+                See Collection
               </Button>
             </Box>
 
@@ -661,12 +656,13 @@ const IndexPage = ({ data }) => {
                 Bundles & Sets
               </Typography>
               <Button
-                // onClick={toggleCollections2}
+                component={Link}
+                to="/products?filter=Set"
                 variant="contained"
                 color="primary"
                 style={{ backgroundColor: "#8B7D9B" }}
               >
-                Hide Collection
+                See Collection
               </Button>
             </Box>
 
