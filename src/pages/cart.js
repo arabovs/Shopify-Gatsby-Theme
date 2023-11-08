@@ -13,29 +13,31 @@ const Cart = () => {
   const renderProductHeader = () => (
     <Grid
       container
-      sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4 }}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+
+        marginBottom: 1,
+        marginTop: 2,
+      }}
     >
       <Grid item xs={4}>
-        <Typography
-          variant="subtitle1"
-          sx={{ fontWeight: 600, fontFamily: "Playfair Display, serif" }}
-        >
+        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
           Product
         </Typography>
       </Grid>
       <Grid item xs={4}>
-        <Typography
-          variant="subtitle1"
-          sx={{ fontWeight: 600, fontFamily: "Playfair Display, serif" }}
-        >
+        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
+          Name
+        </Typography>
+      </Grid>
+      <Grid item xs={4}>
+        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
           Quantity
         </Typography>
       </Grid>
       <Grid item xs={4}>
-        <Typography
-          variant="subtitle1"
-          sx={{ fontWeight: 600, fontFamily: "Playfair Display, serif" }}
-        >
+        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
           Remove Item
         </Typography>
       </Grid>
@@ -64,14 +66,20 @@ const Cart = () => {
   }
 
   return (
-    <Container>
-      <Paper sx={{ marginTop: 4, padding: 4 }}>
-        <Grid container spacing={4}>
+    <Container maxWidth="xl">
+      <Paper
+        sx={{
+          margin: "20px",
+          padding: "20px",
+        }}
+      >
+        <Grid container>
           <Grid item xs={12}>
             <Typography
               variant="h4"
-              gutterBottom
-              sx={{ fontFamily: "Playfair Display, serif" }}
+              sx={{
+                fontFamily: "Playfair Display, serif",
+              }}
             >
               My Cart
             </Typography>
@@ -79,7 +87,13 @@ const Cart = () => {
           {renderProductHeader()}
           {renderCartItems()}
           <Grid item xs={12}>
-            <div sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <div
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                mt: 4,
+              }}
+            >
               <Button
                 onClick={handleCheckout}
                 disabled={cart.length === 0}
