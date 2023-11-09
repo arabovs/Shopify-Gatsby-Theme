@@ -8,7 +8,6 @@ import DialogActions from "@mui/material/DialogActions"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { navigate } from "gatsby"
-import Cookies from "js-cookie"
 
 const client = Client.buildClient(
   {
@@ -18,22 +17,22 @@ const client = Client.buildClient(
   fetch
 )
 
-const cartCookie = Cookies.get("cart")
-const checkoutCookie = Cookies.get("checkout")
+// const cartCookie = Cookies.get("cart")
+// const checkoutCookie = Cookies.get("checkout")
 
-let cart = []
-try {
-  if (cartCookie) {
-    const parsedCart = JSON.parse(cartCookie)
-    if (Array.isArray(parsedCart)) {
-      cart = parsedCart
-    } else {
-      console.log("Not a valid array:", parsedCart)
-    }
-  }
-} catch (error) {
-  console.error("Error parsing JSON:", error)
-}
+// let cart = []
+// try {
+//   if (cartCookie) {
+//     const parsedCart = JSON.parse(cartCookie)
+//     if (Array.isArray(parsedCart)) {
+//       cart = parsedCart
+//     } else {
+//       console.log("Not a valid array:", parsedCart)
+//     }
+//   }
+// } catch (error) {
+//   console.error("Error parsing JSON:", error)
+// }
 
 let checkout = {
   id: "",
@@ -41,21 +40,21 @@ let checkout = {
   webUrl: "",
 }
 
-try {
-  if (checkoutCookie) {
-    const parsedCheckout = JSON.parse(checkoutCookie)
-    if (Array.isArray(parsedCheckout)) {
-      checkout = parsedCheckout
-    } else {
-      console.log("Not a valid array:", parsedCheckout)
-    }
-  }
-} catch (error) {
-  console.error("Error parsing JSON:", error)
-}
+// try {
+//   if (checkoutCookie) {
+//     const parsedCheckout = JSON.parse(checkoutCookie)
+//     if (Array.isArray(parsedCheckout)) {
+//       checkout = parsedCheckout
+//     } else {
+//       console.log("Not a valid array:", parsedCheckout)
+//     }
+//   }
+// } catch (error) {
+//   console.error("Error parsing JSON:", error)
+// }
 
 const defaultValues = {
-  cart: cart || [],
+  cart: [],
   loading: false,
   addVariantToCart: () => {},
   removeLineItem: () => {},
@@ -150,9 +149,9 @@ export const StoreProvider = ({ children }) => {
     }
 
     setCheckout(checkout)
-    Cookies.set("checkout", JSON.stringify(checkout), {
-      expires: 30 / (24 * 60),
-    })
+    // Cookies.set("checkout", JSON.stringify(checkout), {
+    //   expires: 30 / (24 * 60),
+    // })
   }
 
   useEffect(() => {
@@ -207,7 +206,7 @@ export const StoreProvider = ({ children }) => {
         lineItemsToUpdate
       )
       setCheckout(res)
-      Cookies.set("checkout", JSON.stringify(res), { expires: 5 / (24 * 60) })
+      // Cookies.set("checkout", JSON.stringify(res), { expires: 5 / (24 * 60) })
 
       let updatedCart = []
       if (cart.length > 0) {
@@ -231,9 +230,9 @@ export const StoreProvider = ({ children }) => {
         updatedCart = [{ product, quantity: parsedQuantity }]
       }
       setCart(updatedCart)
-      Cookies.set("cart", JSON.stringify(updatedCart), {
-        expires: 30 / (24 * 60),
-      })
+      // Cookies.set("cart", JSON.stringify(updatedCart), {
+      //   expires: 30 / (24 * 60),
+      // })
 
       setLoading(false)
       handleAddToCart()
@@ -264,15 +263,15 @@ export const StoreProvider = ({ children }) => {
         lineItemID,
       ])
       setCheckout(res)
-      Cookies.set("checkout", JSON.stringify(res), { expires: 5 / (24 * 60) })
+      // Cookies.set("checkout", JSON.stringify(res), { expires: 5 / (24 * 60) })
 
       const updatedCart = cart.filter(
         item => item.product.variants[0]?.shopifyId !== variantId
       )
       setCart(updatedCart)
-      Cookies.set("cart", JSON.stringify(updatedCart), {
-        expires: 30 / (24 * 60),
-      })
+      // Cookies.set("cart", JSON.stringify(updatedCart), {
+      //   expires: 30 / (24 * 60),
+      // })
 
       setLoading(false)
     } catch (error) {

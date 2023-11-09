@@ -13,8 +13,9 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Typography } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
+import { useLocation } from "@reach/router"
 
-const Products = ({ data }) => {
+const Products = ({ data, props }) => {
   const { nodes } = data.allShopifyProduct
   const [selectedTags, setSelectedTags] = React.useState([])
   const [minPrice, setMinPrice] = React.useState(0)
@@ -22,6 +23,10 @@ const Products = ({ data }) => {
   const [filteredProducts, setFilteredProducts] = React.useState(nodes)
   const [showCollectionFilter, setShowCollectionFilter] = useState(true)
   const [showApparelFilter, setShowApparelFilter] = useState(true)
+
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const filter = searchParams.get("filter")
 
   const collectionsTags = ["Nightwear", "Outwear", "Set"]
 
@@ -62,7 +67,7 @@ const Products = ({ data }) => {
         setSelectedTags(["Outwear", "Nightwear", "Set"])
       }
     }
-  }, [])
+  }, [filter])
 
   React.useEffect(() => {
     filterProducts()

@@ -107,7 +107,6 @@ const Header = ({ siteTitle }) => {
                   textDecoration: "none",
                   fontFamily: "Playfair Display, serif",
                 }}
-                onClick={() => handleLinkClick(headerTags[label])}
               >
                 <Typography
                   id={index}
@@ -116,6 +115,8 @@ const Header = ({ siteTitle }) => {
                     fontFamily: "Playfair Display, serif",
                     marginLeft: 4,
                     color: "white",
+                    textDecoration: "none",
+                    fontFamily: "Playfair Display, serif",
                   }}
                 >
                   {label}
@@ -151,10 +152,6 @@ const Header = ({ siteTitle }) => {
                 style={{
                   textDecoration: "none",
                   fontFamily: "Playfair Display, serif",
-                }}
-                onClick={() => {
-                  setDrawerOpen(false)
-                  handleLinkClick(headerTags[label])
                 }}
               >
                 <Typography
