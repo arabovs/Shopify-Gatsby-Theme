@@ -136,6 +136,7 @@ const Products = ({ data }) => {
             sx={{
               fontSize: "20px",
               fontFamily: "Playfair Display, serif",
+              marginBottom: 4,
             }}
           >
             The Art in Lounge is not just a lounge wear company; it's a
