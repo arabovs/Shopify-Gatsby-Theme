@@ -33,7 +33,7 @@ const Products = ({ data }) => {
     setShowApparelFilter(!showApparelFilter)
   }
 
-  const isSmallScreen = useMediaQuery("(max-width:900px)") // Adjust the breakpoint as needed
+  const isSmallScreen = useMediaQuery("(max-width:1200px)") // Adjust the breakpoint as needed
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -171,7 +171,7 @@ const Products = ({ data }) => {
           >
             <Seo title="Products" />
 
-            <FormControl sx={{ marginLeft: 6 }} component="fieldset">
+            <FormControl component="fieldset">
               <Typography
                 variant="h3"
                 color="textPrimary"

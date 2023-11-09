@@ -6,8 +6,9 @@ import DialogTitle from "@mui/material/DialogTitle"
 import DialogContent from "@mui/material/DialogContent"
 import DialogActions from "@mui/material/DialogActions"
 import Button from "@mui/material/Button"
+import Typography from "@mui/material/Typography"
 import { navigate } from "gatsby"
-import Cookies from "js-cookie"
+// import Cookies from "js-cookie"
 
 const client = Client.buildClient(
   {
@@ -99,15 +100,33 @@ const SuccessDialog = ({ open, onClose }) => {
         },
       }}
     >
-      <DialogTitle>Item Added to Cart</DialogTitle>
+      <DialogTitle style={{ backgroundColor: "#8B7D9B" }}>
+        Item Added to Cart
+      </DialogTitle>
       <DialogContent>
-        <p>Your item has been added to the cart successfully.</p>
+        <Typography
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            marginTop: 2,
+            fontSize: "24px",
+          }}
+        >
+          Your item has been added to the cart successfully.
+        </Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} sx={{ marginRight: 1 }}>
+        <Button
+          onClick={onClose}
+          sx={{ marginRight: 1, backgroundColor: "#8B7D9B", color: "white" }}
+        >
           Continue Shopping
         </Button>
-        <Button variant="contained" color="primary" onClick={handleGoToCart}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleGoToCart}
+          sx={{ backgroundColor: "#8B7D9B" }}
+        >
           Go to Cart
         </Button>
       </DialogActions>

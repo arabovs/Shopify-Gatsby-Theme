@@ -8,12 +8,12 @@ import { Typography } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import Box from "@mui/material/Box"
-import { StaticImage } from "gatsby-plugin-image"
+// import { StaticImage } from "gatsby-plugin-image"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("md"))
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("lg"))
 
   const handleLinkClick = url => {
     window.location.href = url // This will force a full page reload
@@ -50,12 +50,16 @@ const Header = ({ siteTitle }) => {
           }}
         >
           <Box sx={{ width: "100px" }}>
-            <StaticImage
+            <img
+              width="88"
+              src="https://cardsbg.s3.eu-north-1.amazonaws.com/20231106_125409_0000.png"
+            />
+            {/* <StaticImage
               src="../images/logo.png"
               alt="The Art in Lounge"
               loading="lazy"
               style={{ backgroundColor: "#ccc" }}
-            ></StaticImage>
+            ></StaticImage> */}
           </Box>
           <Link
             to="/"
@@ -150,6 +154,7 @@ const Header = ({ siteTitle }) => {
                 }}
                 onClick={() => {
                   setDrawerOpen(false)
+                  handleLinkClick(headerTags[label])
                 }}
               >
                 <Typography
