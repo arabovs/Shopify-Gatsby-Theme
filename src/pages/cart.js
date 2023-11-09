@@ -141,7 +141,7 @@ const Cart = () => {
               marginBottom: 2,
             }}
           >
-            <Button
+            {/* <Button
               onClick={handleCheckout}
               disabled={cart.length === 0}
               sx={{
@@ -152,7 +152,7 @@ const Cart = () => {
               }}
             >
               Clear Basket
-            </Button>
+            </Button> */}
             <Button
               onClick={handleCheckout}
               disabled={cart.length === 0}

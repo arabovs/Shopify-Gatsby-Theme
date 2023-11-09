@@ -173,60 +173,60 @@ const IndexPage = ({ data }) => {
                           }}
                         />
                       </div>
-                    </CardActionArea>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <IconButton
-                            edge="end"
-                            onClick={() => addVariantToCart(product, 1)}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-around",
+                        }}
+                      >
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <Box
                             sx={{
-                              borderRadius: "50%",
-                              marginLeft: 4,
-                              cursor: "pointer",
-                              transition:
-                                "background-color 0.2s, transform 0.2s",
-                              userSelect: "none",
-                              outline: "none",
-                              padding: 0,
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
                             }}
+                            // onClick={() => addVariantToCart(product, 1)}
                           >
-                            <Typography
+                            <IconButton
+                              edge="end"
                               sx={{
-                                fontFamily: "Playfair Display, serif",
-                                fontSize: "24px",
-                                whiteSpace: "normal",
+                                borderRadius: "50%",
+                                marginLeft: 4,
+                                cursor: "pointer",
+                                transition:
+                                  "background-color 0.2s, transform 0.2s",
+                                userSelect: "none",
+                                outline: "none",
+                                padding: 0,
                               }}
                             >
-                              Buy
-                            </Typography>{" "}
-                            <Typography
-                              sx={{
-                                fontFamily: "Playfair Display, serif",
-                                fontSize: "24px",
-                                whiteSpace: "normal",
-                                marginLeft: 1,
-                              }}
-                            >
-                              ${product.priceRangeV2.maxVariantPrice.amount}0
-                            </Typography>{" "}
-                            <ShoppingCartIcon sx={{ marginLeft: 2 }} />
-                          </IconButton>
+                              <Typography
+                                sx={{
+                                  fontFamily: "Playfair Display, serif",
+                                  fontSize: "24px",
+                                  whiteSpace: "normal",
+                                }}
+                              >
+                                Buy
+                              </Typography>{" "}
+                              <Typography
+                                sx={{
+                                  fontFamily: "Playfair Display, serif",
+                                  fontSize: "24px",
+                                  whiteSpace: "normal",
+                                  marginLeft: 1,
+                                }}
+                              >
+                                ${product.priceRangeV2.maxVariantPrice.amount}0
+                              </Typography>{" "}
+                              <ShoppingCartIcon sx={{ marginLeft: 2 }} />
+                            </IconButton>
+                          </Box>
                         </Box>
                       </Box>
-                    </Box>
+                    </CardActionArea>
                   </Grid>
                 ))}{" "}
               </Grid>{" "}
@@ -295,6 +295,7 @@ const IndexPage = ({ data }) => {
                   elevation={4}
                   sx={{
                     marginTop: 4,
+                    backgroundColor: "#8B7D9B",
                   }}
                 >
                   <Link
@@ -308,7 +309,8 @@ const IndexPage = ({ data }) => {
                     <Typography
                       sx={{
                         fontFamily: "Great Vibes",
-                        color: "black",
+                        color: "white",
+                        lineHeight: "1.8",
                       }}
                       variant="h3"
                       textAlign="center"
@@ -432,23 +434,22 @@ const IndexPage = ({ data }) => {
                           }}
                         />
                       </div>
-                    </CardActionArea>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          {/* <Typography
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-around",
+                        }}
+                      >
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            {/* <Typography
                             sx={{
                               fontFamily: "Playfair Display, serif",
                               fontSize: "24px",
@@ -457,52 +458,54 @@ const IndexPage = ({ data }) => {
                           >
                             ${product.priceRangeV2.maxVariantPrice.amount}0
                           </Typography> */}
-                          <Box
-                            sx={{
-                              display: "flex",
-                              flexDirection: "row",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <IconButton
-                              edge="end"
-                              onClick={() => addVariantToCart(product, 1)}
+                            <Box
                               sx={{
-                                borderRadius: "50%",
-                                marginLeft: 4,
-                                cursor: "pointer",
-                                transition:
-                                  "background-color 0.2s, transform 0.2s",
-                                userSelect: "none",
-                                outline: "none",
-                                padding: 0,
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
                               }}
+                              // onClick={() => addVariantToCart(product, 1)}
                             >
-                              <Typography
+                              <IconButton
+                                edge="end"
                                 sx={{
-                                  fontFamily: "Playfair Display, serif",
-                                  fontSize: "24px",
-                                  whiteSpace: "normal",
+                                  borderRadius: "50%",
+                                  marginLeft: 4,
+                                  cursor: "pointer",
+                                  transition:
+                                    "background-color 0.2s, transform 0.2s",
+                                  userSelect: "none",
+                                  outline: "none",
+                                  padding: 0,
                                 }}
                               >
-                                Buy
-                              </Typography>{" "}
-                              <Typography
-                                sx={{
-                                  fontFamily: "Playfair Display, serif",
-                                  fontSize: "24px",
-                                  whiteSpace: "normal",
-                                  marginLeft: 1,
-                                }}
-                              >
-                                ${product.priceRangeV2.maxVariantPrice.amount}0
-                              </Typography>{" "}
-                              <ShoppingCartIcon sx={{ marginLeft: 2 }} />
-                            </IconButton>
+                                <Typography
+                                  sx={{
+                                    fontFamily: "Playfair Display, serif",
+                                    fontSize: "24px",
+                                    whiteSpace: "normal",
+                                  }}
+                                >
+                                  Buy
+                                </Typography>{" "}
+                                <Typography
+                                  sx={{
+                                    fontFamily: "Playfair Display, serif",
+                                    fontSize: "24px",
+                                    whiteSpace: "normal",
+                                    marginLeft: 1,
+                                  }}
+                                >
+                                  ${product.priceRangeV2.maxVariantPrice.amount}
+                                  0
+                                </Typography>{" "}
+                                <ShoppingCartIcon sx={{ marginLeft: 2 }} />
+                              </IconButton>
+                            </Box>
                           </Box>
                         </Box>
                       </Box>
-                    </Box>
+                    </CardActionArea>
                   </Grid>
                 ))}{" "}
               </Grid>{" "}

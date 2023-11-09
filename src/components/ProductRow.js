@@ -7,12 +7,13 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import useStore from "../context/StoreContext"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
 const ProductRow = ({ item }) => {
   const { removeLineItem } = useStore()
   const { quantity, product } = item
 
-  const isSmallScreen = window.innerWidth < 800 // Adjust the breakpoint as needed
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"))
 
   return (
     <Box width="100%" sx={{ marginTop: 1 }}>
@@ -75,8 +76,7 @@ const ProductRow = ({ item }) => {
                     fontSize: 36,
                     color: "#8B7D9B",
                   }}
-                />{" "}
-                {/* Increase the fontSize as needed */}
+                />
               </IconButton>
             </Box>
           </CardContent>
@@ -102,24 +102,28 @@ const ProductRow = ({ item }) => {
               }}
             />
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid
+            item
+            xs={6}
+            sm={4}
+            sx={{ textAlign: { xs: "center", sm: "left" } }}
+          >
             <Typography
               variant="h6"
-              sx={{
-                fontFamily: "Playfair Display, serif",
-                textAlign: "center",
-              }}
+              sx={{ fontFamily: "Playfair Display, serif" }}
             >
               {product.title}
             </Typography>
           </Grid>
-          <Grid item xs={2} sm={2}>
+          <Grid
+            item
+            xs={2}
+            sm={2}
+            sx={{ textAlign: { xs: "center", sm: "left" } }}
+          >
             <Typography
               variant="h6"
-              sx={{
-                fontFamily: "Playfair Display, serif",
-                textAlign: "center",
-              }}
+              sx={{ fontFamily: "Playfair Display, serif" }}
             >
               {quantity}
             </Typography>
@@ -144,6 +148,7 @@ const ProductRow = ({ item }) => {
           </Grid>
         </Grid>
       )}
+
       <Box sx={{ backgroundColor: "#8B7D9B", padding: 1 }}></Box>
     </Box>
   )

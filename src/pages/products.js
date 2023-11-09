@@ -185,7 +185,6 @@ const Products = ({ data }) => {
                 <IconButton
                   sx={{
                     color: "black",
-                    width: "100%",
                     fontSize: "16px",
                     width: "auto",
                   }}
@@ -246,7 +245,6 @@ const Products = ({ data }) => {
                 <IconButton
                   sx={{
                     color: "black",
-                    width: "100%",
                     fontSize: "16px",
                     width: "auto",
                   }}
