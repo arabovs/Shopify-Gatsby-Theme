@@ -8,7 +8,7 @@ import DialogActions from "@mui/material/DialogActions"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { navigate } from "gatsby"
-// import Cookies from "js-cookie"
+import Cookies from "js-cookie"
 
 const client = Client.buildClient(
   {
