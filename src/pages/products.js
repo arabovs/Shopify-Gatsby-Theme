@@ -193,9 +193,9 @@ const Products = ({ data }) => {
                   onClick={toggleCollectionFilter}
                 >
                   {showCollectionFilter ? (
-                    <ArrowDropDownIcon sx={{ marginLeft: 1, color: "black" }} />
+                    <ArrowDropDownIcon sx={{ color: "black" }} />
                   ) : (
-                    <ArrowRightIcon sx={{ margiLeft: 1, color: "black" }} />
+                    <ArrowRightIcon sx={{ color: "black" }} />
                   )}
                 </IconButton>
                 <Typography
@@ -253,9 +253,9 @@ const Products = ({ data }) => {
                   onClick={toggleApparelFilter}
                 >
                   {showApparelFilter ? (
-                    <ArrowDropDownIcon sx={{ marginLeft: 1, color: "black" }} />
+                    <ArrowDropDownIcon sx={{ color: "black" }} />
                   ) : (
-                    <ArrowRightIcon sx={{ margiLeft: 1, color: "black" }} />
+                    <ArrowRightIcon sx={{ color: "black" }} />
                   )}
                 </IconButton>
                 <Typography
