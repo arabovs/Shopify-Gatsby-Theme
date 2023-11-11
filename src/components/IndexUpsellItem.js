@@ -26,6 +26,7 @@ const borderAnimation = keyframes`
 `
 
 const IndexUpsellItem = ({ upsellItems }) => {
+  console.log(upsellItems)
   const { addVariantToCart } = useStore()
   if (upsellItems.length > 0) {
     return (
@@ -102,8 +103,8 @@ const IndexUpsellItem = ({ upsellItems }) => {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-start", // Align items along the main axis (vertical)
-                  alignItems: "flex-start", // Align items along the cross axis (horizontal)
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
                   marginLeft: 1,
                   marginTop: 0.5,
                   marginBottom: 1,
@@ -144,6 +145,7 @@ const IndexUpsellItem = ({ upsellItems }) => {
                   userSelect: "none",
                   outline: "none",
                   padding: 0,
+                  marginLeft: -12, // Adjust the marginLeft to move the icon to the left
                 }}
               >
                 <ShoppingCartIcon />

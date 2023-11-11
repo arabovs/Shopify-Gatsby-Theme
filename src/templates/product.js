@@ -5,9 +5,19 @@ import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
+import {
+  Card,
+  CardContent,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import useStore from "../context/StoreContext"
 import useInput from "../utils/useInput"
+import useMediaQuery from "@mui/material/useMediaQuery"
+import IndexUpsellItem from "../components/IndexUpsellItem"
 
 const useStyles = makeStyles(theme => ({
   backButton: {
@@ -42,10 +52,44 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const VariantCard = ({ variant }) => {
+  return (
+    <Card>
+      <CardContent>
+        <Typography
+          variant="h6"
+          gutterBottom
+          sx={{ fontFamily: "Playfair Display, serif" }}
+        >
+          {variant.title}
+        </Typography>
+        <Typography sx={{ fontFamily: "Playfair Display, serif" }}>
+          <strong>Quantity:</strong> {variant.inventoryQuantity}
+        </Typography>
+        <Typography sx={{ fontFamily: "Playfair Display, serif" }}>
+          <strong>Price:</strong> ${variant.price}
+        </Typography>
+      </CardContent>
+    </Card>
+  )
+}
+
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
-  // const { upsells } = pageContext
-  // console.log(upsells)
+  const { upsells } = pageContext
+  const isMdOrSmaller = useMediaQuery("(max-width: 960px)")
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+  const [shopifyVariantId, setShopifyVariantId] = useState(product.variants[0])
+
+  const handleShopifyVariantIdChange = shopifyId => {
+    setShopifyVariantId(shopifyId)
+  }
+
+  const handleVariantChange = event => {
+    const selectedIndex = event.target.value
+    setSelectedVariant(product.variants[selectedIndex])
+    handleShopifyVariantIdChange(product.variants[selectedIndex]?.shopifyId)
+  }
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -67,16 +111,21 @@ const ProductTemplate = ({ pageContext }) => {
 
   return (
     <Container>
-      <Box>
+      <Box sx={{ display: "flex" }}>
+        {!isMdOrSmaller && (
+          <Box sx={{ flex: "0 0 300px", marginRight: 2 }}>
+            <IndexUpsellItem upsellItems={upsells} />
+          </Box>
+        )}
         <Grid
+          container
+          spacing={4}
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             padding: "16px",
           }}
-          container
-          spacing={4}
         >
           <Grid item xs={12} sm={6}>
             <Box>
@@ -85,7 +134,7 @@ const ProductTemplate = ({ pageContext }) => {
                 alt={product.title}
                 className={classes.image}
               />
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box sx={{ justifyContent: "space-between" }}>
                 <Button
                   onClick={prevImage}
                   variant="contained"
@@ -141,16 +190,31 @@ const ProductTemplate = ({ pageContext }) => {
                 {product.description}
               </Typography>
               <form className={classes.inputForm}>
-                <Typography
-                  sx={{
-                    fontSize: "18px",
-                    fontFamily: "Playfair Display, serif",
-                    fontWeight: "bold",
-                  }}
-                  variant="subtitle1"
-                >
-                  Quantity:
-                </Typography>
+                <FormControl>
+                  <InputLabel id="variant-select-label"></InputLabel>
+                  <Select
+                    labelId="variant-select-label"
+                    id="variant-select"
+                    value={product.variants.indexOf(selectedVariant)}
+                    onChange={handleVariantChange}
+                    sx={{
+                      fontFamily: "Playfair Display, serif",
+                    }}
+                  >
+                    {product.variants.map((variant, index) => (
+                      <MenuItem
+                        sx={{
+                          fontFamily: "Playfair Display, serif",
+                        }}
+                        key={index}
+                        value={index}
+                      >
+                        {variant.title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <VariantCard variant={selectedVariant} />
                 <TextField
                   id="qty"
                   variant="outlined"
@@ -162,7 +226,9 @@ const ProductTemplate = ({ pageContext }) => {
               <Button
                 variant="contained"
                 className={classes.addToCartButton}
-                onClick={() => addVariantToCart(product, bind.value)}
+                onClick={() =>
+                  addVariantToCart(product, bind.value, shopifyVariantId)
+                }
                 sx={{ backgroundColor: "#8B7D9B" }}
               >
                 Add to Cart

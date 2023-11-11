@@ -180,7 +180,7 @@ export const StoreProvider = ({ children }) => {
     initializeCheckout()
   }, [])
 
-  const addVariantToCart = async (product, quantity) => {
+  const addVariantToCart = async (product, quantity, shopifyId) => {
     setLoading(true)
 
     if (checkout.id === "") {
@@ -189,7 +189,7 @@ export const StoreProvider = ({ children }) => {
     }
 
     const checkoutID = checkout.id
-    const variantId = product.variants[0]?.shopifyId
+    const variantId = shopifyId.shopifyId
     const parsedQuantity = parseInt(quantity, 10)
 
     const lineItemsToUpdate = [

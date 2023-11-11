@@ -15,6 +15,7 @@ const Header = ({ siteTitle }) => {
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("lg"))
 
   const headerTags = {
+    Home: "/",
     "New Arrivals": "/products?filter=New",
     Sales: "/products?filter=Sale",
     Collections: "/products?filter=Collections",
@@ -96,6 +97,7 @@ const Header = ({ siteTitle }) => {
                   textDecoration: "none",
                   fontFamily: "Playfair Display, serif",
                 }}
+                onClick={toggleDrawer}
               >
                 <Typography
                   id={index}
@@ -129,6 +131,7 @@ const Header = ({ siteTitle }) => {
             sx={{ backgroundColor: "#8B7D9B" }}
           >
             {[
+              "Home",
               "Exclusive",
               "New Arrivals",
               "Sales",
