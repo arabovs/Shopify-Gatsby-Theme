@@ -44,6 +44,8 @@ const useStyles = makeStyles(theme => ({
 
 const ProductTemplate = ({ pageContext }) => {
   const { product } = pageContext
+  // const { upsells } = pageContext
+  // console.log(upsells)
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 

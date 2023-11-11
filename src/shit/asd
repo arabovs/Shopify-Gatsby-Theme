@@ -1,0 +1,75 @@
+const path = require(`path`)
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+
+  const LEFT_TAG_1 = "UpsellL1"
+  const LEFT_TAG_2 = "UpsellL2"
+  const RIGHT_TAG_1 = "UpsellR1"
+  const RIGHT_TAG_2 = "UpsellR2"
+
+  // const filterObjectsByTag = (products, tag) => {
+  //   let count = 0
+  //   return products.filter(product => {
+  //     if (count < 4) {
+  //       if (
+  //         product.tags &&
+  //         Array.isArray(product.tags) &&
+  //         product.tags.includes(tag)
+  //       ) {
+  //         count++
+  //         return true
+  //       }
+  //     }
+  //     return false
+  //   })
+  // }
+
+  // Query for all products in Shopify
+  const result = await graphql(`
+    query {
+      allShopifyProduct(limit: 100) {
+        nodes {
+          title
+          handle
+          tags
+          variants {
+            shopifyId
+          }
+          priceRangeV2 {
+            maxVariantPrice {
+              amount
+            }
+          }
+          description
+          images {
+            src
+          }
+        }
+      }
+    }
+  `)
+
+  // const upsellItemLeft1 = filterObjectsByTag(result.data, LEFT_TAG_1)
+  // const upsellItemLeft2 = filterObjectsByTag(result.data, LEFT_TAG_2)
+  // const upsellItemRight1 = filterObjectsByTag(result.data, RIGHT_TAG_1)
+  // const upsellItemRight2 = filterObjectsByTag(result.data, RIGHT_TAG_2)
+
+  // Iterate over all products and create a new page using a template
+  // The product "handle" is generated automatically by Shopify
+  result.data.allShopifyProduct.edges.forEach(({ node }) => {
+    createPage({
+      path: `/products/${node.handle}`,
+      component: path.resolve(`./src/templates/product.js`),
+      context: {
+        product: node,
+        // upsells: [
+        //   upsellItemLeft1[0],
+        //   upsellItemLeft2[0],
+        //   upsellItemRight1[0],
+        //   upsellItemRight2[0],
+        // ],
+      },
+    })
+  })
+}

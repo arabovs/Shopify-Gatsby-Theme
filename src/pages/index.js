@@ -16,8 +16,10 @@ import IndexBanner from "../components/IndexBanner"
 
 const LEFT_TAG_1 = "UpsellL1"
 const LEFT_TAG_2 = "UpsellL2"
+const LEFT_TAG_3 = "UpsellL3"
 const RIGHT_TAG_1 = "UpsellR1"
 const RIGHT_TAG_2 = "UpsellR2"
+const RIGHT_TAG_3 = "UpsellR3"
 
 const IndexPage = ({ data }) => {
   const [fontSize, setFontSize] = useState("1.2rem")
@@ -41,17 +43,18 @@ const IndexPage = ({ data }) => {
     })
   }
 
-  const getRandomObjects = arr =>
-    arr.sort(() => 0.5 - Math.random()).slice(0, 2)
-
   const filteredCollection1 = filterObjectsByTag(nodes, "Nightwear")
   const filteredCollection2 = filterObjectsByTag(nodes, "Set")
   const filteredCollection3 = filterObjectsByTag(nodes, "Outwear")
 
   const upsellItemLeft1 = filterObjectsByTag(nodes, LEFT_TAG_1)
   const upsellItemLeft2 = filterObjectsByTag(nodes, LEFT_TAG_2)
+  const upsellItemLeft3 = filterObjectsByTag(nodes, LEFT_TAG_3)
+
   const upsellItemRight1 = filterObjectsByTag(nodes, RIGHT_TAG_1)
   const upsellItemRight2 = filterObjectsByTag(nodes, RIGHT_TAG_2)
+  const upsellItemRight3 = filterObjectsByTag(nodes, RIGHT_TAG_3)
+
   const theme = useTheme()
   const isMdOrSmaller = useMediaQuery(theme.breakpoints.down("md"))
 
@@ -73,8 +76,7 @@ const IndexPage = ({ data }) => {
             </Typography>
             <IndexUpsellItem upsellItems={upsellItemLeft1} />
             <IndexUpsellItem upsellItems={upsellItemLeft2} />
-            {/* <IndexUpsellItem upsellItems={upsellItemLeft1} />
-            <IndexUpsellItem upsellItems={upsellItemLeft1} /> */}
+            <IndexUpsellItem upsellItems={upsellItemLeft3} />
           </Box>
         )}
         <IndexBanner />
@@ -93,8 +95,7 @@ const IndexPage = ({ data }) => {
             </Typography>
             <IndexUpsellItem upsellItems={upsellItemRight1} />
             <IndexUpsellItem upsellItems={upsellItemRight2} />
-            {/* <IndexUpsellItem upsellItems={upsellItemLeft1} />
-            <IndexUpsellItem upsellItems={upsellItemLeft1} /> */}
+            <IndexUpsellItem upsellItems={upsellItemRight3} />
           </Box>
         )}
       </Box>
