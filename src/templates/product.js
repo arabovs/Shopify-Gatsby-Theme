@@ -18,6 +18,8 @@ import useStore from "../context/StoreContext"
 import useInput from "../utils/useInput"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import IndexUpsellItem from "../components/IndexUpsellItem"
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
 const useStyles = makeStyles(theme => ({
   backButton: {
@@ -27,13 +29,23 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600,
     marginLeft: theme.spacing(2),
   },
-
-  image: {
-    width: "90%",
-    height: "auto",
-    borderRadius: "6px",
+  container: {
+    display: "flex",
+    justifyContentt: "center" /* Horizontal centering */,
+    alignItems: "center" /* Vertical centering */,
+    height: "100vh" /* Adjust the height as needed */,
   },
-
+  imageContainer: {
+    marginTop: 10,
+    position: "relative",
+    textAlign: "center",
+    overflow: "hidden", // Ensure that the slider buttons stay within the container
+  },
+  image: {
+    maxWidth: "100%",
+    height: "auto",
+    transition: "transform 0.5s ease-in-out",
+  },
   inputForm: {
     display: "grid",
     gridTemplateColumns: "repeat(2, auto)",
@@ -49,6 +61,19 @@ const useStyles = makeStyles(theme => ({
       outline: "none",
       outlineColor: theme.palette.primary.main,
     },
+  },
+  sliderButtons: {
+    position: "absolute",
+    bottom: "50%",
+    left: "10%",
+    right: "10%",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  arrowIcon: {
+    fontSize: 30,
+    color: theme.palette.primary.main,
+    cursor: "pointer",
   },
 }))
 
@@ -112,16 +137,15 @@ const ProductTemplate = ({ pageContext }) => {
   }
 
   return (
-    <Container>
+    <Box padding={1}>
       <Box sx={{ display: "flex" }}>
         {!isMdOrSmaller && (
           <Box
             sx={{
               flex: "0 0 300px",
-              marginRight: 2,
               display: "flex",
               flexDirection: "column",
-              marginTop: 2,
+              marginTop: 10,
             }}
           >
             <Typography
@@ -143,36 +167,27 @@ const ProductTemplate = ({ pageContext }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "16px",
           }}
         >
-          <Grid item xs={12} sm={6}>
-            <Box>
+          <Grid item xs={12} sm={6} display="flex" alignItems="flex-start">
+            <div className={classes.imageContainer}>
               <img
                 src={product.images[currentImageIndex]?.src}
                 alt={product.title}
                 className={classes.image}
+                style={{ width: "65%", height: "65%" }}
               />
-              <Box sx={{ justifyContent: "space-between" }}>
-                <Button
-                  onClick={prevImage}
-                  variant="contained"
-                  color="primary"
-                  sx={{ backgroundColor: "#8B7D9B" }}
-                >
-                  Previous
-                </Button>
-                <Button
-                  onClick={nextImage}
-                  variant="contained"
-                  color="primary"
-                  sx={{ backgroundColor: "#8B7D9B", marginRight: 7 }}
-                >
-                  Next
-                </Button>
-              </Box>
-            </Box>
+              <div className={classes.sliderButtons}>
+                <div onClick={prevImage}>
+                  <ArrowBackIcon className={classes.arrowIcon} />
+                </div>
+                <div onClick={nextImage}>
+                  <ArrowForwardIcon className={classes.arrowIcon} />
+                </div>
+              </div>
+            </div>
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <Box
               sx={{
@@ -261,7 +276,7 @@ const ProductTemplate = ({ pageContext }) => {
           </Grid>
         </Grid>
       </Box>
-    </Container>
+    </Box>
   )
 }
 
