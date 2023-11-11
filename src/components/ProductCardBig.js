@@ -75,11 +75,20 @@ const ProductCardBig = ({ product }) => {
         <Typography
           sx={{
             fontFamily: "Playfair Display, serif",
-            fontSize: "24px",
+            fontSize: "20px",
             whiteSpace: "normal",
           }}
         >
-          ${product.priceRangeV2.maxVariantPrice.amount}0
+          BGN{product.priceRangeV2.maxVariantPrice.amount}0
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            fontSize: "20px",
+            whiteSpace: "normal",
+          }}
+        >
+          €{(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(2)}
         </Typography>
         <IconButton
           edge="end"

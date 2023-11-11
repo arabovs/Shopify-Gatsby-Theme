@@ -45,7 +45,10 @@ const Cart = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+        >
           Name
         </Typography>
       </Grid>
@@ -59,7 +62,10 @@ const Cart = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+        >
           Quantity
         </Typography>
       </Grid>
@@ -73,7 +79,10 @@ const Cart = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6" sx={{ fontFamily: "Playfair Display, serif" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+        >
           Remove
         </Typography>
       </Grid>

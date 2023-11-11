@@ -38,7 +38,7 @@ const Products = ({ data, props }) => {
     setShowApparelFilter(!showApparelFilter)
   }
 
-  const isSmallScreen = useMediaQuery("(max-width:1200px)") // Adjust the breakpoint as needed
+  const isSmallScreen = useMediaQuery("(max-width:1200px)")
 
   useEffect(() => {
     if (typeof window !== "undefined") {
