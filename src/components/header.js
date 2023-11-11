@@ -8,16 +8,11 @@ import { Typography } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import Box from "@mui/material/Box"
-// import { StaticImage } from "gatsby-plugin-image"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 const Header = ({ siteTitle }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("lg"))
-
-  const handleLinkClick = url => {
-    window.location.href = url // This will force a full page reload
-  }
 
   const headerTags = {
     "New Arrivals": "/products?filter=New",
@@ -51,15 +46,9 @@ const Header = ({ siteTitle }) => {
         >
           <Box sx={{ width: "100px" }}>
             <img
-              width="88"
+              width="88px"
               src="https://cardsbg.s3.eu-north-1.amazonaws.com/20231106_125409_0000.png"
             />
-            {/* <StaticImage
-              src="../images/logo.png"
-              alt="The Art in Lounge"
-              loading="lazy"
-              style={{ backgroundColor: "#ccc" }}
-            ></StaticImage> */}
           </Box>
           <Link
             to="/"

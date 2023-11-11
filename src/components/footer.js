@@ -1,11 +1,12 @@
 import React from "react"
 import Grid from "@mui/material/Grid"
 import Toolbar from "@mui/material/Toolbar"
-import Box from "@mui/material/Menu"
+import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import Facebook from "@mui/icons-material/Facebook"
 import IconButton from "@mui/material/IconButton"
+import { Link } from "gatsby"
 
 const Footer = () => {
   const instagramUrl = "https://www.instagram.com/the.art.in.lounge/"
@@ -47,12 +48,11 @@ const Footer = () => {
           item
           xs={12} // On extra small screens, take up the full width (stacked)
           lg={3} // On large screens, take up 3/12 of the available width
-          key="contacts"
+          key="contacts-grid"
           sx={{ marginTop: 1 }}
         >
-          <Box sx={{ display: "flex", flexDirection: "column" }}></Box>
           <Typography
-            id="contacts"
+            id="contacts-title"
             variant="h3"
             sx={{
               fontSize: "22px",
@@ -82,13 +82,51 @@ const Footer = () => {
             artinlounge@yahoo.com
           </Typography>
         </Grid>
-        <Grid item xs={12} lg={3} key="contacts" sx={{ marginTop: 1 }}>
+        <Grid
+          item
+          xs={12}
+          lg={3}
+          key="contacts"
+          sx={{ marginTop: 1, display: "flex", flexDirection: "column" }}
+        >
+          <Link
+            to="/terms"
+            style={{
+              textDecoration: "none",
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontFamily: "Playfair Display, serif",
+                color: "white",
+                width: "100%",
+                textAlign: "center", // Center the text
+              }}
+            >
+              Terms & Agreements
+            </Typography>
+          </Link>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              width="100px"
+              src="https://cardsbg.s3.eu-north-1.amazonaws.com/20231106_125409_0000.png"
+              alt="Your Image Alt Text"
+            />
+          </Box>
+
           <Typography
             sx={{
               fontSize: "22px",
               fontFamily: "Playfair Display, serif",
-              marginTop: 4,
-              marginBottom: 3,
+              marginBottom: 1,
               textAlign: "center",
               color: "white",
             }}
@@ -103,12 +141,6 @@ const Footer = () => {
           key="followus"
           sx={{ marginTop: 1 }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          ></Box>
           <Typography
             id="followus"
             variant="h3"
@@ -139,36 +171,6 @@ const Footer = () => {
             Instagram <InstagramIcon sx={{ marginLeft: 1 }} />
           </IconButton>
         </Grid>
-        {/* {footerLinks.map((link, index) => (
-          <Grid
-            item
-            xs={12} // On extra small screens, take up the full width (stacked)
-            lg={3} // On large screens, take up 3/12 of the available width
-            key={index}
-          >
-            <Link
-              id={link.to}
-              to={link.to}
-              style={{
-                textDecoration: "none",
-                fontFamily: "Playfair Display, serif",
-              }}
-            >
-              <Typography
-                id={link.label}
-                sx={{
-                  fontSize: "22px",
-                  fontFamily: "Playfair Display, serif",
-                  color: "white",
-                  width: "100%",
-                  textAlign: "center", // Center the text
-                }}
-              >
-                {link.label}
-              </Typography>
-            </Link>
-          </Grid>
-        ))} */}
       </Grid>
     </Toolbar>
   )

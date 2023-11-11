@@ -76,7 +76,6 @@ const SuccessDialog = ({ open, onClose }) => {
     <Dialog
       open={open}
       onClose={onClose}
-      fullWidth
       maxWidth="xs"
       sx={{
         "& .MuiDialogTitle-root": {

@@ -60,7 +60,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Box>
-      <Box display="flex">
+      <Box display="flex" sx={{ marginTop: 1 }}>
         {isMdOrSmaller ? null : (
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography
@@ -91,7 +91,7 @@ const IndexPage = ({ data }) => {
                 textAlign: "center",
               }}
             >
-              Tailor's Pick:
+              Buy Now:
             </Typography>
             <IndexUpsellItem upsellItems={upsellItemRight1} />
             <IndexUpsellItem upsellItems={upsellItemRight2} />
@@ -170,7 +170,7 @@ const IndexPage = ({ data }) => {
         </div>
 
         <div>
-          <Box py={4} tefilteredCollection1xtAlign="center">
+          <Box py={4} textAlign="center">
             <Box
               sx={{
                 display: "flex",
