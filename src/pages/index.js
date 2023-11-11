@@ -1,46 +1,26 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
-import Paper from "@mui/material/Paper"
-import CardActionArea from "@mui/material/CardActionArea"
-import CardMedia from "@mui/material/CardMedia"
+
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
-import { graphql, navigate, Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-import React, { useState, useEffect } from "react"
+import { graphql, Link } from "gatsby"
+import React, { useState } from "react"
 import ProductCardBig from "../components/ProductCardBig"
 import Seo from "../components/seo"
-import IconButton from "@mui/material/IconButton"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import useStore from "../context/StoreContext"
+
+import IndexUpsellItem from "../components/IndexUpsellItem"
+import { useTheme } from "@mui/system"
+import useMediaQuery from "@mui/material/useMediaQuery"
+import IndexBanner from "../components/IndexBanner"
+
+const LEFT_TAG_1 = "UpsellL1"
+const LEFT_TAG_2 = "UpsellL2"
+const RIGHT_TAG_1 = "UpsellR1"
+const RIGHT_TAG_2 = "UpsellR2"
 
 const IndexPage = ({ data }) => {
   const [fontSize, setFontSize] = useState("1.2rem")
-
-  const { addVariantToCart } = useStore()
-
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth <= 600) {
-        setFontSize("1.8rem")
-      } else if (window.innerWidth <= 800) {
-        setFontSize("2.2rem")
-      } else if (window.innerWidth <= 1200) {
-        setFontSize("2.2rem")
-      } else {
-        setFontSize("2.6rem")
-      }
-    }
-
-    handleResize()
-
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
 
   const { nodes } = data.allShopifyProduct
 
@@ -67,111 +47,56 @@ const IndexPage = ({ data }) => {
   const filteredCollection1 = filterObjectsByTag(nodes, "Nightwear")
   const filteredCollection2 = filterObjectsByTag(nodes, "Set")
   const filteredCollection3 = filterObjectsByTag(nodes, "Outwear")
-  const sideItems = getRandomObjects(nodes)
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+  const upsellItemLeft1 = filterObjectsByTag(nodes, LEFT_TAG_1)
+  const upsellItemLeft2 = filterObjectsByTag(nodes, LEFT_TAG_2)
+  const upsellItemRight1 = filterObjectsByTag(nodes, RIGHT_TAG_1)
+  const upsellItemRight2 = filterObjectsByTag(nodes, RIGHT_TAG_2)
+  const theme = useTheme()
+  const isMdOrSmaller = useMediaQuery(theme.breakpoints.down("md"))
 
   return (
     <Box>
-      <Box>
-        <Box textAlign="center">
-          <Box
-            py={4}
-            padding={4}
-            textAlign="center"
-            sx={{ position: "relative" }}
-          >
+      <Box display="flex">
+        {isMdOrSmaller ? null : (
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography
-              color="white"
-              gutterBottom
-              style={{
-                marginTop: 4,
-                fontFamily: "Great Vibes",
-                position: "absolute",
-                top: "20",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "80%",
-                zIndex: 1,
-                color: "#4f4759",
-                fontStyle: "bold",
-                fontSize: fontSize,
-              }}
-            >
-              Welcome to The Art in Lounge
-              <br />
-              Showcasing Women in Art
-            </Typography>
-
-            <Box
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "relative",
-              }}
-            >
-              <StaticImage
-                src="../images/banner.jpg"
-                alt="Banner"
-                layout="constrained"
-                sx={{
-                  width: "100%",
-                }}
-              />
-            </Box>
-            <Paper
-              elevation={4}
               sx={{
-                marginTop: 4,
-                backgroundColor: "#8B7D9B",
+                fontFamily: "Great Vibes",
+                fontSize: "40px",
+                whiteSpace: "black",
+                marginTop: 1,
+                textAlign: "center",
               }}
             >
-              <Link
-                to="/products"
-                style={{
-                  textDecoration: "none",
-                  fontFamily: "Great Vibes",
-                }}
-                sx={{}}
-              >
-                <Typography
-                  sx={{
-                    fontFamily: "Great Vibes",
-                    color: "white",
-                    lineHeight: "1.8",
-                  }}
-                  variant="h3"
-                  textAlign="center"
-                >
-                  Shop Now
-                </Typography>
-              </Link>
-            </Paper>
-          </Box>
-
-          {!isSmallScreen && (
-            <Typography
-              style={{
-                fontFamily: "Playfair Display, serif",
-                fontSize: 22,
-              }}
-              variant="body1"
-              paragraph
-              sx={{ marginTop: 2, padding: 2 }}
-            >
-              Dear you, Welcome to Art in Lounge! Your fashion soulmate, and
-              place of artistry and freedom. At our establishment we will greet
-              you with classical elegance to bold colours. Each piece of
-              clothing is meticulously designed to reflect your unique style and
-              preferences, escaping from the fast fashion trends, and ensuring
-              you step into your evenings with an aura of sensuality. Expression
-              of character through clothing is a powerful tool. And we will help
-              you use it! Welcome to your exquisite night lounge clothing
-              partner, nestled in the heart of Bulgaria, where we craft the
-              epitome of artistry and comfort.
+              Tailor's Pick:
             </Typography>
-          )}
-        </Box>
+            <IndexUpsellItem upsellItems={upsellItemLeft1} />
+            <IndexUpsellItem upsellItems={upsellItemLeft2} />
+            {/* <IndexUpsellItem upsellItems={upsellItemLeft1} />
+            <IndexUpsellItem upsellItems={upsellItemLeft1} /> */}
+          </Box>
+        )}
+        <IndexBanner />
+        {isMdOrSmaller ? null : (
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography
+              sx={{
+                fontFamily: "Great Vibes",
+                fontSize: "40px",
+                whiteSpace: "black",
+                marginTop: 1,
+                textAlign: "center",
+              }}
+            >
+              Tailor's Pick:
+            </Typography>
+            <IndexUpsellItem upsellItems={upsellItemRight1} />
+            <IndexUpsellItem upsellItems={upsellItemRight2} />
+            {/* <IndexUpsellItem upsellItems={upsellItemLeft1} />
+            <IndexUpsellItem upsellItems={upsellItemLeft1} /> */}
+          </Box>
+        )}
       </Box>
 
       <Container>
