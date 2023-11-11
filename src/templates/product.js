@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const VariantCard = ({ variant }) => {
+const VariantCard = ({ variant, product }) => {
   return (
     <Card>
       <CardContent>
@@ -67,7 +67,9 @@ const VariantCard = ({ variant }) => {
           <strong>Quantity:</strong> {variant.inventoryQuantity}
         </Typography>
         <Typography sx={{ fontFamily: "Playfair Display, serif" }}>
-          <strong>Price:</strong> ${variant.price}
+          <strong>Price:</strong> BGN{variant.price}
+          {"/"} €
+          {(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(2)}
         </Typography>
       </CardContent>
     </Card>
@@ -113,7 +115,24 @@ const ProductTemplate = ({ pageContext }) => {
     <Container>
       <Box sx={{ display: "flex" }}>
         {!isMdOrSmaller && (
-          <Box sx={{ flex: "0 0 300px", marginRight: 2 }}>
+          <Box
+            sx={{
+              flex: "0 0 300px",
+              marginRight: 2,
+              display: "flex",
+              flexDirection: "column",
+              marginTop: 2,
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Great Vibes",
+                fontSize: "30px",
+                textAlign: "center",
+              }}
+            >
+              Buy Now:
+            </Typography>
             <IndexUpsellItem upsellItems={upsells} />
           </Box>
         )}
@@ -177,8 +196,12 @@ const ProductTemplate = ({ pageContext }) => {
                   fontFamily: "Playfair Display, serif",
                 }}
               >
-                <span style={{ fontWeight: "bold" }}>Price:</span>{" "}
-                {`${product.priceRangeV2.maxVariantPrice.amount}0$`}{" "}
+                <span style={{ fontWeight: "bold" }}>Price:</span> BGN{" "}
+                {`${product.priceRangeV2.maxVariantPrice.amount}0`}
+                {"/"} €
+                {(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(
+                  2
+                )}
               </Typography>
               <Typography
                 sx={{
@@ -188,6 +211,14 @@ const ProductTemplate = ({ pageContext }) => {
               >
                 <span style={{ fontWeight: "bold" }}>Product Description:</span>{" "}
                 {product.description}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "Great Vibes",
+                  fontSize: "44px",
+                }}
+              >
+                Select your variant:
               </Typography>
               <form className={classes.inputForm}>
                 <FormControl>
@@ -214,14 +245,7 @@ const ProductTemplate = ({ pageContext }) => {
                     ))}
                   </Select>
                 </FormControl>
-                <VariantCard variant={selectedVariant} />
-                <TextField
-                  id="qty"
-                  variant="outlined"
-                  type="number"
-                  {...bind}
-                  inputProps={{ className: classes.input }}
-                />
+                <VariantCard variant={selectedVariant} product={product} />
               </form>
               <Button
                 variant="contained"
