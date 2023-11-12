@@ -213,7 +213,6 @@ export const StoreProvider = ({ children }) => {
       setCheckout(res)
 
       let updatedCart = []
-      console.log(cart)
       if (cart === null) setCart([])
       if (cart.length > 0) {
         const itemIsInCart = cart.find(
@@ -260,8 +259,6 @@ export const StoreProvider = ({ children }) => {
 
   const removeLineItem = async (variantId, index) => {
     setLoading(true)
-    console.log(variantId, index)
-    console.log(cart)
     try {
       if (checkout.lineItems === null) checkout.lineItems = []
       if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
@@ -284,7 +281,9 @@ export const StoreProvider = ({ children }) => {
       setCheckout(res)
 
       const updatedCart = cart.filter(
-        item => item.product.variants[index]?.shopifyId !== variantId
+        item =>
+          item.product.variants[item.index]?.shopifyId !== variantId &&
+          item.index !== index
       )
       setCart(updatedCart)
       localStorage.setItem(localStorageKeyCart, JSON.stringify(updatedCart))
