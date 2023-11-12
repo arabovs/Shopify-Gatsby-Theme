@@ -70,7 +70,11 @@ const useStyles = makeStyles(theme => ({
 
 const VariantCard = ({ variant, product }) => {
   return (
-    <Card>
+    <Card
+      sx={{
+        boxShadow: "none",
+      }}
+    >
       <CardContent>
         <Typography
           variant="h6"
@@ -236,50 +240,45 @@ const ProductTemplate = ({ pageContext }) => {
                   Add to Cart
                 </Button>
               )}
-              <Typography
-                sx={{
-                  fontFamily: "Great Vibes",
-                  fontSize: "44px",
-                }}
-              >
-                Select your variant:
-              </Typography>
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, auto)",
-                  width: "fit-content",
-                  gap: 4,
-                  alignItems: "center",
-                }}
-              >
-                <FormControl>
-                  <InputLabel id="variant-select-input"></InputLabel>
-                  <Select
-                    labelId="variant-select-label"
-                    id="variant-select"
-                    value={product.variants.indexOf(selectedVariant)}
-                    onChange={handleVariantChange}
+              <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                <Box>
+                  <Typography
                     sx={{
-                      width: "100%",
-                      fontFamily: "Playfair Display, serif",
+                      fontFamily: "Great Vibes",
+                      fontSize: "44px",
                     }}
                   >
-                    {product.variants.map((variant, index) => (
-                      <MenuItem
-                        sx={{
-                          fontFamily: "Playfair Display, serif",
-                        }}
-                        key={index}
-                        value={index}
-                      >
-                        {variant.title}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                    Select your variant:
+                  </Typography>
+                  <FormControl sx={{ width: "100%" }}>
+                    <InputLabel id="variant-select-input"></InputLabel>
+                    <Select
+                      labelId="variant-select-label"
+                      id="variant-select"
+                      value={product.variants.indexOf(selectedVariant)}
+                      onChange={handleVariantChange}
+                      sx={{
+                        width: "100%",
+                        fontFamily: "Playfair Display, serif",
+                      }}
+                    >
+                      {product.variants.map((variant, index) => (
+                        <MenuItem
+                          sx={{
+                            fontFamily: "Playfair Display, serif",
+                          }}
+                          key={index}
+                          value={index}
+                        >
+                          {variant.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
                 <VariantCard variant={selectedVariant} product={product} />
               </Box>
+
               {!isMdOrSmaller && (
                 <Button
                   variant="contained"

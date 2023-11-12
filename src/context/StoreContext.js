@@ -186,6 +186,12 @@ export const StoreProvider = ({ children }) => {
     initializeCheckout()
   }, [])
 
+  const clearCart = async () => {
+    setLoading(true)
+
+    setLoading(false)
+  }
+
   const addVariantToCart = async (product, quantity, shopifyId, index) => {
     setLoading(true)
 
@@ -213,8 +219,7 @@ export const StoreProvider = ({ children }) => {
       setCheckout(res)
 
       let updatedCart = []
-      if (cart === null) setCart([])
-      if (cart.length > 0) {
+      if (cart && cart.length > 0) {
         const itemIsInCart = cart.find(
           item => item.product.variants[index]?.shopifyId === variantId
         )
@@ -260,8 +265,8 @@ export const StoreProvider = ({ children }) => {
   const removeLineItem = async (variantId, index) => {
     setLoading(true)
     try {
-      if (checkout.lineItems === null) checkout.lineItems = []
-      if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
+      if (checkout && checkout.lineItems && checkout.lineItems?.length < 1)
+        throw new Error("Cart is empty")
 
       let lineItemID = ""
       Object.entries(checkout.lineItems).map(([key, value]) => {

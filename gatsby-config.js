@@ -27,7 +27,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#014C40`,
         display: `minimal-ui`,
-        icon: `src/images/coffee-cup.svg`, // This path is relative to the root of the site.
+        icon: `src/images/lounge.svg`, // This path is relative to the root of the site.
       },
     },
     {
