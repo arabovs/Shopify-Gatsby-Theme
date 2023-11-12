@@ -186,10 +186,8 @@ export const StoreProvider = ({ children }) => {
     initializeCheckout()
   }, [])
 
-  const addVariantToCart = async (product, quantity, shopifyId) => {
+  const addVariantToCart = async (product, quantity, shopifyId, index) => {
     setLoading(true)
-
-    console.log(product, quantity, shopifyId)
 
     if (checkout.id === "") {
       console.error("No checkout ID assigned.")
@@ -219,23 +217,28 @@ export const StoreProvider = ({ children }) => {
       if (cart === null) setCart([])
       if (cart.length > 0) {
         const itemIsInCart = cart.find(
-          item => item.product.variants[0]?.shopifyId === variantId
+          item => item.product.variants[index]?.shopifyId === variantId
         )
 
         if (itemIsInCart) {
           const newProduct = {
             product: { ...itemIsInCart.product },
             quantity: itemIsInCart.quantity + parsedQuantity,
+            index: index,
           }
           const otherItems = cart.filter(
-            item => item.product.variants[0]?.shopifyId !== variantId
+            item =>
+              item.product.variants[item.index]?.shopifyId !== variantId &&
+              item.index !== index
           )
           updatedCart = [...otherItems, newProduct]
         } else {
-          updatedCart = cart.concat([{ product, quantity: parsedQuantity }])
+          updatedCart = cart.concat([
+            { product, quantity: parsedQuantity, index: index },
+          ])
         }
       } else {
-        updatedCart = [{ product, quantity: parsedQuantity }]
+        updatedCart = [{ product, quantity: parsedQuantity, index: index }]
       }
       setCart(updatedCart)
       localStorage.setItem(localStorageKeyCart, JSON.stringify(updatedCart))
@@ -255,8 +258,10 @@ export const StoreProvider = ({ children }) => {
     }
   }
 
-  const removeLineItem = async variantId => {
+  const removeLineItem = async (variantId, index) => {
     setLoading(true)
+    console.log(variantId, index)
+    console.log(cart)
     try {
       if (checkout.lineItems === null) checkout.lineItems = []
       if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
@@ -279,7 +284,7 @@ export const StoreProvider = ({ children }) => {
       setCheckout(res)
 
       const updatedCart = cart.filter(
-        item => item.product.variants[0]?.shopifyId !== variantId
+        item => item.product.variants[index]?.shopifyId !== variantId
       )
       setCart(updatedCart)
       localStorage.setItem(localStorageKeyCart, JSON.stringify(updatedCart))

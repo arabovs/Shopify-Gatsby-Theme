@@ -105,15 +105,17 @@ const ProductTemplate = ({ pageContext }) => {
   const isMdOrSmaller = useMediaQuery("(max-width: 960px)")
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
   const [shopifyVariantId, setShopifyVariantId] = useState(product.variants[0])
+  const [index, setIndex] = useState(0)
 
-  const handleShopifyVariantIdChange = shopifyId => {
+  const handleShopifyVariantIdChange = (shopifyId, selectedIndex) => {
     setShopifyVariantId(shopifyId)
+    setIndex(selectedIndex)
   }
 
   const handleVariantChange = event => {
     const selectedIndex = event.target.value
     setSelectedVariant(product.variants[selectedIndex])
-    handleShopifyVariantIdChange(product.variants[selectedIndex]?.shopifyId)
+    handleShopifyVariantIdChange(product.variants[selectedIndex], selectedIndex)
   }
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -228,10 +230,22 @@ const ProductTemplate = ({ pageContext }) => {
               {isMdOrSmaller && (
                 <Button
                   variant="contained"
-                  className={classes.addToCartButton}
-                  onClick={() =>
-                    addVariantToCart(product, bind.value, shopifyVariantId)
-                  }
+                  onClick={() => {
+                    console.log(
+                      "Product:",
+                      product,
+                      "Value:",
+                      bind.value,
+                      "VariantId:",
+                      shopifyVariantId
+                    )
+                    addVariantToCart(
+                      product,
+                      bind.value,
+                      shopifyVariantId,
+                      index
+                    )
+                  }}
                   sx={{ backgroundColor: "#8B7D9B" }}
                 >
                   Add to Cart
@@ -275,10 +289,22 @@ const ProductTemplate = ({ pageContext }) => {
               {!isMdOrSmaller && (
                 <Button
                   variant="contained"
-                  className={classes.addToCartButton}
-                  onClick={() =>
-                    addVariantToCart(product, bind.value, shopifyVariantId)
-                  }
+                  onClick={() => {
+                    console.log(
+                      "Product:",
+                      product,
+                      "Value:",
+                      bind.value,
+                      "VariantId:",
+                      shopifyVariantId
+                    )
+                    addVariantToCart(
+                      product,
+                      bind.value,
+                      shopifyVariantId,
+                      index
+                    )
+                  }}
                   sx={{ backgroundColor: "#8B7D9B" }}
                 >
                   Add to Cart

@@ -13,10 +13,9 @@ import useStore from "../context/StoreContext"
 
 const ProductRow = ({ item }) => {
   const { removeLineItem } = useStore()
-  const { quantity, product } = item
+  const { quantity, product, index } = item
 
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"))
-
   return (
     <Box width="100%" sx={{ marginTop: 1 }}>
       {isSmallScreen ? (
@@ -70,7 +69,9 @@ const ProductRow = ({ item }) => {
                   color: "black",
                   marginTop: 1,
                 }}
-                onClick={() => removeLineItem(product.variants[0]?.shopifyId)}
+                onClick={() =>
+                  removeLineItem(product.variants[index]?.shopifyId, index)
+                }
               >
                 Remove item:
                 <DeleteIcon
@@ -171,7 +172,9 @@ const ProductRow = ({ item }) => {
           >
             <IconButton
               color="secondary"
-              onClick={() => removeLineItem(product.variants[0]?.shopifyId)}
+              onClick={() =>
+                removeLineItem(product.variants[index]?.shopifyId, index)
+              }
             >
               <DeleteIcon />
             </IconButton>
