@@ -1,32 +1,15 @@
+import {
+  Avatar,
+  Box,
+  CardActionArea,
+  CardMedia,
+  Typography,
+} from "@mui/material"
 import React from "react"
-import Box from "@mui/material/Box"
-import Grid from "@mui/material/Grid"
-import CardActionArea from "@mui/material/CardActionArea"
-import CardMedia from "@mui/material/CardMedia"
-import Avatar from "@mui/material/Avatar"
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout"
-import Typography from "@mui/material/Typography"
 import { navigate } from "gatsby"
-import IconButton from "@mui/material/IconButton"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import FavoriteIcon from "@mui/icons-material/Favorite"
-import useStore from "../context/StoreContext"
-import { keyframes } from "@emotion/react"
-
-const borderAnimation = keyframes`
-  0% {
-    border-color: #8B7D9B;
-  }
-  50% {
-    border-color: pink;  // Change to a different color at 50%
-  }
-  100% {
-    border-color: #8B7D9B;
-  }
-`
 
 const IndexUpsellItem = ({ upsellItems }) => {
-  const { addVariantToCart } = useStore()
   if (upsellItems.length > 0) {
     return (
       <Box

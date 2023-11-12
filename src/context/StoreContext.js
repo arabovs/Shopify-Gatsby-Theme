@@ -41,6 +41,7 @@ const isBrowser = typeof window !== `undefined`
 const localStorageKey = `shopify_checkout_id`
 const localStorageKeyItems = `shopify_checkout_lines`
 const localStorageKeyCart = `shopify_cart`
+const localStorageKeyTotal = `shopify_total`
 
 const SuccessDialog = ({ open, onClose }) => {
   const handleGoToCart = () => {
@@ -117,16 +118,27 @@ export const StoreProvider = ({ children }) => {
   const setCheckoutItem = checkout => {
     if (isBrowser) {
       localStorage.setItem(localStorageKey, checkout.id)
-      localStorage.setItem(localStorageKeyItems, checkout.lineItems)
-      localStorage.setItem(localStorageKeyCart, cart)
+      localStorage.setItem(
+        localStorageKeyItems,
+        JSON.stringify(checkout.lineItems)
+      )
     }
 
     setCheckout(checkout)
   }
 
-  useEffect(() => {
-    console.log("Cart: ", cart)
-  }, [cart])
+  const transformArray = arrayOfObjects => {
+    return arrayOfObjects.map(inputObject => {
+      const { quantity, variant, ...restOftheKeys } = inputObject
+      const images = variant ? [variant.image] : undefined
+      const priceRangeV2 = variant ? { maxVariantPrice: 0 } : undefined
+      const shopifyId = variant ? inputObject.id : undefined
+      return {
+        quantity,
+        product: { ...restOftheKeys, images, priceRangeV2, shopifyId },
+      }
+    })
+  }
 
   useEffect(() => {
     const initializeCheckout = async () => {
@@ -135,15 +147,16 @@ export const StoreProvider = ({ children }) => {
         : null
 
       const existingLineItems = isBrowser
-        ? localStorage.getItem(localStorageKeyItems)
+        ? JSON.parse(localStorage.getItem(localStorageKeyItems))
         : null
 
       const existingCart = isBrowser
-        ? localStorage.getItem(localStorageKeyCart)
+        ? JSON.parse(localStorage.getItem(localStorageKeyCart))
         : null
-      console.log(existingCheckoutID)
-      console.log(existingCart)
-      console.log(existingLineItems)
+
+      const existingTotal = isBrowser
+        ? localStorage.getItem(localStorageKeyTotal)
+        : null
 
       if (existingCheckoutID && existingCheckoutID !== `null`) {
         try {
@@ -152,8 +165,9 @@ export const StoreProvider = ({ children }) => {
           )
 
           if (!existingCheckout.completedAt) {
-            console.log(existingCheckoutID)
             setCheckoutItem(existingCheckout)
+            setCart(existingCart)
+            setTotal(Number(existingTotal))
             return
           }
         } catch (e) {
@@ -163,10 +177,6 @@ export const StoreProvider = ({ children }) => {
 
       if (existingLineItems && existingLineItems !== `null`) {
         checkout.lineItems = existingLineItems
-      }
-
-      if (existingCart && existingCart !== `null`) {
-        cart = existingCart
       }
 
       const newCheckout = await client.checkout.create()
@@ -179,6 +189,7 @@ export const StoreProvider = ({ children }) => {
   const addVariantToCart = async (product, quantity, shopifyId) => {
     setLoading(true)
 
+    console.log("hey")
     if (checkout.id === "") {
       console.error("No checkout ID assigned.")
       return
@@ -223,21 +234,15 @@ export const StoreProvider = ({ children }) => {
       } else {
         updatedCart = [{ product, quantity: parsedQuantity }]
       }
-      console.log("updated cart", updatedCart)
-
       setCart(updatedCart)
-      localStorage.setItem(localStorageKeyCart, updatedCart)
-      setTotal(
-        updatedCart.reduce(
-          (total, obj) =>
-            total + parseFloat(obj.product.priceRangeV2.maxVariantPrice.amount),
-          0
-        )
+      localStorage.setItem(localStorageKeyCart, JSON.stringify(updatedCart))
+      const totalValue = updatedCart.reduce(
+        (total, obj) =>
+          total + parseFloat(obj.product.priceRangeV2.maxVariantPrice.amount),
+        0
       )
-
-      // Cookies.set("cart", JSON.stringify(updatedCart), {
-      //   expires: 30 / (24 * 60),
-      // })
+      setTotal(totalValue)
+      // localStorage.setItem(localStorageKeyTotal, totalValue)
 
       setLoading(false)
       handleAddToCart()
@@ -253,9 +258,9 @@ export const StoreProvider = ({ children }) => {
       if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
 
       let lineItemID = ""
-      checkout.lineItems?.forEach(item => {
-        if (item.variableValues.lineItems[0]?.variantId === variantId) {
-          lineItemID = item.id
+      Object.entries(checkout.lineItems).map(([key, value]) => {
+        if (variantId === value.variant?.id) {
+          lineItemID = value.id
         }
       })
 
@@ -273,14 +278,14 @@ export const StoreProvider = ({ children }) => {
         item => item.product.variants[0]?.shopifyId !== variantId
       )
       setCart(updatedCart)
-      localStorage.setItem(localStorageKeyCart, updatedCart)
-      setTotal(
-        updatedCart.reduce(
-          (total, obj) =>
-            total + parseFloat(obj.product.priceRangeV2.maxVariantPrice.amount),
-          0
-        )
+      localStorage.setItem(localStorageKeyCart, JSON.stringify(updatedCart))
+      const totalValue = updatedCart.reduce(
+        (total, obj) =>
+          total + parseFloat(obj.product.priceRangeV2.maxVariantPrice.amount),
+        0
       )
+      setTotal(totalValue)
+      localStorage.setItem(localStorageKeyTotal, totalValue)
 
       setLoading(false)
     } catch (error) {
