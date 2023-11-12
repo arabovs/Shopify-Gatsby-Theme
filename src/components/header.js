@@ -129,6 +129,7 @@ const Header = ({ siteTitle }) => {
             variant="scrollable"
             value={false}
             sx={{ backgroundColor: "#8B7D9B" }}
+            onClick={toggleDrawer}
           >
             {[
               "Home",
