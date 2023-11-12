@@ -55,6 +55,7 @@ let checkout = {
 
 const defaultValues = {
   cart: [],
+  total: 0.0,
   loading: false,
   addVariantToCart: () => {},
   removeLineItem: () => {},
@@ -79,7 +80,6 @@ const SuccessDialog = ({ open, onClose }) => {
       maxWidth="xs"
       sx={{
         "& .MuiDialogTitle-root": {
-          // Style the title
           backgroundColor: "blue",
           color: "white",
         },
@@ -133,12 +133,16 @@ export const StoreProvider = ({ children }) => {
   const [checkout, setCheckout] = useState(defaultValues.checkout)
   const [loading, setLoading] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [total, setTotal] = useState(defaultValues.total)
   const handleDialogClose = () => {
     setIsDialogOpen(false)
   }
 
+  const handleUpdateTotal = total => {
+    setTotal(total)
+  }
+
   const handleAddToCart = () => {
-    // Add item to the cart logic here
     setIsDialogOpen(true)
   }
 
@@ -152,6 +156,10 @@ export const StoreProvider = ({ children }) => {
     //   expires: 30 / (24 * 60),
     // })
   }
+
+  useEffect(() => {
+    console.log("Cart: ", cart)
+  }, [cart])
 
   useEffect(() => {
     const initializeCheckout = async () => {
@@ -228,7 +236,17 @@ export const StoreProvider = ({ children }) => {
       } else {
         updatedCart = [{ product, quantity: parsedQuantity }]
       }
+      console.log("updated cart", updatedCart)
+
       setCart(updatedCart)
+      setTotal(
+        updatedCart.reduce(
+          (total, obj) =>
+            total + parseFloat(obj.product.priceRangeV2.maxVariantPrice.amount),
+          0
+        )
+      )
+
       // Cookies.set("cart", JSON.stringify(updatedCart), {
       //   expires: 30 / (24 * 60),
       // })
@@ -268,6 +286,14 @@ export const StoreProvider = ({ children }) => {
         item => item.product.variants[0]?.shopifyId !== variantId
       )
       setCart(updatedCart)
+      setTotal(
+        updatedCart.reduce(
+          (total, obj) =>
+            total + parseFloat(obj.product.priceRangeV2.maxVariantPrice.amount),
+          0
+        )
+      )
+
       // Cookies.set("cart", JSON.stringify(updatedCart), {
       //   expires: 30 / (24 * 60),
       // })
@@ -285,6 +311,7 @@ export const StoreProvider = ({ children }) => {
         ...defaultValues,
         addVariantToCart,
         removeLineItem,
+        total,
         cart,
         checkout,
         loading,

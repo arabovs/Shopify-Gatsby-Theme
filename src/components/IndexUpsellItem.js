@@ -26,7 +26,6 @@ const borderAnimation = keyframes`
 `
 
 const IndexUpsellItem = ({ upsellItems }) => {
-  console.log(upsellItems)
   const { addVariantToCart } = useStore()
   if (upsellItems.length > 0) {
     return (
@@ -118,17 +117,11 @@ const IndexUpsellItem = ({ upsellItems }) => {
                     textAlign: "left",
                   }}
                 >
-                  BGN {product.priceRangeV2.maxVariantPrice.amount}0
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: "Playfair Display, serif",
-                    fontSize: "18px",
-                    whiteSpace: "normal",
-                    textAlign: "left",
-                  }}
-                >
-                  €{" "}
+                  BGN{" "}
+                  {Number(product.priceRangeV2.maxVariantPrice.amount).toFixed(
+                    2
+                  )}
+                  /€{" "}
                   {(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(
                     2
                   )}

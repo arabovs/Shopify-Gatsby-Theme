@@ -109,8 +109,11 @@ const ProductRow = ({ item }) => {
             sx={{ textAlign: { xs: "center", sm: "left" } }}
           >
             <Typography
-              variant="h6"
-              sx={{ fontFamily: "Playfair Display, serif" }}
+              sx={{
+                fontSize: "18px",
+                fontFamily: "Playfair Display, serif",
+                textAlign: "center",
+              }}
             >
               {product.title}
             </Typography>
@@ -123,9 +126,29 @@ const ProductRow = ({ item }) => {
           >
             <Typography
               variant="h6"
-              sx={{ fontFamily: "Playfair Display, serif" }}
+              sx={{
+                fontFamily: "Playfair Display, serif",
+                textAlign: "center",
+              }}
             >
               {quantity}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={2}
+            sm={2}
+            sx={{ textAlign: { xs: "center", sm: "left" } }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontFamily: "Playfair Display, serif",
+                textAlign: "center",
+              }}
+            >
+              BNG {product.priceRangeV2.maxVariantPrice.amount}/€{" "}
+              {(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(2)}
             </Typography>
           </Grid>
           <Grid

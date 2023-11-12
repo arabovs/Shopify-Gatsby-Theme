@@ -8,36 +8,31 @@ import ProductRow from "../components/ProductRow"
 import useStore from "../context/StoreContext"
 
 const Cart = () => {
-  const { cart, checkout } = useStore()
+  const { cart, checkout, total } = useStore()
 
   const renderProductHeader = () => (
     <Grid
       container
       sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: "repeat(5, 1fr)",
         marginTop: 2,
         backgroundColor: "#8B7D9B",
       }}
     >
       <Grid
         item
-        xs={4}
+        xs={3}
         sx={{
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
           alignItems: "center",
         }}
-      >
-        <Typography
-          variant="h6"
-          sx={{ fontFamily: "Playfair Display, serif" }}
-        ></Typography>
-      </Grid>
+      ></Grid>
       <Grid
         item
-        xs={4}
+        xs={3}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -47,14 +42,18 @@ const Cart = () => {
       >
         <Typography
           variant="h6"
-          sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            color: "white",
+            textAlign: "center",
+          }}
         >
           Name
         </Typography>
       </Grid>
       <Grid
         item
-        xs={4}
+        xs={3}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -64,14 +63,19 @@ const Cart = () => {
       >
         <Typography
           variant="h6"
-          sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            color: "white",
+            textAlign: "center",
+            marginLeft: 10,
+          }}
         >
           Quantity
         </Typography>
       </Grid>
       <Grid
         item
-        xs={4}
+        xs={3}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -81,7 +85,32 @@ const Cart = () => {
       >
         <Typography
           variant="h6"
-          sx={{ fontFamily: "Playfair Display, serif", color: "white" }}
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          Price
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={1}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: "Playfair Display, serif",
+            color: "white",
+            textAlign: "right",
+          }}
         >
           Remove
         </Typography>
@@ -150,18 +179,10 @@ const Cart = () => {
               marginBottom: 2,
             }}
           >
-            {/* <Button
-              onClick={handleCheckout}
-              disabled={cart.length === 0}
-              sx={{
-                backgroundColor: "darkgrey",
-                color: "white",
-                fontSize: "22px",
-                fontFamily: "Playfair Display, serif",
-              }}
-            >
-              Clear Basket
-            </Button> */}
+            <Typography
+              sx={{ fontSize: "24px", fontFamily: "Playfair Display, serif" }}
+            >{`Total: BGN ${total.toFixed(2)}/€
+            ${(total / 1.95).toFixed(2)}`}</Typography>
             <Button
               onClick={handleCheckout}
               disabled={cart.length === 0}
@@ -175,9 +196,7 @@ const Cart = () => {
               Buy Now
             </Button>
           </Box>
-          {/* <Box
-            sx={{ backgroundColor: "#8B7D9B", padding: 1, marginTop: 1 }}
-          ></Box> */}
+
           <Typography
             sx={{
               fontSize: "22px",
@@ -194,11 +213,7 @@ const Cart = () => {
             satisfaction is our priority, and we guarantee a seamless shopping
             experience from checkout to delivery.
           </Typography>
-          {/* <Box sx={{ backgroundColor: "#8B7D9B", padding: 1 }}></Box> */}
         </Container>
-        {/* <Box
-          sx={{ backgroundColor: "#8B7D9B", padding: 1, marginTop: 1 }}
-        ></Box> */}
       </Box>
     </Container>
   )
