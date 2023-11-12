@@ -151,17 +151,12 @@ export const StoreProvider = ({ children }) => {
         : null
 
       const existingCart = isBrowser
-        ? JSON.parse(localStorage.getItem(localStorageKeyItems))
+        ? JSON.parse(localStorage.getItem(localStorageKeyCart))
         : null
 
       const existingTotal = isBrowser
         ? localStorage.getItem(localStorageKeyTotal)
         : null
-
-      // console.log(existingCheckoutID)
-      // console.log(existingCart)
-      // console.log(existingLineItems)
-      console.log("omg", transformArray(existingCart))
 
       if (existingCheckoutID && existingCheckoutID !== `null`) {
         try {
@@ -171,7 +166,7 @@ export const StoreProvider = ({ children }) => {
 
           if (!existingCheckout.completedAt) {
             setCheckoutItem(existingCheckout)
-            setCart(transformArray(existingCart))
+            setCart(existingCart)
             setTotal(Number(existingTotal))
             return
           }
@@ -194,6 +189,7 @@ export const StoreProvider = ({ children }) => {
   const addVariantToCart = async (product, quantity, shopifyId) => {
     setLoading(true)
 
+    console.log("hey")
     if (checkout.id === "") {
       console.error("No checkout ID assigned.")
       return
@@ -262,10 +258,9 @@ export const StoreProvider = ({ children }) => {
       if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
 
       let lineItemID = ""
-      checkout.lineItems?.forEach(item => {
-        if (item.variableValues.lineItems[0]?.variantId === variantId) {
-          lineItemID = item.id
-        }
+      Object.entries(checkout.lineItems).map(([key, value]) => {
+        lineItemID = value
+        if (variantId === lineItemID.variant?.id) lineItemID = lineItemID.id
       })
 
       if (!lineItemID) {
