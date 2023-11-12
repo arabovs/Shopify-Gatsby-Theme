@@ -259,9 +259,12 @@ export const StoreProvider = ({ children }) => {
 
       let lineItemID = ""
       Object.entries(checkout.lineItems).map(([key, value]) => {
-        lineItemID = value
-        if (variantId === lineItemID.variant?.id) lineItemID = lineItemID.id
+        if (variantId === value.variant?.id) {
+          lineItemID = value.id
+        }
       })
+
+      console.log(lineItemID)
 
       if (!lineItemID) {
         console.log("Product not in cart")
