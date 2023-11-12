@@ -127,22 +127,6 @@ const IndexUpsellItem = ({ upsellItems }) => {
                   )}
                 </Typography>
               </Box>
-
-              <IconButton
-                edge="end"
-                onClick={() => addVariantToCart(product, 1)}
-                sx={{
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                  transition: "background-color 0.2s, transform 0.2s",
-                  userSelect: "none",
-                  outline: "none",
-                  padding: 0,
-                  marginLeft: -12, // Adjust the marginLeft to move the icon to the left
-                }}
-              >
-                <ShoppingCartIcon />
-              </IconButton>
             </Box>
           </Box>
         ))}
