@@ -264,8 +264,6 @@ export const StoreProvider = ({ children }) => {
         }
       })
 
-      console.log(lineItemID)
-
       if (!lineItemID) {
         console.log("Product not in cart")
         return
