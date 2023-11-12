@@ -1,14 +1,18 @@
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material"
 import React from "react"
-import Container from "@mui/material/Container"
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import Grid from "@mui/material/Grid"
-import Button from "@mui/material/Button"
 import ProductRow from "../components/ProductRow"
 import useStore from "../context/StoreContext"
 
 const Cart = () => {
   const { cart, checkout, total } = useStore()
+  const isSmallScreen = useMediaQuery("(max-width:600px)")
 
   const renderProductHeader = () => (
     <Grid
@@ -158,7 +162,7 @@ const Cart = () => {
               My Cart
             </Typography>
           </Grid>
-          {renderProductHeader()}
+          {!isSmallScreen && renderProductHeader()}
           {renderCartItems()}
           <Grid item xs={12}>
             <div
@@ -175,7 +179,7 @@ const Cart = () => {
             sx={{
               display: "flex",
               justifyContent: "space-around",
-              marginTop: 2,
+              marginTop: 4,
               marginBottom: 2,
             }}
           >

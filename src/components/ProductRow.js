@@ -1,13 +1,15 @@
-import React from "react"
-import Grid from "@mui/material/Grid"
-import Typography from "@mui/material/Typography"
-import IconButton from "@mui/material/IconButton"
-import Box from "@mui/material/Box"
 import DeleteIcon from "@mui/icons-material/Delete"
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material"
+import React from "react"
 import useStore from "../context/StoreContext"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import useMediaQuery from "@mui/material/useMediaQuery"
 
 const ProductRow = ({ item }) => {
   const { removeLineItem } = useStore()
@@ -112,7 +114,7 @@ const ProductRow = ({ item }) => {
               sx={{
                 fontSize: "18px",
                 fontFamily: "Playfair Display, serif",
-                textAlign: "center",
+                textAlign: "left",
               }}
             >
               {product.title}
@@ -128,7 +130,7 @@ const ProductRow = ({ item }) => {
               variant="h6"
               sx={{
                 fontFamily: "Playfair Display, serif",
-                textAlign: "center",
+                textAlign: "left",
               }}
             >
               {quantity}
@@ -138,13 +140,18 @@ const ProductRow = ({ item }) => {
             item
             xs={2}
             sm={2}
-            sx={{ textAlign: { xs: "center", sm: "left" } }}
+            sx={{
+              textAlign: {
+                xs: "center",
+                sm: "left",
+              },
+            }}
           >
             <Typography
               variant="h6"
               sx={{
                 fontFamily: "Playfair Display, serif",
-                textAlign: "center",
+                textAlign: "left",
               }}
             >
               BNG {product.priceRangeV2.maxVariantPrice.amount}/€{" "}
