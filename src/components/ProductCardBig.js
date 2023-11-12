@@ -1,17 +1,44 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { navigate } from "gatsby-link"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
-import CardActionArea from "@mui/material/CardActionArea"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import IconButton from "@mui/material/IconButton"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import useStore from "../context/StoreContext"
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  useMediaQuery,
+} from "@mui/material"
+import { useTheme } from "@mui/system"
 
 const ProductCardBig = ({ product }) => {
-  const { addVariantToCart } = useStore()
+  const [fontSize, setFontSize] = useState("1.2rem")
+  const theme = useTheme()
+  const isMdOrSmaller = useMediaQuery(theme.breakpoints.down("md"))
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 600) {
+        setFontSize("22px")
+      } else if (window.innerWidth <= 680) {
+        setFontSize("12px")
+      } else if (window.innerWidth <= 880) {
+        setFontSize("14px")
+      } else if (window.innerWidth <= 1200) {
+        setFontSize("18px")
+      } else {
+        setFontSize("24px")
+      }
+    }
+
+    handleResize()
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   return (
     <Card
@@ -33,7 +60,7 @@ const ProductCardBig = ({ product }) => {
         <Typography
           sx={{
             fontFamily: "Playfair Display, serif",
-            fontSize: "20px",
+            fontSize: fontSize,
             whiteSpace: "white",
             minHeight: "2.8em", // Minimum height for two lines
           }}
@@ -75,35 +102,13 @@ const ProductCardBig = ({ product }) => {
         <Typography
           sx={{
             fontFamily: "Playfair Display, serif",
-            fontSize: "20px",
+            fontSize: fontSize,
             whiteSpace: "normal",
           }}
         >
-          BGN{product.priceRangeV2.maxVariantPrice.amount}0
+          BGN {Number(product.priceRangeV2.maxVariantPrice.amount).toFixed(2)}/€
+          {(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(2)}
         </Typography>
-        <Typography
-          sx={{
-            fontFamily: "Playfair Display, serif",
-            fontSize: "20px",
-            whiteSpace: "normal",
-          }}
-        >
-          €{(product.priceRangeV2.maxVariantPrice.amount / 1.95).toFixed(2)}
-        </Typography>
-        <IconButton
-          edge="end"
-          onClick={() => addVariantToCart(product, 1)}
-          sx={{
-            borderRadius: "50%",
-            cursor: "pointer",
-            transition: "background-color 0.2s, transform 0.2s",
-            userSelect: "none",
-            outline: "none",
-            padding: 0,
-          }}
-        >
-          <ShoppingCartIcon />
-        </IconButton>
       </Box>
     </Card>
   )
