@@ -44,13 +44,6 @@ const useStyles = makeStyles(theme => ({
     height: "auto",
     transition: "transform 0.5s ease-in-out",
   },
-  inputForm: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, auto)",
-    width: "fit-content",
-    gap: theme.spacing(4),
-    alignItems: "center",
-  },
   input: {
     padding: theme.spacing(2),
     maxWidth: 80,
@@ -251,15 +244,24 @@ const ProductTemplate = ({ pageContext }) => {
               >
                 Select your variant:
               </Typography>
-              <form className={classes.inputForm}>
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(2, auto)",
+                  width: "fit-content",
+                  gap: 4,
+                  alignItems: "center",
+                }}
+              >
                 <FormControl>
-                  <InputLabel id="variant-select-label"></InputLabel>
+                  <InputLabel id="variant-select-input"></InputLabel>
                   <Select
                     labelId="variant-select-label"
                     id="variant-select"
                     value={product.variants.indexOf(selectedVariant)}
                     onChange={handleVariantChange}
                     sx={{
+                      width: "100%",
                       fontFamily: "Playfair Display, serif",
                     }}
                   >
@@ -277,7 +279,7 @@ const ProductTemplate = ({ pageContext }) => {
                   </Select>
                 </FormControl>
                 <VariantCard variant={selectedVariant} product={product} />
-              </form>
+              </Box>
               {!isMdOrSmaller && (
                 <Button
                   variant="contained"

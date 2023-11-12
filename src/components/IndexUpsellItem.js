@@ -51,7 +51,7 @@ const IndexUpsellItem = ({ upsellItems }) => {
             <Typography
               sx={{
                 fontFamily: "Playfair Display, serif",
-                fontSize: "20px",
+                fontSize: "18px",
                 whiteSpace: "white",
                 marginBottom: 2,
                 marginTop: 2,
