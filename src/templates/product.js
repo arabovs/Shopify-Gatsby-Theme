@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
   },
   arrowIcon: {
     fontSize: 30,
-    color: theme.palette.primary.main,
+    color: "#8B7D9B",
     cursor: "pointer",
   },
 }))
