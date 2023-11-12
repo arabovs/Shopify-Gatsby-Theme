@@ -189,7 +189,8 @@ export const StoreProvider = ({ children }) => {
   const addVariantToCart = async (product, quantity, shopifyId) => {
     setLoading(true)
 
-    console.log("hey")
+    console.log(product, quantity, shopifyId)
+
     if (checkout.id === "") {
       console.error("No checkout ID assigned.")
       return
@@ -214,6 +215,8 @@ export const StoreProvider = ({ children }) => {
       setCheckout(res)
 
       let updatedCart = []
+      console.log(cart)
+      if (cart === null) setCart([])
       if (cart.length > 0) {
         const itemIsInCart = cart.find(
           item => item.product.variants[0]?.shopifyId === variantId
@@ -255,6 +258,7 @@ export const StoreProvider = ({ children }) => {
   const removeLineItem = async variantId => {
     setLoading(true)
     try {
+      if (checkout.lineItems === null) checkout.lineItems = []
       if (checkout.lineItems.length < 1) throw new Error("Cart is empty")
 
       let lineItemID = ""
