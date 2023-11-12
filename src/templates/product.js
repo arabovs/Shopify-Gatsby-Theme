@@ -1,25 +1,23 @@
 import React, { useState } from "react"
-import Button from "@mui/material/Button"
-import Box from "@mui/material/Box"
-import Container from "@mui/material/Container"
-import Grid from "@mui/material/Grid"
-import Typography from "@mui/material/Typography"
-import TextField from "@mui/material/TextField"
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 import {
+  Box,
+  Button,
   Card,
   CardContent,
   FormControl,
+  Grid,
   InputLabel,
-  Select,
   MenuItem,
+  Select,
+  Typography,
+  useMediaQuery,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
+import IndexUpsellItem from "../components/IndexUpsellItem"
 import useStore from "../context/StoreContext"
 import useInput from "../utils/useInput"
-import useMediaQuery from "@mui/material/useMediaQuery"
-import IndexUpsellItem from "../components/IndexUpsellItem"
-import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
 const useStyles = makeStyles(theme => ({
   backButton: {
@@ -227,6 +225,18 @@ const ProductTemplate = ({ pageContext }) => {
                 <span style={{ fontWeight: "bold" }}>Product Description:</span>{" "}
                 {product.description}
               </Typography>
+              {isMdOrSmaller && (
+                <Button
+                  variant="contained"
+                  className={classes.addToCartButton}
+                  onClick={() =>
+                    addVariantToCart(product, bind.value, shopifyVariantId)
+                  }
+                  sx={{ backgroundColor: "#8B7D9B" }}
+                >
+                  Add to Cart
+                </Button>
+              )}
               <Typography
                 sx={{
                   fontFamily: "Great Vibes",
@@ -262,16 +272,18 @@ const ProductTemplate = ({ pageContext }) => {
                 </FormControl>
                 <VariantCard variant={selectedVariant} product={product} />
               </form>
-              <Button
-                variant="contained"
-                className={classes.addToCartButton}
-                onClick={() =>
-                  addVariantToCart(product, bind.value, shopifyVariantId)
-                }
-                sx={{ backgroundColor: "#8B7D9B" }}
-              >
-                Add to Cart
-              </Button>
+              {!isMdOrSmaller && (
+                <Button
+                  variant="contained"
+                  className={classes.addToCartButton}
+                  onClick={() =>
+                    addVariantToCart(product, bind.value, shopifyVariantId)
+                  }
+                  sx={{ backgroundColor: "#8B7D9B" }}
+                >
+                  Add to Cart
+                </Button>
+              )}
             </Box>
           </Grid>
         </Grid>
