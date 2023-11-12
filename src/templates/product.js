@@ -231,14 +231,6 @@ const ProductTemplate = ({ pageContext }) => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    console.log(
-                      "Product:",
-                      product,
-                      "Value:",
-                      bind.value,
-                      "VariantId:",
-                      shopifyVariantId
-                    )
                     addVariantToCart(
                       product,
                       bind.value,
@@ -290,14 +282,6 @@ const ProductTemplate = ({ pageContext }) => {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    console.log(
-                      "Product:",
-                      product,
-                      "Value:",
-                      bind.value,
-                      "VariantId:",
-                      shopifyVariantId
-                    )
                     addVariantToCart(
                       product,
                       bind.value,
