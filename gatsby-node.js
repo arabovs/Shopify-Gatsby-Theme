@@ -78,16 +78,18 @@ exports.createPages = async ({ graphql, actions }) => {
   )
 
   function getRandomUpsell() {
-    const elements = [
-      upsellItemLeft1[0].node,
-      upsellItemLeft2[0].node,
-      upsellItemLeft3[0].node,
-      upsellItemRight1[0].node,
-      upsellItemRight2[0].node,
-      upsellItemRight3[0].node,
-    ]
+    const elements = []
+
+    if ( upsellItemLeft1 && upsellItemLeft1.length > 0 && upsellItemLeft1[0]) elements.push(upsellItemLeft1[0].node)
+    if ( upsellItemLeft2 && upsellItemLeft2.length > 0 && upsellItemLeft2[0]) elements.push(upsellItemLeft2[0].node)
+    if ( upsellItemLeft3 && upsellItemLeft3.length > 0 && upsellItemLeft3[0]) elements.push(upsellItemLeft3[0].node)
+    if ( upsellItemRight1 && upsellItemRight1.length > 0 && upsellItemRight1[0]) elements.push(upsellItemRight1[0].node)
+    if ( upsellItemRight2 && upsellItemRight2.length > 0 && upsellItemRight2[0]) elements.push(upsellItemRight2[0].node)
+    if ( upsellItemRight3 && upsellItemRight3.length > 0 && upsellItemRight3[0]) elements.push(upsellItemRight3[0].node)
+
 
     const randomIndex = Math.floor(Math.random() * elements.length)
+    
     return elements[randomIndex]
   }
 
